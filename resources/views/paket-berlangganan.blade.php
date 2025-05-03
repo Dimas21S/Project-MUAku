@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Paket Langganan</title>
     <style>
         body {
@@ -36,14 +37,23 @@
   </head>
   <body>
     <div class="container py-3">
-        <header>      
-          <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-            <h1 class="display-4 fw-normal text-body-emphasis" style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal;">PREMIUM</h1>
-          </div>
-        </header>
+      <header class="d-flex align-items-center justify-content-center position-relative py-3">
+        <!-- Tombol kembali (diposisikan absolute di kiri) -->
+        <button type="button" 
+                class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        
+        <!-- Judul (ditengah secara natural) -->
+        <div class="text-center">
+            <h1 class="display-4 fw-normal m-0" style="font-family: 'DM Serif Display', serif; font-weight: 400;">
+                PREMIUM
+            </h1>
+        </div>
+    </header>
       
         <main>
-          <h1 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 20px; margin-top: 30px; margin-left: 70px">Content digital premium access</h1>
+          <h1 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 20px; margin-top: 70px; margin-left: 70px">Content digital premium access</h1>
           <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" style="margin-left: 55px; margin-right: 5px;">
             <div class="col">
               <div class="card mb-4 rounded-3 shadow-sm" style="width: 88%; margin-right: 5px;">

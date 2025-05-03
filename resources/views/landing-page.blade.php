@@ -14,7 +14,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        min-height: 100vh;
+        height: 90vh;
       }
       .navbar-brand {
         font-family: 'DM Serif Display', serif;
@@ -175,7 +175,7 @@
   </head>
   <body>
     {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-2"> <!-- py-2 lebih kecil dari py-3 -->
       <div class="container">
         <a class="navbar-brand" href="#" style="color: #A87648;">MUAku</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -183,11 +183,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto right-navbar">
-            <li class="nav-item">
-              <a class="nav-link text-black" href="#" style="margin-right: 200px">Collection</a>
+            <li class="nav-item" style="margin-right: 150px"> 
+              <a class="nav-link text-black" href="#">Collection</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" href="#" style="margin-right: 200px">About Us</a>
+            <li class="nav-item" style="margin-right: 150px">
+              <a class="nav-link text-black" href="#">About Us</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-black" href="#">Contact</a>
@@ -224,6 +224,9 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div style="background-color: #332318; width: 100%; height: 50px; position: absolute; bottom: 0;"></div>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
