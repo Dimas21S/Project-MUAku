@@ -106,6 +106,74 @@
         object-fit: cover;
       }
 
+      /* Laptop screens below 1440px */
+      @media (max-width: 1440px) {
+        .navbar-brand {
+          font-size: 40px;
+        }
+        
+        .nav-link {
+          font-size: 24px;
+          margin: 0 10px;
+        }
+        
+        .right-navbar .nav-item {
+          margin-right: 100px !important;
+        }
+        
+        .collection-heading {
+          font-size: 64px;
+        }
+        
+        .new-coming {
+          font-size: 32px;
+          margin-top: 40px;
+        }
+        
+        .image-card {
+          width: 140px;
+          height: 110px;
+        }
+        
+        .btn-login, 
+        .btn-register {
+          padding: 10px 25px;
+          font-size: 16px;
+        }
+      }
+      
+      /* Laptop screens below 1200px */
+      @media (max-width: 1199.98px) {
+        .navbar-brand {
+          font-size: 36px;
+        }
+        
+        .nav-link {
+          font-size: 20px;
+        }
+        
+        .right-navbar .nav-item {
+          margin-right: 70px !important;
+        }
+        
+        .collection-heading {
+          font-size: 56px;
+        }
+        
+        .new-coming {
+          font-size: 28px;
+        }
+        
+        .image-card {
+          width: 120px;
+          height: 95px;
+        }
+
+        .kotak-coklat {
+          height: 100px;
+        }
+      }
+
       @media (max-width: 992px) {
         .navbar-brand {
           font-size: 2rem;
@@ -118,6 +186,10 @@
         .nav-link {
           font-size: 1rem;
           padding: 0.5rem;
+        }
+        
+        .right-navbar .nav-item {
+          margin-right: 0 !important;
         }
       }
       
@@ -226,7 +298,7 @@
       </div>
     </div>
 
-    <div style="background-color: #332318; width: 100%; height: 50px; position: absolute; bottom: 0;"></div>
+    <div class="kotak-coklat" style="background-color: #332318; width: 100%; height: 50px; position: absolute; bottom: 0;"></div>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

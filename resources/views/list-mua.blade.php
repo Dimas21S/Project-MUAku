@@ -173,9 +173,9 @@
       </div>
 
       {{-- List MUA --}}
-      <div class="container mt-3 mb-5">
-        <h4 class="fw-bold mb-4">MUA Pesta dan Acara Rekomendasi</h4>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-5">
+      <h4 class="fw-bold mb-4 ms-3">MUA Pesta dan Acara Rekomendasi</h4>
+      <div class="container-fluid px-0 mt-3 mb-5">
+        <div class="row mx-0 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-7">
       
           <!-- Card MUA -->
           <div class="col">
@@ -237,26 +237,24 @@
       </div>
 
       {{-- Navbar-Bottom --}}
-      <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark" style="background: #E0DEE7; width: 50%; border-radius: 50px; margin-left: 25%; margin-bottom: 20px;">
+      <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; width: 530px; border-radius: 50px; margin-left: 35%; margin-bottom: 20px; padding: 5px 0;">
         <div class="container-fluid">
           <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-            <ul class="navbar-nav">
-              <li class="nav-item" style="margin-left: 10px; margin-right: 50px; padding-left: 10px;">
-                <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house"></i></a>
+            <ul class="navbar-nav" style="gap: 60px;">
+              <li class="nav-item">
+                <a class="nav-link fs-4 text-white" aria-current="page" href="#"><i class="bi bi-house"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link fs-4 text-white" href="#"><i class="bi bi-geo-alt-fill"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                <a class="nav-link fs-4 text-white" aria-disabled="true"><i class="bi bi-heart"></i></a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link fs-4 text-white" href="#" aria-expanded="false"><i class="bi bi-card-text"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-4 text-white" href="#" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
               </li>
             </ul>
           </div>
