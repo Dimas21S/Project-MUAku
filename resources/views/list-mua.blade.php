@@ -178,7 +178,7 @@
         <div class="row mx-0 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-7">
       
           <!-- Card MUA -->
-          <div class="col">
+          <div class="col mb-4">
             <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent;">
               <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
               <div class="card-body p-2" style="background: #E0DEE7;">
@@ -189,7 +189,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col mb-4">
             <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent;">
               <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
               <div class="card-body p-2" style="background: #E0DEE7;">
@@ -200,7 +200,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col mb-4">
             <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
               <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
               <div class="card-body p-2" style="background: #E0DEE7;">
@@ -211,7 +211,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col mb-4">
             <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
               <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
               <div class="card-body p-2" style="background: #E0DEE7;">
@@ -222,7 +222,7 @@
             </div>
           </div>
 
-          <div class="col">
+          <div class="col mb-4">
             <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
               <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
               <div class="card-body p-2" style="background: #E0DEE7;">

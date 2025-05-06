@@ -17,3 +17,7 @@ Route::get('/paket', function () {
 Route::get('/daftar-mua', function () {
     return view('list-mua');
 });
+
+Route::get('/deskripsi', function () {
+    return view('deskripsi-mua');
+});
