@@ -52,6 +52,7 @@
         </div>
     </header>
       
+    <div>
         <main>
           <h1 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 20px; margin-top: 70px; margin-left: 70px">Content digital premium access</h1>
           <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" style="margin-left: 55px; margin-right: 5px;">

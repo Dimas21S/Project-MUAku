@@ -29,3 +29,7 @@ Route::get('/data-langganan', function () {
 Route::get('/verified-admin', function () {
     return view('admin.admin-verified');
 });
+
+Route::get('/vip-fitur', function () {
+    return view('admin.fitur-vip');
+});
