@@ -62,6 +62,109 @@
       .carousel .carousel-indicators button.active {
         background-color: #A87648;
       }
+
+      .card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+    }
+    
+    .card-img-top {
+        transition: transform 0.5s ease;
+    }
+    
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+    
+    .card-body {
+        transition: background-color 0.3s ease;
+    }
+    
+    .card:hover .card-body {
+        background-color: #D5CFE1 !important;
+    }
+    
+    .btn-outline-primary {
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover .btn-outline-dark {
+        background-color: #A87648;
+        color: white !important;
+        border-color: #A87648;
+    }
+    
+    /* Efek overlay saat hover */
+    .card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(168, 118, 72, 0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .card:hover::after {
+        opacity: 1;
+    }
+
+      .navbar-nav .nav-item {
+        position: relative;
+    }
+
+    .navbar-nav .nav-link {
+        color: #EECFC0 !important;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Lingkaran background saat hover */
+    .navbar-nav .nav-link:hover::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 50%;
+        z-index: -1;
+    }
+
+    /* Efek hover untuk ikon */
+    .navbar-nav .nav-link:hover i {
+        color: #332318 !important;
+    }
+
+    /* Indikator aktif */
+    .navbar-nav .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background-color: white;
+        border-radius: 50%;
+    }
     </style>
   </head>
   <body>
@@ -184,7 +287,7 @@
               <div class="card-body p-2" style="background: #E0DEE7;">
                 <p class="card-text small fw-normal mb-1">Kategori: </p>
                 <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Profil</a>
+                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
               </div>
             </div>
           </div>
@@ -195,7 +298,7 @@
               <div class="card-body p-2" style="background: #E0DEE7;">
                 <p class="card-text small fw-normal mb-1">Kategori: </p>
                 <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Profil</a>
+                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
               </div>
             </div>
           </div>
@@ -206,7 +309,7 @@
               <div class="card-body p-2" style="background: #E0DEE7;">
                 <p class="card-text small fw-normal mb-1">Kategori: </p>
                 <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Profil</a>
+                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
               </div>
             </div>
           </div>
@@ -217,7 +320,7 @@
               <div class="card-body p-2" style="background: #E0DEE7;">
                 <p class="card-text small fw-normal mb-1">Kategori: </p>
                 <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Profil</a>
+                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
               </div>
             </div>
           </div>
@@ -228,7 +331,7 @@
               <div class="card-body p-2" style="background: #E0DEE7;">
                 <p class="card-text small fw-normal mb-1">Kategori: </p>
                 <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-primary btn-sm w-100">Lihat Profil</a>
+                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
               </div>
             </div>
           </div>
@@ -242,19 +345,19 @@
           <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
             <ul class="navbar-nav" style="gap: 60px;">
               <li class="nav-item">
-                <a class="nav-link fs-4 text-white" aria-current="page" href="#"><i class="bi bi-house"></i></a>
+                <a class="nav-link fs-4" aria-current="page" href="#"><i class="bi bi-house"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-4 text-white" href="#"><i class="bi bi-geo-alt-fill"></i></a>
+                <a class="nav-link fs-4" href="#"><i class="bi bi-geo-alt-fill"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-4 text-white" aria-disabled="true"><i class="bi bi-heart"></i></a>
+                <a class="nav-link fs-4" ><i class="bi bi-heart"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-4 text-white" href="#" aria-expanded="false"><i class="bi bi-card-text"></i></a>
+                <a class="nav-link fs-4" href="#"><i class="bi bi-card-text"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-4 text-white" href="#" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                <a class="nav-link fs-4" href="#"><i class="bi bi-person-fill"></i></a>
               </li>
             </ul>
           </div>

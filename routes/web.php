@@ -21,3 +21,11 @@ Route::get('/daftar-mua', function () {
 Route::get('/deskripsi', function () {
     return view('deskripsi-mua');
 });
+
+Route::get('/data-langganan', function () {
+    return view('admin.data-berlangganan');
+});
+
+Route::get('/verified-admin', function () {
+    return view('admin.admin-verified');
+});
