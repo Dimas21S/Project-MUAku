@@ -14,7 +14,7 @@
           background-attachment: fixed;
           background-size: cover;
         }
-      /* Tambahan CSS untuk memperbaiki tampilan carousel */
+        
       .carousel-item {
         height: 10vh;
         min-height: 300px;

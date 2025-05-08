@@ -26,54 +26,51 @@
         }
         
         .navbar-nav .nav-item {
-        position: relative;
-    }
+            position: relative;
+        }
 
-    .navbar-nav .nav-link {
-        color: #EECFC0 !important;
-        transition: all 0.3s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        position: relative;
-        z-index: 1;
-    }
+        .navbar-nav .nav-link {
+            color: #EECFC0 !important;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            z-index: 1;
+        }
 
-    /* Lingkaran background saat hover */
-    .navbar-nav .nav-link:hover::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        background-color: white;
-        border-radius: 50%;
-        z-index: -1;
-    }
+        .navbar-nav .nav-link:hover::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            z-index: -1;
+        }
 
-    /* Efek hover untuk ikon */
-    .navbar-nav .nav-link:hover i {
-        color: #332318 !important;
-    }
+        .navbar-nav .nav-link:hover i {
+            color: #332318 !important;
+        }
 
-    /* Indikator aktif */
-    .navbar-nav .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        background-color: white;
-        border-radius: 50%;
-    }
+        .navbar-nav .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+        }
 
-    li {
+        li {
             margin-right: 1.5rem;
         }
         
@@ -104,18 +101,7 @@
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm" style="width: 654px; margin-right: 5px; height: 300px;">
-                <div class="card-header py-3" style="background-color: #332318; color: #fff;">
-                  <h5 class="my-0 fw-bold text-center">Tipe Paket Basic</h5>
-                </div>
-                <div class="card-body ms-start">
-                  <p class="fw-normal">Tarif: (harga integer (50) di CRUD)</p> 
-                  <p class="fw-normal">Deskripsi: (deskripsi varchard (500) bisa di CRUD)</p> 
-                  <button type="button" class="btn btn-lg fw-bold" style="background: #6DE471;">Langganan</button>
-                </div>
-              </div>
-            </div>
+
             <div class="col">
               <div class="card mb-4 rounded-3 shadow-sm" style="width: 654px; margin-right: 5px; height: 300px;">
                 <div class="card-header py-3" style="background-color: #332318; color: #fff;">
@@ -129,9 +115,19 @@
               </div>
             </div>
 
-            
-
-            
+            <div class="col">
+              <div class="card mb-4 rounded-3 shadow-sm" style="width: 654px; margin-right: 5px; height: 300px;">
+                <div class="card-header py-3" style="background-color: #332318; color: #fff;">
+                  <h5 class="my-0 fw-bold text-center">Tipe Paket Basic</h5>
+                </div>
+                <div class="card-body ms-start">
+                  <p class="fw-normal">Tarif: (harga integer (50) di CRUD)</p> 
+                  <p class="fw-normal">Deskripsi: (deskripsi varchard (500) bisa di CRUD)</p> 
+                  <button type="button" class="btn btn-lg fw-bold" style="background: #6DE471;">Langganan</button>
+                </div>
+              </div>
+            </div>
+        
           </div>
         </main>
       </div>

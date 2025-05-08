@@ -33,3 +33,11 @@ Route::get('/verified-admin', function () {
 Route::get('/vip-fitur', function () {
     return view('admin.fitur-vip');
 });
+
+Route::get('/map', function () {
+    return view('map');
+});
+
+Route::get('/profile', function () {
+    return view('profil-pengguna');
+});
