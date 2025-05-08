@@ -14,7 +14,7 @@
           background-attachment: fixed;
           background-size: cover;
         }
-        
+
       .carousel-item {
         height: 10vh;
         min-height: 300px;
@@ -68,103 +68,103 @@
         cursor: pointer;
         overflow: hidden;
         position: relative;
-    }
+      }
     
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
-    }
-    
-    .card-img-top {
-        transition: transform 0.5s ease;
-    }
-    
-    .card:hover .card-img-top {
-        transform: scale(1.05);
-    }
-    
-    .card-body {
-        transition: background-color 0.3s ease;
-    }
-    
-    .card:hover .card-body {
-        background-color: #D5CFE1 !important;
-    }
-    
-    .btn-outline-primary {
-        transition: all 0.3s ease;
-    }
-    
-    .card:hover .btn-outline-dark {
-        background-color: #A87648;
-        color: white !important;
-        border-color: #A87648;
-    }
-    
-    /* Efek overlay saat hover */
-    .card::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(168, 118, 72, 0.1);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    .card:hover::after {
-        opacity: 1;
-    }
+      .card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+      }
 
-      .navbar-nav .nav-item {
-        position: relative;
-    }
+      .card-img-top {
+          transition: transform 0.5s ease;
+      }
 
-    .navbar-nav .nav-link {
-        color: #EECFC0 !important;
-        transition: all 0.3s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        position: relative;
-        z-index: 1;
-    }
+      .card:hover .card-img-top {
+          transform: scale(1.05);
+      }
 
-    /* Lingkaran background saat hover */
-    .navbar-nav .nav-link:hover::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        background-color: white;
-        border-radius: 50%;
-        z-index: -1;
-    }
+      .card-body {
+          transition: background-color 0.3s ease;
+      }
 
-    /* Efek hover untuk ikon */
-    .navbar-nav .nav-link:hover i {
-        color: #332318 !important;
-    }
+      .card:hover .card-body {
+          background-color: #D5CFE1 !important;
+      }
 
-    /* Indikator aktif */
-    .navbar-nav .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        background-color: white;
-        border-radius: 50%;
-    }
+      .btn-outline-primary {
+          transition: all 0.3s ease;
+      }
+
+      .card:hover .btn-outline-dark {
+          background-color: #A87648;
+          color: white !important;
+          border-color: #A87648;
+      }
+
+      /* Efek overlay saat hover */
+      .card::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(168, 118, 72, 0.1);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+
+      .card:hover::after {
+          opacity: 1;
+      }
+
+        .navbar-nav .nav-item {
+          position: relative;
+      }
+
+      .navbar-nav .nav-link {
+          color: #EECFC0 !important;
+          transition: all 0.3s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          position: relative;
+          z-index: 1;
+      }
+
+      /* Lingkaran background saat hover */
+      .navbar-nav .nav-link:hover::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
+          background-color: white;
+          border-radius: 50%;
+          z-index: -1;
+      }
+
+      /* Efek hover untuk ikon */
+      .navbar-nav .nav-link:hover i {
+          color: #332318 !important;
+      }
+
+      /* Indikator aktif */
+      .navbar-nav .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          height: 6px;
+          background-color: white;
+          border-radius: 50%;
+      }
     </style>
   </head>
   <body>
@@ -172,7 +172,7 @@
       {{-- Carousel --}}
       <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-top: 80px;">
           <div class="carousel-inner" style="overflow: hidden; border-radius: 50px;">
-            <div class="carousel-item active" style="background-image: url('{{ asset('image/foto-cewek-1.jpg') }}');">
+            <div class="carousel-item active" style="background-image: url('{{ asset('image/foto-cewek-1.jpg') }}'); object-fit: cover;">
               {{-- Jangan dihapus !!! --}}
               {{-- <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="d-block w-auto" alt="Makeup Artist 1"> --}}
               <div class="container">
@@ -184,7 +184,7 @@
                 </div>
               </div>
             </div>
-            <div class="carousel-item" style="background-image: url('{{ asset('image/foto-cewek-2.jpg') }}');">
+            <div class="carousel-item" style="background-image: url('{{ asset('image/foto-cewek-2.jpg') }}'); object-fit: cover;">
               {{-- Jangan dihapus !!! --}}
               {{-- <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="d-block w-100" alt="Makeup Artist 2" style="border-radius: 40px;"> --}}
               <div class="container">
@@ -196,7 +196,7 @@
                 </div>
               </div>
             </div>
-            <div class="carousel-item" style="background-image: url('{{ asset('image/foto-makeup.jpg') }}');">
+            <div class="carousel-item" style="background-image: url('{{ asset('image/foto-makeup.jpg') }}'); object-fit: cover;">
               {{-- Jangan dihapus !!! --}}
               {{-- <img src="{{ asset('image/foto-makeup.jpg') }}" class="d-block w-100" alt="Makeup Products"> --}}
               <div class="container">
@@ -234,7 +234,7 @@
                 <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
                      alt="Makeup Artist 1" 
                      class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                     style="width: 70px; height: 70px;">
+                     style="width: 70px; height: 70px; object-fit: cover;">
                 <span class="fw-semibold text-dark">Pesta <br>dan Acara</span>
               </div>
             </button>
@@ -245,7 +245,7 @@
                 <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
                      alt="Makeup Artist 1" 
                      class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                     style="width: 70px; height: 70px;">
+                     style="width: 70px; height: 70px; object-fit: cover;">
                 <span class="fw-semibold text-dark">Pengantin</span>
               </div>
             </button>
@@ -256,7 +256,7 @@
                 <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
                      alt="Makeup Artist 1" 
                      class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                     style="width: 70px; height: 70px;">
+                     style="width: 70px; height: 70px; object-fit: cover;">
                 <span class="fw-semibold text-dark">Editorial</span>
               </div>
             </button>
@@ -267,7 +267,7 @@
                 <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
                      alt="Makeup Artist 1" 
                      class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                     style="width: 70px; height: 70px;">
+                     style="width: 70px; height: 70px; object-fit: cover;">
                 <span class="fw-semibold text-dark">Artistik</span>
               </div>
             </button>

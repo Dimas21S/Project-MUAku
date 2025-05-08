@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,4 +41,13 @@ Route::get('/map', function () {
 
 Route::get('/profile', function () {
     return view('profil-pengguna');
+});
+
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'showLoginForm')->name('login');
+    Route::post('/login', 'login')->name('login.post');
+    Route::get('/register', 'showRegistrationForm')->name('register');
+    Route::post('/register', 'register')->name('register.post');
+    Route::post('/logout', 'logout')->name('logout');
 });
