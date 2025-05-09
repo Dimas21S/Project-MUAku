@@ -290,8 +290,12 @@
             </div>
 
             <div class="d-flex">
-              <button type="button" class="btn btn-login me-3">Sign In</button>
-              <button type="button" class="btn btn-register">Sign Up</button>
+              <button type="button" class="btn btn-login me-3">
+                <a href="{{ route('login') }}" class="text-decoration-none text-white">Sign In</a>
+              </button>
+              <button type="button" class="btn btn-register">
+                <a href="{{ route('register') }}" class="text-decoration-none text-black">Sign Up</a>
+              </button>
             </div>
           </div>
         </div>

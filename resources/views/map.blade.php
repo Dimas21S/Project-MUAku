@@ -9,7 +9,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
   <style>
     html, body {
       height: 100%;
@@ -82,6 +81,54 @@
       top: 50%;
       transform: translateY(-50%);
     }
+
+    .navbar-nav .nav-item {
+          position: relative;
+      }
+
+      .navbar-nav .nav-link {
+          color: #EECFC0 !important;
+          transition: all 0.3s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          position: relative;
+          z-index: 1;
+      }
+
+      /* Lingkaran background saat hover */
+      .navbar-nav .nav-link:hover::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
+          background-color: white;
+          border-radius: 50%;
+          z-index: -1;
+      }
+
+      /* Efek hover untuk ikon */
+      .navbar-nav .nav-link:hover i {
+          color: #332318 !important;
+      }
+
+      /* Indikator aktif */
+      .navbar-nav .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          height: 6px;
+          background-color: white;
+          border-radius: 50%;
+      }
   </style>
 </head>
 <body>
@@ -96,17 +143,8 @@
 
   <div id="map" class="container mt-3"></div>
 
-  <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; border-radius: 50px; max-width: 530px; margin: 20px auto; padding: 5px 0;">
-    <div class="container-fluid justify-content-center">
-      <ul class="navbar-nav d-flex flex-row gap-4">
-        <li class="nav-item"><a class="nav-link fs-4" href="#"><i class="bi bi-house"></i></a></li>
-        <li class="nav-item"><a class="nav-link fs-4" href="#"><i class="bi bi-geo-alt-fill"></i></a></li>
-        <li class="nav-item"><a class="nav-link fs-4" href="#"><i class="bi bi-heart"></i></a></li>
-        <li class="nav-item"><a class="nav-link fs-4" href="#"><i class="bi bi-card-text"></i></a></li>
-        <li class="nav-item"><a class="nav-link fs-4" href="#"><i class="bi bi-person-fill"></i></a></li>
-      </ul>
-    </div>
-  </nav>
+  <x-navbar></x-navbar>
+
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -118,7 +118,7 @@
           opacity: 1;
       }
 
-        .navbar-nav .nav-item {
+      .navbar-nav .nav-item {
           position: relative;
       }
 
@@ -228,6 +228,7 @@
       <div class="container mt-5 mx-1">
         <h4 class=" fw-bold" style="padding-left: 0px;">Kategori Make Up</h4>
         <div class="row g-2 mt-3 mb-3">
+
           <div class="col-auto mb-3 mx-3">
             <button class="btn p-0 border-0 bg-transparent text-center">
               <div class="d-flex flex-column align-items-center">
@@ -282,15 +283,16 @@
       
           <!-- Card MUA -->
           <div class="col mb-4">
-            <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent;">
+            <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent; position: relative;">
               <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
-              <div class="card-body p-2" style="background: #E0DEE7;">
+              <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
                 <p class="card-text small fw-normal mb-1">Kategori: </p>
                 <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
+                <a href="{{ route('deskripsi-mua') }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
               </div>
             </div>
           </div>
+
 
           <div class="col mb-4">
             <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent;">
@@ -340,29 +342,7 @@
       </div>
 
       {{-- Navbar-Bottom --}}
-      <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; width: 530px; border-radius: 50px; margin-left: 35%; margin-bottom: 20px; padding: 5px 0;">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-            <ul class="navbar-nav" style="gap: 60px;">
-              <li class="nav-item">
-                <a class="nav-link fs-4" aria-current="page" href="#"><i class="bi bi-house"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fs-4" href="#"><i class="bi bi-geo-alt-fill"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fs-4" ><i class="bi bi-heart"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fs-4" href="#"><i class="bi bi-card-text"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fs-4" href="#"><i class="bi bi-person-fill"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <x-navbar></x-navbar>
       
     </main>
 

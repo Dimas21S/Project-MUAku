@@ -1,0 +1,26 @@
+<div>
+    <!-- Simplicity is an acquired taste. - Katharine Gerould -->
+    <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; width: 530px; border-radius: 50px; margin-left: 35%; margin-bottom: 20px; padding: 5px 0;">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+            <ul class="navbar-nav" style="gap: 60px;">
+              <li class="nav-item">
+                <a class="nav-link fs-4" aria-current="page" href="/daftar-mua"><i class="bi bi-house"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-4" href="/map"><i class="bi bi-geo-alt-fill"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-4" href="#"><i class="bi bi-heart"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-4" href="#"><i class="bi bi-card-text"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-4" href="{{ route('profile') }}"><i class="bi bi-person-fill"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>

@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArtistController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing-page');
 });
 
 Route::get('/index', function () {
@@ -13,14 +14,6 @@ Route::get('/index', function () {
 
 Route::get('/paket', function () {
     return view('paket-berlangganan');
-});
-
-Route::get('/daftar-mua', function () {
-    return view('list-mua');
-});
-
-Route::get('/deskripsi', function () {
-    return view('deskripsi-mua');
 });
 
 Route::get('/data-langganan', function () {
@@ -51,4 +44,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register')->name('register.post');
     Route::post('/logout', 'logout')->name('logout');
     Route::get('/profil', 'userProfile')->name('profile');
+})->middleware('auth');
+
+Route::controller(ArtistController::class)->group(function () {
+    Route::get('/daftar-mua', 'listMakeUpArtist')->name('list-mua');
+    Route::get('/deskripsi-mua', 'artistDescription')->name('deskripsi-mua');
 });
