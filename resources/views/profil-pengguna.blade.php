@@ -85,19 +85,17 @@
         <div class="profile-info">
             <div class="mb-4">
                 <h5 class="info-label">USER NAME</h5>
-                <p class="info-value">Loreal Paris Fransiska</p>
+                <p class="info-value">{{$user->name}}</p>
             </div>
             
             <div class="mb-4">
                 <h5 class="info-label">E-MAIL</h5>
-                <p class="info-value">
-                    <a href="https://www.loriajolaris.com" class="email-link">Loriajolaris@gmail.com</a>
-                </p>
+                <p class="info-value">{{$user->email}}</p>
             </div>
             
             <div class="mb-4">
                 <h5 class="info-label">PASSWORD</h5>
-                <p class="info-value">***********</p>
+                <p class="info-value">********</p>
             </div>
             
             <div class="mb-4">

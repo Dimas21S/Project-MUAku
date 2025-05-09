@@ -39,9 +39,9 @@ Route::get('/map', function () {
     return view('map');
 });
 
-Route::get('/profile', function () {
-    return view('profil-pengguna');
-});
+// Route::get('/profile', function () {
+//     return view('profil-pengguna');
+// });
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -50,4 +50,5 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register')->name('register.post');
     Route::post('/logout', 'logout')->name('logout');
+    Route::get('/profil', 'userProfile')->name('profile');
 });

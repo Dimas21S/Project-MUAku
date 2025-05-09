@@ -75,4 +75,13 @@ class AuthController extends Controller
         // Redirect to the login page or home page
         return redirect('/index');
     }
+
+    public function userProfile()
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Return the user profile view with the user data
+        return view('profil-pengguna', compact('user'));
+    }
 }
