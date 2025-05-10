@@ -22,9 +22,8 @@ class PaymentController extends Controller
                 'gross_amount' => 10000,
             ],
             'customer_details' => [
-                'first_name' => 'Yoga',
-                'last_name' => 'Meleniawan',
-                'email' => 'yogameleniawan@example.com',
+                'name' => 'User Test',
+                'email' => 'Email_akanDiambil_dariAkunUser@example.com',
                 'phone' => '08111222333',
             ],
         ];
