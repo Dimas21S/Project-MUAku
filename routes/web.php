@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('landing-page');
@@ -12,9 +13,9 @@ Route::get('/index', function () {
     return view('landing-page');
 });
 
-Route::get('/paket', function () {
-    return view('paket-berlangganan');
-});
+// Route::get('/paket', function () {
+//     return view('paket-berlangganan');
+// });
 
 Route::get('/data-langganan', function () {
     return view('admin.data-berlangganan');
@@ -49,4 +50,9 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(ArtistController::class)->group(function () {
     Route::get('/daftar-mua', 'listMakeUpArtist')->name('list-mua');
     Route::get('/deskripsi-mua', 'artistDescription')->name('deskripsi-mua');
+});
+
+Route::controller(PaymentController::class)->group(function () {
+    Route::get('/payment', 'paymentIndex')->name('payment');
+    Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token');
 });
