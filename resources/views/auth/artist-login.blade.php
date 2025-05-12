@@ -16,7 +16,7 @@
         <div class="front-paper">
             <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">Login</h1>
             
-            <form class="flex-grow" action="{{ route('login.post') }}" method="POST">
+            <form class="flex-grow" action="{{ route('login-mua.post') }}" method="POST">
                 @csrf
                 <div class="input-field">
                     <input type="text" id="username" name="name" required>
@@ -43,7 +43,7 @@
             
             <div class="text-center text-sm text-gray-500 mt-4">
                 Belum punya akun? 
-                <a href="{{ route('register') }}" class="text-indigo-600 font-medium">Daftar disini</a>
+                <a href="#" class="text-indigo-600 font-medium">Daftar disini</a>
             </div>
         </div>
     </div>

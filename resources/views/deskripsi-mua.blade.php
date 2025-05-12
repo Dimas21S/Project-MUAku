@@ -67,10 +67,10 @@
     <div class="container-fluid py-3 px-4"> <!-- Changed to container-fluid and added px-4 -->
         <header class="d-flex align-items-center justify-content-center position-relative py-3">
           <!-- Tombol kembali (diposisikan absolute di kiri) -->
-          <button type="button" 
-                  class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
-              <i class="bi bi-arrow-left"></i>
-          </button>
+           <a href="{{ route('list-mua') }}"
+                class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+                <i class="bi bi-arrow-left"></i>
+            </a>
           
           {{-- Grup tombol kanan --}}
           <div class="btn-group position-absolute end-0 me-3">

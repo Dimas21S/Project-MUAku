@@ -29,10 +29,10 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('name', 'password'))) {
             $request->session()->regenerate();
             // Check if the user is an admin
-            // if (Auth::user()->role == 'admin') {
-            //     // Redirect to the admin dashboard
-            //     return redirect()->intended('/data-langganan');
-            // }
+            if (Auth::user()->role == 'admin') {
+                // Redirect to the admin dashboard
+                return redirect()->intended('/data-langganan');
+            }
             // Redirect to the intended page or dashboard
             return redirect()->intended('/daftar-mua');
         }
@@ -73,7 +73,7 @@ class AuthController extends Controller
         Auth::logout();
 
         // Redirect to the login page or home page
-        return redirect('/index');
+        return redirect('/');
     }
 
     public function userProfile()

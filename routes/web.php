@@ -50,9 +50,14 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(ArtistController::class)->group(function () {
     Route::get('/daftar-mua', 'listMakeUpArtist')->name('list-mua');
     Route::get('/deskripsi-mua', 'artistDescription')->name('deskripsi-mua');
+    Route::get('/login-mua', 'artistLoginForm')->name('login-mua');
+    Route::post('/login-mua', 'artistLogin')->name('login-mua.post');
+    Route::get('/register-mua', 'artistRegisterForm')->name('register-mua');
+    Route::post('/register-mua', 'artistRegister')->name('register-mua.post');
 });
 
 Route::controller(PaymentController::class)->group(function () {
     Route::get('/payment', 'paymentIndex')->name('payment');
     Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token');
+    Route::post('/payment/notification', 'handlePaymentNotification')->name('payment-notification');
 });

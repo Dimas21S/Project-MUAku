@@ -108,7 +108,20 @@
           background-color: white;
           border-radius: 50%;
         }
+
+        .btn-logout {
+            background-color: #EECFC0;
+            border: none;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
         
+        .btn-logout:hover {
+            background-color: #A87648;
+            color: white;
+        }
+            
         @media (max-width: 992px) {
             .profile-container {
                 flex-direction: column;
@@ -152,6 +165,15 @@
                     aku seorang pelaut yang suka beraktifitas menggunakan make up, 
                     di bawah terik matahari di lautan lepas samudra.
                 </p>
+            </div>
+
+            <div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> Keluar
+                    </button>
+                </form>
             </div>
         </div>
         

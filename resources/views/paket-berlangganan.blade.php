@@ -42,10 +42,10 @@
     <div class="container py-3">
       <header class="d-flex align-items-center justify-content-center position-relative py-3">
         <!-- Tombol kembali (diposisikan absolute di kiri) -->
-        <button type="button" 
-                class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+        <a href="{{ route('list-mua') }}"
+           class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
             <i class="bi bi-arrow-left"></i>
-        </button>
+        </a>
         
         <!-- Judul (ditengah secara natural) -->
         <div class="text-center">
@@ -125,7 +125,11 @@
                   'Content-Type': 'application/json',
                   'X-CSRF-TOKEN': '{{ csrf_token() }}',
               },
-              body: JSON.stringify({})
+              body: JSON.stringify({
+                packageName: 'Paket Dasar',
+                packageId: 1,
+                amount: 4000
+              })
           })
           .then(response => response.json())
           .then(data => {
@@ -144,7 +148,11 @@
                   'Content-Type': 'application/json',
                   'X-CSRF-TOKEN': '{{ csrf_token() }}',
               },
-              body: JSON.stringify({})
+              body: JSON.stringify({
+                packageName: 'Paket Medium',
+                packageId: 2,
+                amount: 13000
+              })
           })
           .then(response => response.json())
           .then(data => {
@@ -163,7 +171,11 @@
                   'Content-Type': 'application/json',
                   'X-CSRF-TOKEN': '{{ csrf_token() }}',
               },
-              body: JSON.stringify({})
+              body: JSON.stringify({
+                packageName: 'Paket High',
+                packageId: 3,
+                amount: 150000
+              })
           })
           .then(response => response.json())
           .then(data => {
@@ -175,5 +187,6 @@
           });
       };
   </script>
+
   </body>
 </html>

@@ -290,13 +290,43 @@
             </div>
 
             <div class="d-flex">
-              <button type="button" class="btn btn-login me-3">
-                <a href="{{ route('login') }}" class="text-decoration-none text-white">Sign In</a>
-              </button>
-              <button type="button" class="btn btn-register">
-                <a href="{{ route('register') }}" class="text-decoration-none text-black">Sign Up</a>
-              </button>
+              <button type="button" class="btn btn-login me-3" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button>
+                <button type="button" class="btn btn-register" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
             </div>
+
+            <!-- Add these near the bottom of the body -->
+            <div class="modal fade" id="loginModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body text-center">
+                    <p class="text-center fw-bold">Login as</p>
+                    <button type="button" class="btn btn-login me-3">
+                      <a href="{{ route('login') }}" class="text-decoration-none text-white">User</a>
+                    </button>
+                    <button type="button" class="btn btn-register">
+                      <a href="{{ route('login-mua') }}" class="text-decoration-none text-black">MakeUp Artist</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="registerModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body text-center">
+                    <p class="text-center fw-bold">Register as</p>
+                    <button type="button" class="btn btn-login me-3">
+                      <a href="{{ route('register') }}" class="text-decoration-none text-white">User</a>
+                    </button>
+                    <button type="button" class="btn btn-register">
+                      <a href="{{ route('register-mua') }}" class="text-decoration-none text-black">MakeUp Artist</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

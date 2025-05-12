@@ -32,13 +32,13 @@
        }
 
        /* Untuk Caption di Carousel */
-      /* .carousel-caption {
+      .carousel-caption {
         bottom: 3rem;
         z-index: 10;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 20px;
         border-radius: 10px;
-      } */
+      }
       
       .carousel-indicators {
         bottom: -3rem;
@@ -178,9 +178,9 @@
               <div class="container">
                 <div class="carousel-caption text-start">
                   {{-- Caption di dalam carousel --}}
-                  {{-- <h1>Professional Makeup Services</h1>
-                  <p class="opacity-75">Find the best makeup artists for your special occasion.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#">Book Now</a></p> --}}
+                  <h1>Kenapa Harus Berlangganan?</h1>
+                  <p class="opacity-75">Akses eksklusif ke konten premium, Lebih hemat dengan diskon khusus member, dan Bebas iklan & fitur tambahan eksklusif</p>
+                  <p><a class="btn btn-lg btn-primary" href="{{ route('payment') }}">Daftar sekarang</a></p>
                 </div>
               </div>
             </div>
@@ -190,9 +190,9 @@
               <div class="container">
                 <div class="carousel-caption">
                   {{-- Caption di dalam carousel --}}
-                  {{-- <h1>Bridal Makeup Specialists</h1>
-                  <p>Let us make you look stunning on your wedding day.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#">View Portfolio</a></p> --}}
+                  <h1>Lebih Untung Langganan!</h1>
+                  <p>Bayar sekali, nikmati sebulan penuh! dan Gratis update fitur terbaru</p>
+                  <p><a class="btn btn-lg btn-primary" href="{{ route('payment') }}">Yuk, upgrade ke paket berlangganan dan rasakan bedanya!</a></p>
                 </div>
               </div>
             </div>
@@ -202,9 +202,9 @@
               <div class="container">
                 <div class="carousel-caption text-end">
                   {{-- Caption di dalam carousel --}}
-                  {{-- <h1>Premium Quality Products</h1>
+                  <h1>Premium Quality Products</h1>
                   <p>We use only the best cosmetics for your skin.</p>
-                  <p><a class="btn btn-lg btn-primary" href="#">Our Products</a></p> --}}
+                  <p><a class="btn btn-lg btn-primary" href="#">Our Products</a></p>
                 </div>
               </div>
             </div>
@@ -286,8 +286,8 @@
             <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent; position: relative;">
               <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
               <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
-                <p class="card-text small fw-normal mb-1">Kategori: </p>
-                <p class="card-text small fw-normal mb-1">Alamat</p>
+                <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Kategori: </p>
+                <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat</p>
                 <a href="{{ route('deskripsi-mua') }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
               </div>
             </div>
