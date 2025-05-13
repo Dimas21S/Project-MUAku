@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('package_id');
             $table->string('package_name');
             $table->decimal('amount', 10, 2);
-            $table->string('status'); // pending, success, failed
+            $table->enum('status', ['success', 'pending', 'failed'])->default('pending');
             $table->timestamps();
         });
     }

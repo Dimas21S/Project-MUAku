@@ -59,5 +59,6 @@ Route::controller(ArtistController::class)->group(function () {
 Route::controller(PaymentController::class)->group(function () {
     Route::get('/payment', 'paymentIndex')->name('payment');
     Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token');
-    Route::post('/payment/notification', 'handlePaymentNotification')->name('payment-notification');
 });
+
+Route::post('/payment/notification', [PaymentController::class, 'handleNotification'])->withoutMiddleware('web');

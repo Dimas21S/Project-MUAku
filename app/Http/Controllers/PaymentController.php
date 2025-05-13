@@ -32,7 +32,7 @@ class PaymentController extends Controller
             'package_id' => $package_id,
             'package_name' => $package_name,
             'amount' => $amount,
-            'status' => 'settlement', // Set status awal sebagai settlement
+            'status' => 'pending', // Set status awal sebagai settlement
         ]);
 
         $params = [
@@ -57,14 +57,6 @@ class PaymentController extends Controller
 
         try {
             $snapToken = \Midtrans\Snap::getSnapToken($params);
-
-            $updated = $user->update(['role' => 'customer']);
-
-            if (!$updated) {
-                Log::error('Failed to update user role', ['user_id' => $user->id]);
-                return response()->json(['error' => 'Gagal mengupdate role user'], 500);
-            }
-
             return response()->json(['snap_token' => $snapToken]);
         } catch (\Exception $e) {
             Log::error('Payment Error: ' . $e->getMessage());
@@ -88,7 +80,7 @@ class PaymentController extends Controller
             $user = User::find($payment->user_id);
 
             if ($user) {
-                $user->role = 'pelanggan';
+                $user->role = 'customer';
                 $user->save();
 
                 // Update status payment
