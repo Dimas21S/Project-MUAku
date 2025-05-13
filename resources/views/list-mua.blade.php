@@ -281,63 +281,35 @@
       <div class="container-fluid px-0 mt-3 mb-5">
         <div class="row mx-0 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-7">
       
-          <!-- Card MUA -->
-          <div class="col mb-4">
-            <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent; position: relative;">
-              <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
-              <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
-                <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Kategori: </p>
-                <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat</p>
-                <a href="{{ route('deskripsi-mua') }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
+          @if ($user->role == 'customer')
+            @foreach ($artist as $artistId)
+              <!-- Card MUA -->
+              <div class="col mb-4">
+                <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent; position: relative;">
+                  <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
+                  <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
+                    <p class="card-text small fw-normal mb-1">Kategori: {{ $artistId->category }}</p>
+                    <p class="card-text small fw-normal mb-1">Alamat:  {{ $artistId->address }}</p>
+                    <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            @endforeach
 
-
-          <div class="col mb-4">
-            <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent;">
-              <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
-              <div class="card-body p-2" style="background: #E0DEE7;">
-                <p class="card-text small fw-normal mb-1">Kategori: </p>
-                <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
+          @elseif ($user->role == 'user')
+            @foreach ($artist as $artistId)
+              <div class="col mb-4">
+                <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent; position: relative;">
+                  <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
+                  <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
+                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Kategori:  {{ $artistId->category }}</p>
+                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat:  {{ $artistId->address }}</p>
+                    <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div class="col mb-4">
-            <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
-              <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
-              <div class="card-body p-2" style="background: #E0DEE7;">
-                <p class="card-text small fw-normal mb-1">Kategori: </p>
-                <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col mb-4">
-            <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
-              <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
-              <div class="card-body p-2" style="background: #E0DEE7;">
-                <p class="card-text small fw-normal mb-1">Kategori: </p>
-                <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col mb-4">
-            <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
-              <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="card-img-top" alt="MUA 2" style="height: 200px; object-fit: cover;">
-              <div class="card-body p-2" style="background: #E0DEE7;">
-                <p class="card-text small fw-normal mb-1">Kategori: </p>
-                <p class="card-text small fw-normal mb-1">Alamat</p>
-                <a href="#" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
-              </div>
-            </div>
-          </div>
-      
+            @endforeach
+          @endif
         </div>
       </div>
 

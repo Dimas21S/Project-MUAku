@@ -123,11 +123,11 @@
             </div>
 
             <div class="description-container">
-                <p class="mt-0 mb-3">Kategori Make up : Pesta dan Acara.</p>
-                <p class="mb-3">MUA : Kak Lady Gaga</p>
-                <p class="mb-3">Alamat : ####################No 
-                    <br>Telp : 08+++
-                    <br>Sosial Media : @###</p> 
+                <p class="mt-0 mb-3">Kategori Make up : {{ $artist->category }}</p>
+                <p class="mb-3">MUA : {{ $artist->name }}</p>
+                <p class="mb-3">Alamat : {{ $artist->address }}
+                    <br>Telp : {{ $artist->phone }}
+                    <br>Sosial Media : {{ $artist->email }}</p> 
                 <h4 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 25px; margin-top: 25px;">Deskripsi</h4>
                 <p>Makeup acara difokuskan untuk menciptakan tampilan yang lebih berani, elegan, dan tahan lama sesuai dengan jenis acara yang dihadiri.
                     Aku menyesuaikan teknik riasan berdasarkan tema acara, outfit, dan karakter wajahmu, memastikan hasil yang harmonis dan memukau. 

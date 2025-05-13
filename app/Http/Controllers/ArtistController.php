@@ -61,15 +61,14 @@ class ArtistController extends Controller
 
     public function listMakeUpArtist()
     {
-        // $artists = MakeUpArtist::all();
-        // return view('list-mua', compact('artists'));
-        return view('list-mua');
+        $user = Auth::user();
+        $artist = MakeUpArtist::all();
+        return view('list-mua', compact('user', 'artist'));
     }
 
     public function artistDescription($id)
     {
-        // $artist = MakeUpArtist::findOrFail($id);
-        // return view('deskripsi-mua', compact('artist'));
-        return view('deskripsi-mua');
+        $artist = MakeUpArtist::findOrFail($id);
+        return view('deskripsi-mua', compact('artist'));
     }
 }
