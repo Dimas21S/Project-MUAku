@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'user@example.com',
-        //     'password' => bcrypt('password'),
-        //     'role' => 'admin',
-        // ]);
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'user@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+        ]);
 
         MakeUpArtist::factory()->create([
             'name' => 'Devi',
@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
             'phone' => '987654321',
             'address' => 'Jalan Tuna 4',
             'city' => 'Jambi',
-            'status' => 'makeup artist',
-            'category' => 'Wedding',
+            'status' => 'active',
+            'category' => 'Pesta dan Acara',
             'file_certificate' => 'path/to/certificate.jpg',
             'profile_photo' => 'path/to/profile.jpg',
         ]);
@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder
             'phone' => '0246813579',
             'address' => 'Jalan Tuna 7',
             'city' => 'Jambi',
-            'status' => 'makeup artist',
-            'category' => 'Wedding',
+            'status' => 'active',
+            'category' => 'Pengantin',
             'file_certificate' => 'path/to/certificate.jpg',
             'profile_photo' => 'path/to/profile.jpg',
         ]);
@@ -53,8 +53,8 @@ class DatabaseSeeder extends Seeder
             'phone' => '192837465',
             'address' => 'Jalan Tuna 7',
             'city' => 'Jambi',
-            'status' => 'makeup artist',
-            'category' => 'Wedding',
+            'status' => 'active',
+            'category' => 'Editorial',
             'file_certificate' => 'path/to/certificate.jpg',
             'profile_photo' => 'path/to/profile.jpg',
         ]);

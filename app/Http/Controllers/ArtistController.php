@@ -71,4 +71,9 @@ class ArtistController extends Controller
         $artist = MakeUpArtist::findOrFail($id);
         return view('deskripsi-mua', compact('artist'));
     }
+
+    public function submitRequest()
+    {
+        return view('form-pendaftaran');
+    }
 }

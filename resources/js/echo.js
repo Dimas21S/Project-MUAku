@@ -12,3 +12,14 @@ window.Echo = new Echo({
     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
+
+Echo.channel('presence-chat')
+    .here((users) => {
+        console.log('Users in the channel:', users);
+    })
+    .joining((user) => {
+        console.log('User joined:', user);
+    })
+    .leaving((user) => {
+        console.log('User left:', user);
+    });

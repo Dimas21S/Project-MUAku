@@ -97,4 +97,13 @@ class PaymentController extends Controller
 
         return response()->json(['status' => 'success']);
     }
+
+    public function paymentSuccess()
+    {
+        $success = Payment::where('user_id', Auth::id())
+            ->where('status', 'success')
+            ->latest()
+            ->first();
+        return view('pembayaran-berhasil', compact('success'));
+    }
 }

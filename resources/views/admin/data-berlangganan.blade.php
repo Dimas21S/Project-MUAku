@@ -137,24 +137,14 @@
             </tr>
           </thead>
           <tbody>
+            @foreach ($itemPembayaran as $pembayaran)              
             <tr>
-              <th scope="row">1</th>
-              <td>Ballerina Capucina</td>
-              <td>Medium</td>
-              <td>05-06-2025</td>
+              <th scope="row">{{ $pembayaran->id }}</th>
+              <td>{{ $pembayaran->user->name }}</td>
+              <td>{{ $pembayaran->package_name }}</td>
+              <td>{{ $pembayaran->created_at }}</td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Tralarero tralala</td>
-              <td>Basic</td>
-              <td>06-07-2025</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Bombonzini Guzini</td>
-              <td>Basic</td>
-              <td>07-08-2025</td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
     </div>
@@ -164,7 +154,7 @@
         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
           <ul class="navbar-nav nav-brand" style="gap: 60px;">
             <li class="nav-item">
-              <a class="nav-link fs-4" href="#"><i class="bi bi-person-fill-check"></i></a>
+              <a class="nav-link fs-4" href="{{ route('verified-admin') }}"><i class="bi bi-person-fill-check"></i></a>
               <div class="circle-effect"></div>
             </li>
             <li class="nav-item">

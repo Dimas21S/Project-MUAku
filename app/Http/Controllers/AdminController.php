@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Payment;
+
 class AdminController extends Controller
 {
     //
@@ -14,7 +16,9 @@ class AdminController extends Controller
 
     public function dataPelanggan()
     {
-        return view('admin.data-berlangganan');
+        $itemPembayaran = Payment::with('user')->get();
+
+        return view('admin.data-berlangganan', compact('itemPembayaran'));
     }
 
     public function verifiedMakeUpArtist()
