@@ -30,9 +30,11 @@ Route::controller(ArtistController::class)->group(function () {
     Route::post('/login-mua', 'artistLogin')->name('login-mua.post');
     Route::get('/register-mua', 'artistRegisterForm')->name('register-mua');
     Route::post('/register-mua', 'artistRegister')->name('register-mua.post');
+    Route::get('/pendaftaran', 'submitRequest')->name('get.pendaftaran');
+    Route::post('/pendaftaran', 'formSubmitRequest')->name('post.pendaftaran');
 });
 
-//Rute URL yang hanya bisa diakses oleh role customer
+//Rute URL yang hanya bisa diakses oleh role customer (Masih terdapat bug)
 //Rute URL untuk yang sudah login (User yang belum login tidak bisa mengakses rute ini)
 Route::middleware('auth')->group(function () {
     Route::get('/daftar-mua', [ArtistController::class, 'listMakeUpArtist'])->name('list-mua');
@@ -42,14 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profil', [AuthController::class, 'userProfile'])->name('profile');
 });
 
-//Rute URL pembayaran
+// Rute URL pembayaran
 Route::controller(PaymentController::class)->group(function () {
     Route::get('/payment', 'paymentIndex')->name('payment');
     Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token');
 });
 
-//Rute URL untuk notifikasi dari Midtrans
+// Rute URL untuk notifikasi dari Midtrans
 // Rute ini tidak memerlukan middleware 'web' karena hanya digunakan untuk menerima notifikasi dari Midtrans
-// Pastikan untuk menyesuaikan URL ini dengan URL yang Anda daftarkan di Midtrans
+// Pastikan untuk menyesuaikan URL ini dengan URL yang anda daftarkan di Midtrans
 Route::get('payment/success', [PaymentController::class, 'paymentSuccess'])->withoutMiddleware('web');
 Route::post('/payment/notification', [PaymentController::class, 'handleNotification'])->withoutMiddleware('web');

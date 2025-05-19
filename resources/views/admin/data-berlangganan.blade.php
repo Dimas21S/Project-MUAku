@@ -5,10 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    {{-- Bootstrap CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
     <title>Data Pengguna Berlangganan</title>
@@ -74,58 +76,59 @@
 
         .navbar-nav .nav-item {
         position: relative;
-    }
+      }
 
-    .navbar-nav .nav-link {
-        color: #EECFC0 !important;
-        transition: all 0.3s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        position: relative;
-        z-index: 1;
-    }
+      .navbar-nav .nav-link {
+          color: #EECFC0 !important;
+          transition: all 0.3s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          position: relative;
+          z-index: 1;
+      }
 
-    /* Lingkaran background saat hover */
-    .navbar-nav .nav-link:hover::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        background-color: white;
-        border-radius: 50%;
-        z-index: -1;
-    }
+      /* Lingkaran background saat hover */
+      .navbar-nav .nav-link:hover::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
+          background-color: white;
+          border-radius: 50%;
+          z-index: -1;
+      }
 
-    /* Efek hover untuk ikon */
-    .navbar-nav .nav-link:hover i {
-        color: #332318 !important;
-    }
+      /* Efek hover untuk ikon */
+      .navbar-nav .nav-link:hover i {
+          color: #332318 !important;
+      }
 
-    /* Indikator aktif */
-    .navbar-nav .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        background-color: white;
-        border-radius: 50%;
-    }
-        </style>
+      /* Indikator aktif */
+      .navbar-nav .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          height: 6px;
+          background-color: white;
+          border-radius: 50%;
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-2 mb-3">
       <h1 class="text-center mb-4 mt-3">DATA OF ORANG BERLANGGANAN</h1>
     </div>
 
+    {{-- Daftar User --}}
     <div class="table-container" style="overflow-x:auto;">
       <table class="table border-top-0 border-bottom-0 table-hover">
           <thead>
@@ -149,6 +152,7 @@
         </table>
     </div>
 
+    {{-- Navbar Bottom --}}
     <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; width: 340px; border-radius: 50px; margin-left: 40%; margin-bottom: 20px; padding: 5px 0;">
       <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">

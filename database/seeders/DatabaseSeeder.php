@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // Pembuatan data user dan make up artist
+        // Menggunakan factory untuk membuat data user dan make up artist
+        // Menggunakan model User dan MakeUpArtist untuk membuat data
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'user@example.com',

@@ -291,10 +291,10 @@
 
             <div class="d-flex">
               <button type="button" class="btn btn-login me-3" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button>
-                <button type="button" class="btn btn-register" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
+              <button type="button" class="btn btn-register" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
             </div>
 
-            <!-- Add these near the bottom of the body -->
+            {{-- Pop Up ketika tombol Sign In diklik --}}
             <div class="modal fade" id="loginModal" tabindex="-1">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -311,6 +311,7 @@
               </div>
             </div>
 
+            {{-- Pop Up ketika tombol Sign Up diklik --}}
             <div class="modal fade" id="registerModal" tabindex="-1">
               <div class="modal-dialog">
                 <div class="modal-content">

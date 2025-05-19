@@ -168,6 +168,7 @@
     </style>
   </head>
   <body>
+    {{-- Tombol pada Carousel akan mengarah ke halaman paket-berlangganan --}}
     <main>
       {{-- Carousel --}}
       <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-top: 80px;">
@@ -280,7 +281,8 @@
       <h4 class="fw-bold mb-4 ms-3">MUA Pesta dan Acara Rekomendasi</h4>
       <div class="container-fluid px-0 mt-3 mb-5">
         <div class="row mx-0 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-7">
-      
+
+          {{-- Jika role user adalah customer --}}
           @if ($user->role == 'customer')
             @foreach ($artist as $artistId)
               <!-- Card MUA -->
@@ -296,6 +298,7 @@
               </div>
             @endforeach
 
+            {{-- Apabila role user adalah user maka tampilan card akan diblur --}}
           @elseif ($user->role == 'user')
             @foreach ($artist as $artistId)
               <div class="col mb-4">
@@ -313,7 +316,8 @@
         </div>
       </div>
 
-      {{-- Navbar-Bottom --}}
+      {{-- Component Navbar Bottom (Bisa dilihat di folder components) --}}
+      {{-- Navbar Bottom --}}
       <x-navbar></x-navbar>
       
     </main>

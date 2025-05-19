@@ -142,7 +142,7 @@
   </head>
   <body>
     <div class="profile-container">
-        <!-- Profile Info Section (Left) -->
+        <!-- Keterangan Profil User -->
         <div class="profile-info">
             <div class="mb-4">
                 <h5 class="info-label">USER NAME</h5>
@@ -167,6 +167,7 @@
                 </p>
             </div>
 
+            {{-- Tombol Logout --}}
             <div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -183,6 +184,8 @@
         </div>
     </div>
 
+    {{-- Component Navbar Bottom (Bisa dilihat di folder components) --}}
+    {{-- Navbar Bottom --}}
     <x-navbar></x-navbar>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

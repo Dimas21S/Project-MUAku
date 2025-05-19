@@ -126,32 +126,38 @@
         bergabung sebagai Make-Up Artist (MUA) di platform kami.</p>
     </div>
 
-    <form class="form">
+    <form class="form" action="{{ route('post.pendaftaran') }}" method="POST" enctype="multipart/form-data">
+      @csrf
       <div class="form-group">
         <label for="nama">Nama Lengkap</label>
-        <input type="text" id="nama" placeholder="Masukkan Nama Asli Anda Sesuai KTP">
+        <input type="text" id="nama" name="name" placeholder="Masukkan Nama Asli Anda Sesuai KTP">
       </div>
 
       <div class="form-group">
         <label for="panggilan">Nama Panggilan MUA</label>
-        <input type="text" id="panggilan" placeholder="Contoh : MakeUp BY">
+        <input type="text" id="panggilan" name="username" placeholder="Contoh : MakeUp BY">
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Masukkan Email Aktif">
+        <input type="email" id="email" name="email" placeholder="Masukkan Email Aktif">
+      </div>
+
+      <div class="form-group">
+        <label for="alamat">Alamat</label>
+        <input type="text" id="alamat" name="address" placeholder="Masukkan Alamat Lengkap Anda">
       </div>
 
       <div class="form-group">
         <label for="pengalaman">Jelaskan Secara Singkat Pengalaman Anda</label>
-        <textarea id="pengalaman" placeholder="Jelaskan secara singkat pengalaman Anda sebagai MUA dan keunggulan layanan Anda"></textarea>
+        <textarea id="pengalaman" name="deskripsi" placeholder="Jelaskan secara singkat pengalaman Anda sebagai MUA dan keunggulan layanan Anda"></textarea>
       </div>
 
       <div class="form-group">
         <label for="sertifikat">Sertifikat MUA</label>
         <div class="upload">
           <label for="sertifikat">📷 Masukkan sertifikat MUA</label>
-          <input type="file" id="sertifikat">
+          <input type="file" id="sertifikat" name="portofolio" accept="image/*">
         </div>
       </div>
 

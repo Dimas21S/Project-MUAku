@@ -10,6 +10,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+// Event untuk mengirim pesan baru
+// Menggunakan trait Dispatchable, InteractsWithSockets, SerializesModels
+// Menggunakan interface ShouldBroadcast untuk mengirim pesan ke channel
+// Menggunakan PrivateChannel untuk mengirim pesan ke channel privat
+// Menggunakan model Message untuk menyimpan data pesan
+// Menggunakan model User untuk mendapatkan informasi pengguna
+// Menggunakan model MakeUpArtist untuk mendapatkan informasi make up artist
+// Tapi ini tidak digunakan
 class NewChatMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;

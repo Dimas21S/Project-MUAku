@@ -9,45 +9,48 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    //
-    // Function to show the login form
+    // Menampilkan form login
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    // Function to handle the login process
+    // Menangani proses login
     public function login(Request $request)
     {
-        // Validate the request data
+        // Validasi data request
         $request->validate([
             'name' => 'required|string',
             'password' => 'required|min:6',
         ]);
 
-        // Attempt to log the user in
+        // Cek apakah pengguna sudah terdaftar
         if (Auth::attempt($request->only('name', 'password'))) {
+
             $request->session()->regenerate();
-            // Check if the user is an admin
+
+            // Cek apakah pengguna adalah admin
             if (Auth::user()->role == 'admin') {
-                // Redirect to the admin dashboard
+
+                // Jika admin maka akan diarahkan ke dasbor admin
                 return redirect()->intended('/data-langganan');
             }
-            // Redirect to the intended page or dashboard
+
+            // jika hanya user biasa atau customer maka akan diarahkan ke halaman
             return redirect()->intended('/daftar-mua');
         }
 
-        // If login fails, redirect back with an error message
+        // Jika login gagal, alihkan kembali dengan pesan kesalahan
         return redirect()->back()->withErrors(['username' => 'Invalid credentials'])->withInput();
     }
 
-    // Function to show the registration form
+    // Menampilkan form registrasi
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    // Function to handle the registration process
+    // Menangani proses registrasi
     public function register(Request $request)
     {
         $request->validate([
@@ -61,27 +64,26 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        // Simpan data pengguna ke dalam database
         $user->save();
 
         return redirect('login')->with('message', 'Registration successful, please login');
     }
 
-    // Function to handle the logout process
+    // Menangani proses logout
+    // Menggunakan Auth::logout() untuk mengeluarkan pengguna dari sesi
+    // Menggunakan redirect untuk mengalihkan pengguna ke halaman login atau halaman lain
     public function logout(Request $request)
     {
-        // Log the user out
         Auth::logout();
-
-        // Redirect to the login page or home page
         return redirect('/');
     }
 
+    // Menampilkan profil pengguna
+    // Menggunakan Auth::user() untuk mendapatkan data pengguna yang sedang login
     public function userProfile()
     {
-        // Get the authenticated user
         $user = Auth::user();
-
-        // Return the user profile view with the user data
         return view('profil-pengguna', compact('user'));
     }
 }

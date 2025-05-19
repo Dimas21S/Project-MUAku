@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
-            $table->enum('status', ['active', 'pending'])->default('pending');
+            $table->enum('status', ['active', 'pending', 'rejected'])->default('pending');
             $table->string('category')->nullable(); // Kategori make up artist
             $table->text('file_certificate')->nullable(); // Path ke file sertifikat
             $table->text('profile_photo')->nullable(); // Path ke foto profil

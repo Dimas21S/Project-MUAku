@@ -141,14 +141,21 @@
     </div>
   </div>
 
+  {{-- Map dengan Leaflet.js --}}
   <div id="map" class="container mt-3"></div>
 
+  {{-- Component Navbar Bottom (Bisa dilihat di folder components) --}}
+  {{-- Navbar Bottom --}}
   <x-navbar></x-navbar>
 
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  {{-- Script Leaflet.js --}}
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  {{-- Inisialisasi Peta --}}
   <script>
     const map = L.map('map').setView([0, 0], 13);
 
