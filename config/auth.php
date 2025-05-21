@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'makeup_artist' => [
+            'driver' => 'session',
+            'provider' => 'makeup_artists',
+        ],
+
     ],
 
     /*
@@ -64,6 +69,11 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
+        'makeup_artists' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MakeUpArtist::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',

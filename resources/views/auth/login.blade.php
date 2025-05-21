@@ -19,13 +19,13 @@
             <form class="flex-grow" action="{{ route('login.post') }}" method="POST">
                 @csrf
                 <div class="input-field">
-                    <input type="text" id="username" name="name" required>
+                    <input type="text" id="username" name="name" autocomplete="off" placeholder="" required>
                     <label for="username">Username</label>
                     <div class="input-highlight"></div>
                 </div>
                 
                 <div class="input-field">
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" autocomplete="off" placeholder="" required>
                     <label for="password">Password</label>
                     <div class="input-highlight"></div>
                 </div>

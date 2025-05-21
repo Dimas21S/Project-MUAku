@@ -19,13 +19,13 @@
             <form class="flex-grow" action="{{ route('login-mua.post') }}" method="POST">
                 @csrf
                 <div class="input-field">
-                    <input type="text" id="username" name="name" required>
+                    <input type="text" id="username" name="username" autocomplete="off" required>
                     <label for="username">Username</label>
                     <div class="input-highlight"></div>
                 </div>
                 
                 <div class="input-field">
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" autocomplete="off" required>
                     <label for="password">Password</label>
                     <div class="input-highlight"></div>
                 </div>
@@ -43,7 +43,7 @@
             
             <div class="text-center text-sm text-gray-500 mt-4">
                 Belum punya akun? 
-                <a href="#" class="text-indigo-600 font-medium">Daftar disini</a>
+                <a href="{{ route('register-mua') }}" class="text-indigo-600 font-medium">Daftar disini</a>
             </div>
         </div>
     </div>

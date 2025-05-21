@@ -170,8 +170,37 @@
   <body>
     {{-- Tombol pada Carousel akan mengarah ke halaman paket-berlangganan --}}
     <main>
+      <main>
+      <div class="container-fluid px-4 mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2 class="mb-1 fw-bold" style="color: #332318;">
+              Selamat Datang, 
+              <span class="text-primary" style="color: #A87648 !important;">
+                {{ $user->name ?? 'Pengguna' }}
+              </span>
+            </h2>
+            <p class="text-muted small">
+              @php
+                $hour = date('H');
+                if ($hour < 12) {
+                    echo 'Selamat pagi!';
+                } elseif ($hour < 15) {
+                    echo 'Selamat siang!';
+                } elseif ($hour < 18) {
+                    echo 'Selamat sore!';
+                } else {
+                    echo 'Selamat malam!';
+                }
+              @endphp
+              <span id="welcome-message">Apa makeup favoritmu hari ini?</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
       {{-- Carousel --}}
-      <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-top: 80px;">
+      <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-top: 20px;">
           <div class="carousel-inner" style="overflow: hidden; border-radius: 50px;">
             <div class="carousel-item active" style="background-image: url('{{ asset('image/foto-cewek-1.jpg') }}'); object-fit: cover;">
               {{-- Jangan dihapus !!! --}}
@@ -306,7 +335,7 @@
                   <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
                   <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
                     <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Kategori:  {{ $artistId->category }}</p>
-                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat:  {{ $artistId->address }}</p>
+                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat:  {{ $artistId->address->alamat }}</p>
                     <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
                   </div>
                 </div>
@@ -333,6 +362,30 @@
           interval: 5000,
           wrap: true
         });
+      });
+
+      const messages = [
+          "Apa makeup favoritmu hari ini?",
+          "Temukan MUA terbaik di sekitarmu!",
+          "Siap tampil maksimal hari ini?",
+          "Makeup bagus, mood pun ikut baik!",
+          "Jangan lupa skin care sebelum makeup!"
+        ];
+        
+        const welcomeElement = document.getElementById('welcome-message');
+        let currentIndex = 0;
+        
+        function rotateMessage() {
+          welcomeElement.style.opacity = 0;
+          setTimeout(() => {
+            currentIndex = (currentIndex + 1) % messages.length;
+            welcomeElement.textContent = messages[currentIndex];
+            welcomeElement.style.opacity = 1;
+          }, 500);
+        }
+        
+        // Change message every 5 seconds
+        setInterval(rotateMessage, 5000);
       });
     </script>
   </body>

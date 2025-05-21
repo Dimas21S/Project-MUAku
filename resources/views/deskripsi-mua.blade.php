@@ -85,10 +85,12 @@
               <i class="bi bi-whatsapp text-success"></i>
             </button>
             <button type="button" 
-                    class="btn btn-light rounded-circle btn-outline-dark"
-                    style="width: 40px; height: 40px;">
-              <i class="bi bi-chat-left-text text-primary"></i>
+                class="btn btn-light rounded-circle btn-outline-dark"
+                style="width: 40px; height: 40px;"
+                onclick="window.location.href='{{ route('chat', ['id' => $artist->id]) }}'">
+                <i class="bi bi-chat-left-text text-primary"></i>
             </button>
+        
           </div>
         </header>
 
@@ -125,7 +127,7 @@
             <div class="description-container">
                 <p class="mt-0 mb-3">Kategori Make up : {{ $artist->category }}</p>
                 <p class="mb-3">MUA : {{ $artist->name }}</p>
-                <p class="mb-3">Alamat : {{ $artist->address }}
+                <p class="mb-3">Alamat : {{ $artist->address->alamat }}
                     <br>Telp : {{ $artist->phone }}
                     <br>Sosial Media : {{ $artist->email }}</p> 
                 <h4 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 25px; margin-top: 25px;">Deskripsi</h4>

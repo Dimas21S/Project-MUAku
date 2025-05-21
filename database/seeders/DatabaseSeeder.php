@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MakeUpArtist;
 use App\Models\User;
+use App\Models\Address;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,40 +27,21 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        MakeUpArtist::factory()->create([
-            'name' => 'Devi',
-            'email' => 'devi@gmail.com',
-            'phone' => '987654321',
-            'address' => 'Jalan Tuna 4',
-            'city' => 'Jambi',
-            'status' => 'active',
-            'category' => 'Pesta dan Acara',
-            'file_certificate' => 'path/to/certificate.jpg',
-            'profile_photo' => 'path/to/profile.jpg',
-        ]);
-
-        MakeUpArtist::factory()->create([
-            'name' => 'Diana',
-            'email' => 'dianak@gmail.com',
-            'phone' => '0246813579',
-            'address' => 'Jalan Tuna 7',
-            'city' => 'Jambi',
-            'status' => 'active',
-            'category' => 'Pengantin',
-            'file_certificate' => 'path/to/certificate.jpg',
-            'profile_photo' => 'path/to/profile.jpg',
-        ]);
-
-        MakeUpArtist::factory()->create([
-            'name' => 'Rini',
-            'email' => 'rini@gmail.com',
-            'phone' => '192837465',
-            'address' => 'Jalan Tuna 7',
-            'city' => 'Jambi',
-            'status' => 'active',
-            'category' => 'Editorial',
-            'file_certificate' => 'path/to/certificate.jpg',
-            'profile_photo' => 'path/to/profile.jpg',
-        ]);
+        MakeUpArtist::factory()
+            ->has(Address::factory()->state([
+                'alamat' => 'Jalan Tuna 7',
+                'city' => 'Jambi',
+            ]))
+            ->create([
+                'username' => 'riri123',
+                'name' => 'Rini',
+                'password' => bcrypt('rini123'),
+                'email' => 'rini@gmail.com',
+                'phone' => '192837465',
+                'status' => 'accepted',
+                'category' => 'Editorial',
+                'file_certificate' => 'path/to/certificate.jpg',
+                'profile_photo' => 'path/to/profile.jpg',
+            ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ChatController;
 use App\Http\Middleware\IsCustomer;
 
 //Rute URL untuk admin
@@ -14,6 +15,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/data-langganan', 'dataPelanggan');
     Route::get('/verified-admin', 'verifiedMakeUpArtist')->name('verified-admin');
     Route::get('/vip-fitur', 'fiturVip');
+    Route::post('/update-status/{artistId}', 'updateStatus')->name('admin.post.update-status');
 });
 
 //Rute URL untuk yang belum login maupun register (User yang sudah login tidak bisa mengakses rute ini)
@@ -48,6 +50,13 @@ Route::middleware('auth')->group(function () {
 Route::controller(PaymentController::class)->group(function () {
     Route::get('/payment', 'paymentIndex')->name('payment');
     Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token');
+});
+
+//Rute URL untuk fitur chat
+Route::controller(ChatController::class)->group(function () {
+    Route::get('/chat/{id}', 'chatPage')->name('chat');
+    Route::post('/send-message', 'sendMessage')->name('send-message');
+    Route::get('/chat-history/{receiverId}', 'chatHistory')->name('chat-history');
 });
 
 // Rute URL untuk notifikasi dari Midtrans

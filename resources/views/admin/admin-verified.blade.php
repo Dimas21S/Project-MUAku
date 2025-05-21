@@ -177,7 +177,7 @@
           <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
           <div class="text-muted">{{ $artist->city }}</div>
         </div>
-        @if ($artist->status == 'active')
+        @if ($artist->status == 'accepted')
           <span class="badge bg-success">Verified</span>
         @elseif ($artist->status == 'pending')
           <span class="badge bg-secondary">Pending</span>
@@ -231,14 +231,13 @@
           </div>
 
           {{-- Tombol Aksi --}}
-          <div class="d-grid gap-2">
-            <button class="btn btn-outline-danger" type="button">
-              <i class="bi bi-trash"></i> Remove Account
-            </button>
-            <button class="btn btn-primary" type="button">
-              <i class="bi bi-chat-left-text"></i> Send Message
-            </button>
-          </div>
+            @if ($artist->status == 'pending')
+            <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}">
+              @csrf
+              <button type="submit" name="status" value="accepted">Terima</button>
+              <button type="submit" name="status" value="rejected">Tolak</button>
+            </form>
+            @endif
         </div>
       </div>
     </div>

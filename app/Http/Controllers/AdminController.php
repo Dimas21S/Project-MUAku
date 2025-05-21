@@ -35,8 +35,22 @@ class AdminController extends Controller
     {
         return view('admin.fitur-vip');
     }
+
     public function map()
     {
         return view('map');
+    }
+
+    public function updateStatus(Request $request, $artistId)
+    {
+        $request->validate([
+            'status' => 'required|in:accepted,rejected',
+        ]);
+
+        $artist = MakeUpArtist::findOrFail($artistId);
+        $artist->status = $request->status;
+        $artist->save();
+
+        return redirect()->back()->with('success', 'Status artist berhasil diperbarui.');
     }
 }
