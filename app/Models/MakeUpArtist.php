@@ -28,4 +28,9 @@ class MakeUpArtist extends Authenticatable
     {
         return $this->hasOne(Address::class);
     }
+
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
 }

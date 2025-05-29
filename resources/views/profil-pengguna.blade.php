@@ -142,47 +142,61 @@
   </head>
   <body>
     <div class="profile-container">
-        <!-- Keterangan Profil User -->
-        <div class="profile-info">
-            <div class="mb-4">
-                <h5 class="info-label">USER NAME</h5>
-                <p class="info-value">{{$user->name}}</p>
-            </div>
-            
-            <div class="mb-4">
-                <h5 class="info-label">E-MAIL</h5>
-                <p class="info-value">{{$user->email}}</p>
-            </div>
-            
-            <div class="mb-4">
-                <h5 class="info-label">PASSWORD</h5>
-                <p class="info-value">********</p>
-            </div>
-            
-            <div class="mb-4">
-                <h5 class="info-label">DESKRIPSI</h5>
-                <p class="info-value">
-                    aku seorang pelaut yang suka beraktifitas menggunakan make up, 
-                    di bawah terik matahari di lautan lepas samudra.
-                </p>
+
+            <!-- Keterangan Profil User -->
+            <div class="profile-info">
+                <div class="mb-4">
+                    <h5 class="info-label">USER NAME</h5>
+                    <p class="info-value">{{$user->name}}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h5 class="info-label">E-MAIL</h5>
+                    <p class="info-value">{{$user->email}}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h5 class="info-label">PASSWORD</h5>
+                    <p class="info-value">********</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h5 class="info-label">DESKRIPSI</h5>
+                    <p class="info-value">
+                        @if($user->deskripsi)
+                            {{$user->deskripsi}}
+                        @else
+                            Belum ada deskripsi.
+                        @endif
+                    </p>
+                </div>
+
+                {{-- Tombol Logout --}}
+                <div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-logout">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </button>
+                    </form>
+                </div>
+                {{-- Tombol Edit --}}
+                <div>
+                    <button type="submit" class="btn btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> <a href="{{ route('update') }}" class="text-decoration-none text-dark">Edit Profil</a>
+                    </button>
+                </div>
             </div>
 
-            {{-- Tombol Logout --}}
-            <div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> Keluar
-                    </button>
-                </form>
+            <!-- Profile Image Section (Right) -->
+            <div class="profile-image-container">
+                    @if ($user->foto_profil)
+                        <img src="{{ Storage::url($user->foto_profil) }}" class="profile-image" alt="Profile Picture">
+                    @else
+                        <img src="{{ asset('image/Profile-Foto.jpg') }}" class="profile-image" alt="Default Profile Picture">
+                    @endif
             </div>
         </div>
-        
-        <!-- Profile Image Section (Right) -->
-        <div class="profile-image-container">
-            <img src="{{ asset('image/foto-cewek-5.jpg') }}" class="profile-image" alt="Profile Picture">
-        </div>
-    </div>
 
     {{-- Component Navbar Bottom (Bisa dilihat di folder components) --}}
     {{-- Navbar Bottom --}}

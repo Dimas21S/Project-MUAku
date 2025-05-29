@@ -71,34 +71,24 @@
                 class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
                 <i class="bi bi-arrow-left"></i>
             </a>
-          
-          {{-- Grup tombol kanan --}}
-          <div class="btn-group position-absolute end-0 me-3">
+
+            <div class="btn-group position-absolute end-0 me-3">
             <button type="button" 
-                    class="btn btn-light rounded-circle btn-outline-dark"
+                    class="btn btn-light btn-outline-dark"
                     style="width: 40px; height: 40px;">
-              <i class="bi bi-heart-fill text-danger"></i>
+              <i class="bi bi-heart-fill text-danger"></i><a href="{{ route('update') }}" class="text-decoration-none text-dark">Edit Profil</a>
             </button>
-            <button type="button" 
-                    class="btn btn-light rounded-circle btn-outline-dark"
-                    style="width: 40px; height: 40px;">
-              <i class="bi bi-whatsapp text-success"></i>
-            </button>
-            <button type="button" 
-                class="btn btn-light rounded-circle btn-outline-dark"
-                style="width: 40px; height: 40px;"
-                onclick="window.location.href='{{ route('chat.user.to.mua', ['mua_id' => $artist->id]) }}'">
-                <i class="bi bi-chat-left-text text-primary"></i>
-            </button>
-        
           </div>
         </header>
 
         <div class="content-wrapper">
             <div class="image-container">
+                @if ( $artist->profile_photo)
+                    <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="rounded img-fluid" alt="..." style="max-height: 640px; margin-left: 30px; margin-right: 5px;">                    
+                @else
                 <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="rounded img-fluid" alt="..." style="max-height: 640px; margin-left: 30px; margin-right: 5px;">
+                @endif
 
-                {{-- Daftar Foto yang diupload --}}
                 <div class="d-flex justify-content-center mt-3 mb-3 ms-3">
                     <div class="d-flex flex-column align-items-center">
                         <button type="button" class="btn btn-light btn-outline-dark me-2 overflow-hidden" style="width: 79px; height: 79px; border-radius: 8px;">

@@ -21,12 +21,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'foto_profil',
+        'deskripsi',
     ];
 
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'sender');
     }
 
     /**

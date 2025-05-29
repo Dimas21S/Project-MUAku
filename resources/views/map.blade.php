@@ -8,7 +8,6 @@
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     html, body {
       height: 100%;
@@ -133,16 +132,43 @@
 </head>
 <body>
 
-  <div class="container mt-4">
-    <h3 class="mb-3">Pencarian Make Up Artist</h3>
-    <div class="search-box">
-      <input id="autocomplete" class="form-control border border-dark" type="text" placeholder="Cari lokasi...">
-      <i class="bi bi-search"></i>
+ <div class="container mt-4">
+  <h3 class="mb-3">Pencarian Make Up Artist</h3>
+  <form action="{{ route('address') }}" method="GET">
+    <div class="search-box d-flex">
+      <input id="autocomplete" class="form-control border border-dark" type="text" placeholder="Cari lokasi..." name="search" aria-label="Search" value="{{ request('search') }}">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+@foreach ($artist as $item)
+<div class="card mt-3">
+  <div class="card-body">
+    <div class="d-flex align-items-center"> <!-- Tambahkan flex container -->
+      <div class="me-3"> <!-- Beri margin kanan untuk foto -->
+        <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
+             alt="{{ $item->name }}" 
+             class="rounded-circle object-fit-cover shadow-sm" 
+             style="width: 70px; height: 70px; object-fit: cover;">
+      </div>
+      <div> <!-- Container untuk teks -->
+        <h5 class="card-title mb-0">{{ $item->name }}</h5>
+        <!-- Anda bisa tambahkan elemen lain di sini -->
+        <small class="text-muted">{{ $item->category }}</small>
+      </div>
+      <div class="ms-auto"> <!-- Tambahkan margin kiri otomatis untuk mendorong ke kanan -->
+        <a href="#" class="btn btn-primary">
+          <i class="bi bi-geo-alt-fill"></i> Lihat Lokasi
+        </a>
+      </div>
     </div>
   </div>
-
-  {{-- Map dengan Leaflet.js --}}
-  <div id="map" class="container mt-3"></div>
+</div>
+@endforeach
 
   {{-- Component Navbar Bottom (Bisa dilihat di folder components) --}}
   {{-- Navbar Bottom --}}
@@ -154,30 +180,5 @@
 
   {{-- Script Leaflet.js --}}
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  {{-- Inisialisasi Peta --}}
-  <script>
-    const map = L.map('map').setView([0, 0], 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
-        map.setView([lat, lon], 18);
-
-        const marker = L.marker([lat, lon]).addTo(map);
-        marker.bindPopup("<strong>Lokasi kamu sekarang</strong>").openPopup();
-      }, function (error) {
-        alert("Gagal mengambil lokasi: " + error.message);
-      });
-    } else {
-      alert("Geolocation tidak didukung di browser ini.");
-    }
-  </script>
 </body>
 </html>

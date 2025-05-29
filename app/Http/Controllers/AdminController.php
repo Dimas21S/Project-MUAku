@@ -20,6 +20,7 @@ class AdminController extends Controller
     {
         // Mengambil data pembayaran dari model Payment dan mengaitkannya dengan model User
         $itemPembayaran = Payment::with('user')->get();
+
         return view('admin.data-berlangganan', compact('itemPembayaran'));
     }
 
@@ -28,17 +29,13 @@ class AdminController extends Controller
     {
         // Menggunakan model MakeUpArtist untuk mengambil semua data dengan method all()
         $artistsItem = MakeUpArtist::all();
+
         return view('admin.admin-verified', compact('artistsItem'));
     }
 
     public function fiturVip()
     {
         return view('admin.fitur-vip');
-    }
-
-    public function map()
-    {
-        return view('map');
     }
 
     public function updateStatus(Request $request, $artistId)

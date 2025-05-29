@@ -167,15 +167,26 @@
     @foreach ($artistsItem as $artist)
     <div class="user-card" data-bs-toggle="modal" data-bs-target="#userModal"
          data-name="{{ $artist->name }}"
-         data-location="{{ $artist->address }}"
+         data-location="{{ $artist->address->alamat }}"
          data-phone="{{ $artist->phone }}"
          data-email="{{ $artist->email }}"
-         data-status="{{ $artist->status }}">
+         data-status="{{ $artist->status }}"
+         data-portfolio="{{ $artist->file_certificate }}">
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <span class="fw-bold">{{ $artist->name }}</span>
+          {{-- @if ($artist->profile_photo)
+            <img src="{{ asset($artist->profile_photo) }}" alt="Profile Photo" class="user-avatar">
+          @else
+            <img src="{{ asset('image/Profile-Foto.jpg') }}" alt="Default Profile Photo" class="user-avatar">
+          @endif --}}
+
+          @if ($artist->status == 'accepted')
           <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
-          <div class="text-muted">{{ $artist->city }}</div>
+          @else
+          <span class="verified-badge"><i class="bi bi-patch-exclamation-fill"></i> Not Verified</span>
+          @endif
+          <div class="text-muted">{{ $artist->address->alamat }}</div>
         </div>
         @if ($artist->status == 'accepted')
           <span class="badge bg-success">Verified</span>
@@ -198,7 +209,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
-          <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="user-avatar" id="modalUserAvatar">
+          <img src="{{ asset($artistItem->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="user-avatar" id="modalUserAvatar">
           <h5 class="mb-1" id="modalUserName">Nama</h5><i class="bi bi-patch-check-fill"></i>
           <p class="text-muted mb-3" id="modalUserLocation">Alamat</p>
           <div class="d-flex justify-content-center gap-3 mb-4">
@@ -276,6 +287,7 @@
             document.getElementById('modalUserPhone').textContent = button.getAttribute('data-phone');
             document.getElementById('modalUserEmail').textContent = button.getAttribute('data-email');
             document.getElementById('modalUserStatus').textContent = button.getAttribute('data-status');
+            const portfolio = button.getAttribute('data-portfolio');
             
             // Reset portfolio preview when modal opens
             const portfolioPreview = document.getElementById('portfolioPreview');
@@ -296,7 +308,8 @@
 
         if (showPortfolioBtn && portfolioOverlay) {
             // Data portfolio - bisa diambil dari data attribute jika dinamis
-            const portfolioImageUrl = "{{ asset('image/foto-cewek-1.jpg') }}";
+            const portfolioImageUrl = "{{ Storage::url($artist->file_certificate) }}";
+            
 
         showPortfolioBtn.addEventListener('click', function() {
           portfolioImage.src = portfolioImageUrl;

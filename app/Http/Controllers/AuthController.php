@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -19,10 +19,18 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         // Validasi data request
-        $request->validate([
+        $rule_validasi = [
             'name' => 'required|string',
-            'password' => 'required|min:6',
-        ]);
+            'password' => 'required|min:8',
+        ];
+
+        $pesan_validasi = [
+            'name.required' => 'Nama harus diisi',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 8 karakter'
+        ];
+
+        $request->validate($rule_validasi, $pesan_validasi);
 
         // Cek apakah pengguna sudah terdaftar
         if (Auth::attempt($request->only('name', 'password'))) {
@@ -41,7 +49,10 @@ class AuthController extends Controller
         }
 
         // Jika login gagal, alihkan kembali dengan pesan kesalahan
-        return redirect()->back()->withErrors(['username' => 'Invalid credentials'])->withInput();
+        return redirect()->back()->withErrors([
+            'name' => 'Nama tidak sesuai',
+            'password' => 'Password tidak sesuai',
+        ])->withInput();
     }
 
     // Menampilkan form registrasi
@@ -53,11 +64,21 @@ class AuthController extends Controller
     // Menangani proses registrasi
     public function register(Request $request)
     {
-        $request->validate([
+        $rule_validasi = [
             'username' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
-        ]);
+        ];
+
+        $pesan_validasi = [
+            'username.required' => 'Nama harus diisi',
+            'email.required' => 'e-Mail harus diisi',
+            'email.email' => 'Format e-Mail tidak sesuai',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 8 karakter'
+        ];
+
+        $request->validate($rule_validasi, $pesan_validasi);
 
         $user = User::create([
             'name' => $request->username,
@@ -71,19 +92,73 @@ class AuthController extends Controller
     }
 
     // Menangani proses logout
-    // Menggunakan Auth::logout() untuk mengeluarkan pengguna dari sesi
-    // Menggunakan redirect untuk mengalihkan pengguna ke halaman login atau halaman lain
     public function logout(Request $request)
     {
+        // Menggunakan Auth::logout() untuk mengeluarkan pengguna dari sesi
         Auth::logout();
+
+        // Menggunakan redirect untuk mengalihkan pengguna ke halaman login atau halaman lain
         return redirect('/');
     }
 
     // Menampilkan profil pengguna
-    // Menggunakan Auth::user() untuk mendapatkan data pengguna yang sedang login
     public function userProfile()
     {
+        // Menggunakan Auth::user() untuk mendapatkan data pengguna yang sedang login
         $user = Auth::user();
+
         return view('profil-pengguna', compact('user'));
+    }
+
+    public function userUpdate()
+    {
+        $user = Auth::user();
+        return view('update-profile', compact('user'));
+    }
+
+    public function userUpdateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:5',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'nullable|max:500'
+        ];
+
+        $messages = [
+            'name.required' => 'Nama wajib diisi',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah digunakan',
+            'password.min' => 'Password minimal 5 karakter',
+            'foto_profil.image' => 'File harus berupa gambar',
+            'foto_profil.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif',
+            'foto_profil.max' => 'Ukuran gambar maksimal 2MB'
+        ];
+
+        $request->validate($rules, $messages);
+
+        // Update data user
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->deskripsi = $request->deskripsi;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('foto_profil')) {
+            $file = $request->file('foto_profil');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads', $filename, 'public');
+            $user->foto_profil = $path;
+        }
+
+        $user->save();
+
+        return redirect('profil-pengguna')->with('success', 'Profil berhasil diperbarui!');
     }
 }

@@ -14,14 +14,11 @@ class PaymentController extends Controller
     // Menampilkan halaman pembayaran
     public function paymentIndex()
     {
-        return view('paket-berlangganan');
+        return view('payment.paket-berlangganan');
     }
 
     // Mendapatkan token Snap untuk pembayaran
     // Menggunakan Midtrans Snap API untuk mendapatkan token pembayaran
-    // Menggunakan model Payment untuk menyimpan data transaksi
-    // Menggunakan model User untuk mendapatkan informasi pengguna
-    // Menggunakan middleware auth untuk memastikan pengguna sudah login
     public function getSnapToken(Request $request)
     {
         $user = $request->user();
@@ -29,6 +26,7 @@ class PaymentController extends Controller
         $package_id = $request->input('packageId');
         $amount = $request->input('amount');
 
+        //Membuat orderId menjadi unik
         $orderId = 'ORD-' . time() . '-' . $user->id;
 
         // Simpan data transaksi ke database sebelum memproses pembayaran
@@ -63,11 +61,13 @@ class PaymentController extends Controller
         ];
 
         // Melakukan try and catch untuk menangani error
-        // Jika berhasil, kembalikan token snap
         try {
+
+            // Jika berhasil, kembalikan token snap
             $snapToken = \Midtrans\Snap::getSnapToken($params);
             return response()->json(['snap_token' => $snapToken]);
         } catch (\Exception $e) {
+
             // Jika terjadi error, log error tersebut dan kembalikan response error (Log error => mencatat error ketika mendapatkan token snap ke dalam file log)
             Log::error('Payment Error: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
@@ -75,9 +75,6 @@ class PaymentController extends Controller
     }
 
     // Menangani notifikasi dari Midtrans
-    // Menggunakan middleware auth untuk memastikan pengguna sudah login
-    // Menggunakan model Payment untuk memperbarui status pembayaran
-    // Menggunakan model User untuk memperbarui role pengguna
     // Menggunakan request untuk mendapatkan data dari Midtrans
     public function handleNotification(Request $request)
     {
@@ -91,24 +88,25 @@ class PaymentController extends Controller
         }
 
         // jika status transaksi adalah 'settlement' atau 'capture'
-        // maka update status pembayaran menjadi 'success'
-        // dan update role user menjadi 'customer'
         if ($transaction == 'settlement' || $transaction == 'capture') {
 
             // Pembayaran berhasil, update role user
             $user = User::find($payment->user_id);
 
             if ($user) {
+
+                //update role user menjadi 'customer'
                 $user->role = 'customer';
                 $user->save();
 
-                // Update status payment
+                //Menggunakan model Payment untuk memperbarui status pembayaran
                 $payment->status = 'success';
                 $payment->save();
 
                 Log::info("User {$user->id} role updated to pelanggan after successful payment");
             }
         } elseif ($transaction == 'expire' || $transaction == 'cancel' || $transaction == 'deny') {
+
             // Pembayaran gagal
             $payment->status = 'failed';
             $payment->save();
@@ -123,6 +121,6 @@ class PaymentController extends Controller
             ->where('status', 'success')
             ->latest()
             ->first();
-        return view('pembayaran-berhasil', compact('success'));
+        return view('payment.pembayaran-berhasil', compact('success'));
     }
 }

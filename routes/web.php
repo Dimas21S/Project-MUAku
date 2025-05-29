@@ -44,6 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/map', [AdminController::class, 'map'])->name('map');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profil', [AuthController::class, 'userProfile'])->name('profile');
+    Route::get('/address', [ArtistController::class, 'listAddressMakeUpArtist'])->name('address');
+    Route::get('/update/edit', [AuthController::class, 'userUpdate'])->name('update');
+    Route::patch('/update-profil', [AuthController::class, 'userUpdateProfile'])->name('update.profile');
 });
 
 // Rute URL pembayaran
@@ -54,9 +57,12 @@ Route::controller(PaymentController::class)->group(function () {
 
 //Rute URL untuk fitur chat
 Route::controller(ChatController::class)->group(function () {
-    Route::get('/chat/{id}', 'chatPage')->name('chat');
-    Route::post('/send-message', 'sendMessage')->name('send-message');
-    Route::get('/chat-history/{receiverId}', 'chatHistory')->name('chat-history');
+    Route::get('/chat/mua/{mua_id}', 'userToMua')->name('chat.user.to.mua');
+    Route::post('/chat/mua/{mua_id}', 'userSendToMua')->name('chat.user.send.mua');
+    Route::get('/mua/chat/user/{user_id}', [ChatController::class, 'muaToUser'])->name('chat.mua.to.user');
+    Route::post('/mua/chat/user/{user_id}', [ChatController::class, 'muaSendToUser'])->name('chat.mua.send.user');
+    Route::get('/notif-chat', 'receivedMessages')->name('notif-chat');
+    Route::get('/chat-page', 'showChatPage')->name('chat.page');
 });
 
 // Rute URL untuk notifikasi dari Midtrans

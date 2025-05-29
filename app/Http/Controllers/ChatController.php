@@ -2,112 +2,196 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\MakeUpArtist;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use App\Models\User;
-use App\Models\MakeUpArtist;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
-    //
-    public function chatPage($id)
+    // Menangani Update pesan dari user ke MUA
+    public function userToMua($mua_id)
     {
-        $receiver = User::findOrFail($id);
+        $user = Auth::user();
 
-        // Ambil semua pesan antara user login dan receiver
-        $messages = Message::where(function ($query) use ($id) {
-            $query->where('sender_id', Auth::id())
-                ->where('receiver_id', $id);
-        })->orWhere(function ($query) use ($id) {
-            $query->where('sender_id', $id)
-                ->where('receiver_id', Auth::id());
-        })->orderBy('created_at')->get();
+        //Mencari id mua
+        $mua = MakeUpArtist::findOrFail($mua_id);
 
-        return view('chat', compact('messages', 'receiver'));
+        $messages = Message::where(function ($query) use ($user, $mua) {
+            $query->where('sender_id', $user->id)
+                ->where('sender_type', 'user')
+                ->where('receiver_id', $mua->id)
+                ->where('receiver_type', 'make_up_artist');
+        })
+            ->orWhere(function ($query) use ($user, $mua) {
+                $query->where('sender_id', $mua->id)
+                    ->where('sender_type', 'make_up_artist')
+                    ->where('receiver_id', $user->id)
+                    ->where('receiver_type', 'user');
+            })
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Tandai pesan sebagai dibaca
+        Message::where('sender_id', $mua->id)
+            ->where('sender_type', 'make_up_artist')
+            ->where('receiver_id', $user->id)
+            ->where('receiver_type', 'user')
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        return view('chat.user-chat', compact('mua', 'messages'));
     }
 
-    // Fungsi untuk mengirim pesan
-    // Fungsi ini akan dipanggil ketika user mengirim pesan
-    public function sendMessage(Request $request)
+    //Menangani pengiriman pesan dari user ke mua
+    public function userSendToMua(Request $request, $mua_id)
     {
-
         $request->validate([
-            'receiver_id' => 'required|integer',
             'message' => 'required|string|max:1000',
         ]);
 
-        // Melakukan pengecekan siapa yang sedang login (user atau makeup artist)
-        if (auth()->guard('web')->check()) {
-            $senderId = auth()->guard('web')->id();
-            $request->merge(['receiver_type' => 'makeup_artist']);
-        } elseif (auth()->guard('makeup_artist')->check()) {
-            $senderId = auth()->guard('makeup_artist')->id();
-            $request->merge(['receiver_type' => 'user']);
-        } else {
-            return redirect()->back()->with('error', 'Anda harus login terlebih dahulu');
-        }
+        //Mencari id mua yang ingin dichat
+        $mua = MakeUpArtist::findOrFail($mua_id);
 
-        // Menyimpan pesan ke dalam database
         Message::create([
-            'sender_id' => $senderId,
-            'sender_type' => auth()->guard('web')->check() ? 'user' : 'makeup_artist',
-            'receiver_id' => $request->receiver_id,
-            'receiver_type' => $request->receiver_type,
-            'message' => strip_tags(trim($request->message)),
+            'sender_id' => Auth::id(),
+            'sender_type' => 'user',
+            'receiver_id' => $mua->id,
+            'receiver_type' => 'make_up_artist',
+            'message' => $request->message,
+            'is_read' => false,
         ]);
 
-        return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
+        return back()->with('success', 'Pesan terkirim!');
     }
 
-    public function chatHistory(Request $request, $receiverId)
+    // Untuk MUA mengirim ke user
+    public function muaToUser($user_id)
     {
-        if (auth()->guard('web')->check()) {
-            $authId = auth()->guard('web')->id();
-        } elseif (auth()->guard('makeup_artist')->check()) {
-            $authId = auth()->guard('makeup_artist')->id();
-        } else {
-            return redirect()->back()->with('error', 'Anda harus login');
-        }
+        $mua = Auth::guard('makeup_artist')->user();
+        $user = User::findOrFail($user_id);
 
-        $messages = Message::where(function ($q) use ($authId, $receiverId) {
-            $q->where('sender_id', $authId)->where('receiver_id', $receiverId);
-        })->orWhere(function ($q) use ($authId, $receiverId) {
-            $q->where('sender_id', $receiverId)->where('receiver_id', $authId);
-        })->orderBy('created_at')->get();
+        $messages = Message::where(function ($query) use ($user, $mua) {
+            $query->where('sender_id', $user->id)
+                ->where('sender_type', 'user')
+                ->where('receiver_id', $mua->id)
+                ->where('receiver_type', 'make_up_artist');
+        })
+            ->orWhere(function ($query) use ($user, $mua) {
+                $query->where('sender_id', $mua->id)
+                    ->where('sender_type', 'make_up_artist')
+                    ->where('receiver_id', $user->id)
+                    ->where('receiver_type', 'user');
+            })
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-        return view('chat.index', compact('messages', 'receiverId'));
+        // Tandai pesan sebagai dibaca
+        Message::where('sender_id', $user->id)
+            ->where('sender_type', 'user')
+            ->where('receiver_id', $mua->id)
+            ->where('receiver_type', 'make_up_artist')
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        return view('chat.mua-chat', compact('user', 'messages'));
     }
 
-    public function deleteMessage(Request $request, $id)
+    public function muaSendToUser(Request $request, $user_id)
     {
-        // Find the message by ID
-        $message = Message::find($id);
+        $request->validate([
+            'message' => 'required|string|max:1000',
+        ]);
 
-        if ($message) {
-            // Delete the message
-            $message->delete();
+        $user = User::findOrFail($user_id);
 
-            return response()->json(['status' => 'success', 'message' => 'Message deleted successfully']);
-        } else {
-            return response()->json(['status' => 'error', 'message' => 'Message not found'], 404);
-        }
+        Message::create([
+            'sender_id' => Auth::guard('makeup_artist')->id(),
+            'sender_type' => 'make_up_artist',
+            'receiver_id' => $user->id,
+            'receiver_type' => 'user',
+            'message' => $request->message,
+            'is_read' => false,
+        ]);
+
+        return back()->with('success', 'Pesan terkirim!');
     }
 
-    public function markAsRead(Request $request, $id)
+    //Mengambil chat yang diterima oleh makeup artist
+    public function receivedMessages()
     {
-        // Find the message by ID
-        $message = Message::find($id);
+        $mua = Auth::guard('makeup_artist')->user();
 
-        if ($message) {
-            // Mark the message as read
-            $message->is_read = true;
-            $message->save();
+        // Ambil pesan terbaru dari setiap pengirim
+        $latestMessages = Message::where('receiver_id', $mua->id)
+            ->where('receiver_type', 'make_up_artist')
+            ->select('sender_id', 'sender_type', DB::raw('MAX(created_at) as latest_time'))
+            ->groupBy('sender_id', 'sender_type')
+            ->orderBy('latest_time', 'desc')
+            ->get();
 
-            return response()->json(['status' => 'success', 'message' => 'Message marked as read']);
-        } else {
-            return response()->json(['status' => 'error', 'message' => 'Message not found'], 404);
+        // Ambil detail lengkap dari pesan-pesan terbaru tersebut
+        $messages = collect();
+        foreach ($latestMessages as $latest) {
+            $message = Message::where('receiver_id', $mua->id)
+                ->where('receiver_type', 'make_up_artist')
+                ->where('sender_id', $latest->sender_id)
+                ->where('sender_type', $latest->sender_type)
+                ->where('created_at', $latest->latest_time)
+                ->first();
+
+            if ($message) {
+                $messages->push($message);
+            }
         }
+
+        return view('chat.notif-chat', compact('messages'));
+    }
+
+    public function showChatPage()
+    {
+        // Ambil semua MUA yang diterima
+        $muas = MakeUpArtist::where('status', 'accepted')->get();
+
+        // Jika ada parameter MUA ID, tampilkan pesan dengan MUA tersebut
+        $selectedMuaId = request('mua_id');
+
+        if ($selectedMuaId) {
+            $selectedMua = MakeUpArtist::findOrFail($selectedMuaId);
+
+            // Ambil pesan antara user yang login dan MUA yang dipilih
+            $messages = Message::where(function ($query) use ($selectedMuaId) {
+                $query->where('sender_id', auth()->id())
+                    ->where('sender_type', 'user')
+                    ->where('receiver_id', $selectedMuaId)
+                    ->where('receiver_type', 'make_up_artist');
+            })
+                ->orWhere(function ($query) use ($selectedMuaId) {
+                    $query->where('sender_id', $selectedMuaId)
+                        ->where('sender_type', 'make_up_artist')
+                        ->where('receiver_id', auth()->id())
+                        ->where('receiver_type', 'user');
+                })
+                ->orderBy('created_at', 'asc')
+                ->get();
+
+            // Tandai pesan sebagai dibaca
+            Message::where('sender_id', $selectedMuaId)
+                ->where('sender_type', 'make_up_artist')
+                ->where('receiver_id', auth()->id())
+                ->where('is_read', false)
+                ->update(['is_read' => true]);
+        } else {
+            $selectedMua = null;
+            $messages = collect();
+        }
+
+        return view('chat.halaman-chat', [
+            'muas' => $muas,
+            'selectedMua' => $selectedMua,
+            'messages' => $messages
+        ]);
     }
 }

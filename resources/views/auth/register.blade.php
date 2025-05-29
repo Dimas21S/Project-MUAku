@@ -13,6 +13,23 @@
         
         <div class="front-paper">
             <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">Register</h1>
+
+            @if(session('message'))
+                <div class="mb-4 p-3 bg-green-100 border-l-4 border-green-500 text-green-700">
+                    {{ session('message') }}
+                </div>
+            @endif
+            
+            <!-- Display validation errors -->
+            @if($errors->any())
+                <div class="mb-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             
             <form class="flex-grow" action="{{ route('register.post') }}" method="POST">
                 @csrf
@@ -20,18 +37,27 @@
                     <input type="text" id="username" name="username" autocomplete="off" placeholder="" value="" required>
                     <label for="username">Username</label>
                     <div class="input-highlight"></div>
+                    @error('username')
+                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="input-field">
                     <input type="text" id="email" name="email" autocomplete="off" placeholder="" value="" required>
                     <label for="email">Email</label>
                     <div class="input-highlight"></div>
+                    @error('email')
+                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
                 
                 <div class="input-field">
                     <input type="password" id="password" name="password" autocomplete="off" placeholder="" value="" required>
                     <label for="password">Password</label>
                     <div class="input-highlight"></div>
+                    @error('password')
+                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
                 
                 <div class="flex items-center justify-between mb-6">
