@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->enum('status', ['accepted', 'pending', 'rejected'])->default('pending');
+            $table->string('link_map')->nullable(); // Link ke lokasi di Google Maps
             $table->string('category')->nullable(); // Kategori make up artist
+            $table->text('description')->nullable(); // Deskripsi singkat tentang make up artist
             $table->text('file_certificate')->nullable(); // Path ke file sertifikat
             $table->text('profile_photo')->nullable(); // Path ke foto profil
             $table->timestamps();

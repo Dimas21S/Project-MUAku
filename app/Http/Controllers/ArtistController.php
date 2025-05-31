@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MakeUpArtist;
+use App\Models\UserHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -88,7 +89,7 @@ class ArtistController extends Controller
         $artist->save();
 
         // Redirect to the intended page or dashboard
-        return redirect()->intended('login-mua')->with('Registrasi Berhasil');
+        return redirect()->route('login-mua')->with('Registrasi Berhasil');
     }
 
     // Menampilkan daftar make up artist
@@ -114,6 +115,23 @@ class ArtistController extends Controller
         // Menggunakan model MakeUpArtist untuk mengambil data berdasarkan id dan menggunakan findOrFail untuk menangani jika data tidak ditemukan
         $artist = MakeUpArtist::findOrFail($id);
 
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            // Cek apakah sudah pernah disimpan
+            $exists = UserHistory::where('user_id', $user->id)
+                ->where('make_up_artist_id', $artist->id)
+                ->first();
+
+            // Simpan hanya jika belum ada
+            if (!$exists) {
+                UserHistory::create([
+                    'user_id' => $user->id,
+                    'make_up_artist_id' => $artist->id,
+                ]);
+            }
+        }
+
         return view('deskripsi-mua', compact('artist'));
     }
 
@@ -129,22 +147,55 @@ class ArtistController extends Controller
         $rule_validasi = [
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
+            'link_map' => 'nullable|url',
             'category' => 'required|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
-            'address' => 'required|in:Jambi',
+            'city' => 'required|in:Jambi',
+            'photos' => 'nullable|array',
+            'photos.*' => 'file|mimes:jpg,jpeg,png|max:2048', // Validasi untuk setiap foto
             'portfolio' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5048',
+            'deskripsi' => 'nullable|string|max:1000'
         ];
 
         $pesan_validasi = [
             'name.required' =>  'name harus diisi',
             'phone.rquired' => 'Nomor Telepon harus diisi',
             'category.required' => 'Kategori harus dipilih',
-            'address.required' => 'Alamat harus dipilih',
-            'portfolio.required' => 'Portofolio harus diisi'
+            'address.required' => 'Kota harus dipilih',
+            'photos.array' => 'Foto harus berupa array',
+            'photos.*.file' => 'Setiap foto harus berupa file',
+            'photos.*.mimes' => 'Foto harus berupa file dengan format jpg, jpeg, atau png',
+            'photos.*.max' => 'Setiap foto maksimal 2MB',
+            'portfolio.required' => 'Portofolio harus diisi',
         ];
 
         $request->validate($rule_validasi, $pesan_validasi);
 
         $artist = auth()->guard('makeup_artist')->user();
+
+        // Menangani upload foto
+        if ($request->hasFile('photos')) {
+            $photos = $request->file('photos');
+            $photoPaths = [];
+
+            foreach ($photos as $photo) {
+                // Menggunakan time() untuk memberikan nama unik pada file
+                $filename = time() . '_' . $photo->getClientOriginalName();
+
+                // Menggunakan Storage untuk menyimpan file ke public disk
+                $path = $photo->storeAs('uploads', $filename, 'public');
+
+                // Menyimpan path foto ke array
+                $photoPaths[] = $path;
+            }
+
+            // Menyimpan foto ke database
+            foreach ($photoPaths as $path) {
+                $artist->photos()->create([
+                    'image_path' => $path,
+                    'make_up_artist_id' => $artist->id
+                ]);
+            }
+        }
 
         // Menangani upload file portfolio
         // Menggunakan storeAs untuk menyimpan file dengan nama yang ditentukan
@@ -163,17 +214,24 @@ class ArtistController extends Controller
         $artist->update([
             'name' => $request->name,
             'phone' => $request->phone,
+            'link_map' => $request->link_map,
             'category' => $request->category,
             'file_certificate' => $path,
             'status' => 'pending',
+            'description' => $request->deskripsi,
         ]);
 
         $artist->address()->updateOrCreate([], [
-            'alamat' => $request->address,
+            'city' => $request->city,
         ]);
 
 
-        return redirect()->back()->with('success', 'Form pendaftaran berhasil dikirim.');
+        return redirect()->route('pendaftaran.berhasil')->with('success', 'Form pendaftaran berhasil dikirim.');
+    }
+
+    public function pendaftaranBerhasil()
+    {
+        return view('mua.pendaftaran-selesai');
     }
 
     public function listAddressMakeUpArtist()
@@ -193,5 +251,85 @@ class ArtistController extends Controller
         $artist = $artistStatus->get();
 
         return view('map', compact('artist'));
+    }
+
+    public function historyUser()
+    {
+        $artist = MakeUpArtist::all();
+
+        $history = [];
+
+        if (Auth::check()) {
+            $history = Auth::user()->histories()
+                ->with('makeupartist')
+                ->whereHas('makeupartist', function ($query) {
+                    $query->where('status', 'accepted');
+                })
+                ->latest()
+                ->take(5)
+                ->get();
+        }
+
+        return view('user-history', compact('artist', 'history'));
+    }
+
+    public function deleteHistory($id)
+    {
+        Auth::user()->histories()->delete();
+        return redirect()->back()->with('status', 'Riwayat berhasil dihapus.');
+    }
+
+    public function artistLogout(Request $request)
+    {
+        Auth::guard('makeup_artist')->logout();
+
+        // Menghapus session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('status', 'Anda telah berhasil logout.');
+    }
+
+    public function editMakeUpArtist()
+    {
+        $mua = MakeUpArtist::findOrFail(Auth::guard('makeup_artist')->user()->id);
+
+        // Pastikan hanya makeup artist yang sedang login yang bisa mengedit profilnya
+        if (Auth::guard('makeup_artist')->user()->id !== $mua->id) {
+            return redirect()->back()->withErrors(['error' => 'Unauthorized action.']);
+        }
+
+        return view('mua.edit-profile', compact('mua'));
+    }
+    public function updateMakeUpArtist(Request $request)
+    {
+        $mua = Auth::guard('makeup_artist')->user();
+
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'link_map' => 'nullable|url',
+            'category' => 'required|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        // Update data make up artist
+        $mua->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'link_map' => $request->link_map,
+            'category' => $request->category,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('index-mua')->with('status', 'Profil berhasil diperbarui.');
+    }
+
+    public function artistIndex()
+    {
+        $artist = Auth::guard('makeup_artist')->user();
+
+        return view('mua.mua-index', compact('artist'));
     }
 }

@@ -34,7 +34,7 @@
                           <a class="nav-link fs-4" href="{{ route('address') }}"><i class="bi bi-geo-alt-fill"></i></a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link fs-4" href="#"><i class="bi bi-heart"></i></a>
+                          <a class="nav-link fs-4" href="{{ route('history') }}"><i class="bi bi-heart"></i></a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link fs-4" href="{{ route('chat.page') }}"><i class="bi bi-card-text"></i></a>

@@ -485,7 +485,7 @@
       </button>
       
       <div class="recipient-info">
-        <img src="{{ asset($mua->profile_photo ?? 'images/default-avatar.png') }}" alt="Profile" class="recipient-avatar" />
+        <img src="{{ asset($mua->profile_photo ?? 'image/Profile-Foto.jpg') }}" alt="Profile" class="recipient-avatar" />
         <div>
           <div class="recipient-name">{{ $mua->name }}</div>
           <div class="recipient-status">Online</div>
@@ -512,7 +512,7 @@
                 @if(!$message->is_read)
                   <i class="bi bi-check"></i>
                 @else
-                  <i class="bi bi-check-all"></i>
+                  <i class="bi bi-check-all text-primary"></i>
                 @endif
               </span>
             @endif

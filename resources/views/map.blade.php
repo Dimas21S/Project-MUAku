@@ -7,7 +7,7 @@
 
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     html, body {
       height: 100%;
@@ -161,7 +161,7 @@
         <small class="text-muted">{{ $item->category }}</small>
       </div>
       <div class="ms-auto"> <!-- Tambahkan margin kiri otomatis untuk mendorong ke kanan -->
-        <a href="#" class="btn btn-primary">
+        <a href="{{ $item->link_map }}" class="btn btn-primary" target="_blank">
           <i class="bi bi-geo-alt-fill"></i> Lihat Lokasi
         </a>
       </div>

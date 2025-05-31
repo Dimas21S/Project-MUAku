@@ -17,8 +17,8 @@ class MakeUpArtist extends Authenticatable
         'password',
         'email',
         'phone',
-        'address',
-        'city',
+        'link_map',
+        'description',
         'category',
         'file_certificate',
         'profile_photo',
@@ -32,5 +32,10 @@ class MakeUpArtist extends Authenticatable
     public function messages()
     {
         return $this->morphMany(Message::class, 'sender');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class, 'make_up_artist_id');
     }
 }

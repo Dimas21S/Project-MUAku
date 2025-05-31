@@ -44,6 +44,22 @@
             flex: 1;
             padding-right: 1rem;
         }
+
+        .modal-content {
+            padding-top: 2rem; /* Tambah ruang agar tombol close tidak mentok */
+            z-index: 1055;
+            position: relative;
+            }
+
+        .modal-header {
+            z-index: 9999;
+        }
+
+        .btn-close {
+            z-index: 9999;
+            position: relative;
+        }
+
         
         @media (max-width: 992px) {
             .content-wrapper {
@@ -96,31 +112,34 @@
 
         <div class="content-wrapper">
             <div class="image-container">
-                <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="rounded img-fluid" alt="..." style="max-height: 640px; margin-left: 30px; margin-right: 5px;">
+                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
+                    class="rounded img-fluid" 
+                    alt="Foto MUA" 
+                    style="max-height: 640px; margin-left: 30px; margin-right: 5px;">
 
-                {{-- Daftar Foto yang diupload --}}
-                <div class="d-flex justify-content-center mt-3 mb-3 ms-3">
-                    <div class="d-flex flex-column align-items-center">
-                        <button type="button" class="btn btn-light btn-outline-dark me-2 overflow-hidden" style="width: 79px; height: 79px; border-radius: 8px;">
-                          <img src="{{ asset('image/foto-cewek-1.jpg') }}" alt="Preview" class="w-100 h-100 object-fit-cover">
-                        </button>
+                @foreach ($artist->photos as $photo)
+                    <div class="d-flex justify-content-center mt-3 mb-3 ms-3">
+                        <div class="d-flex flex-column align-items-center">
+                            <button type="button" class="btn btn-light btn-outline-dark me-2 overflow-hidden" 
+                                    style="width: 79px; height: 79px; border-radius: 8px;"
+                                    onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
+                                <img src="{{ Storage::url($photo->image_path) }}" alt="Preview" class="w-100 h-100 object-fit-cover">
+                            </button>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <button type="button" class="btn btn-light btn-outline-dark me-2" style="width: 79px; height: 79px; background-color: #A87648;">
-                        </button>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <button type="button" class="btn btn-light btn-outline-dark me-2" style="width: 79px; height: 79px; background-color: #A87648;">
-                        </button>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <button type="button" class="btn btn-light btn-outline-dark me-2" style="width: 79px; height: 79px; background-color: #A87648;">
-                        </button>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <button type="button" class="btn btn-light btn-outline-dark me-2" style="width: 79px; height: 79px; background-color: #A87648;">
-                            <i class="bi bi-arrow-right-short fs-2"></i>
-                        </button>
+                @endforeach
+            </div>
+
+            <!-- Modal untuk tampilan fullscreen -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content bg-transparent border-0">
+                        <div class="modal-header border-0 position-absolute top-0 end-0 z-1">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center p-0 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+                            <img id="fullscreenImage" src="" class="img-fluid" style="max-height: 90vh; max-width: 100%;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,29 +151,20 @@
                     <br>Telp : {{ $artist->phone }}
                     <br>Sosial Media : {{ $artist->email }}</p> 
                 <h4 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 25px; margin-top: 25px;">Deskripsi</h4>
-                <p>Makeup acara difokuskan untuk menciptakan tampilan yang lebih berani, elegan, dan tahan lama sesuai dengan jenis acara yang dihadiri.
-                    Aku menyesuaikan teknik riasan berdasarkan tema acara, outfit, dan karakter wajahmu, memastikan hasil yang harmonis dan memukau. 
-                    Setiap detail seperti complexion, riasan mata, hingga pewarnaan bibir aku rancang untuk tetap nyaman dipakai berjam-jam dan tetap terlihat segar di bawah cahaya lampu atau kamera. 
-                    Aku menggunakan produk makeup berkualitas tinggi dengan teknik penguncian agar riasan tidak mudah luntur, sehingga kamu tetap percaya diri sepanjang acara.
-                <br><br>
-                Aku menerima pemesanan makeup acara dengan jadwal sebagai berikut:</p>
-                <ul>
-                    <li>Senin – Jumat : Pukul 08.00 – 20.00 WIB</li>
-                    <li>Sabtu & Minggu : Pukul 07.00 – 22.00 WIB</li>
-                </ul>
-                <p>Pemesanan minimal H-2 sebelum acara untuk memastikan ketersediaan jadwal dan konsultasi gaya riasan yang diinginkan. 
-                    Untuk acara khusus atau kebutuhan di luar jam operasional, silakan hubungi lebih awal untuk penyesuaian jadwal.
-                    <br><br>                
-                    Kalau mau, aku juga bisa buatin tambahan seperti:</p>
-                <ul>
-                    <li>Format booking</li>
-                    <li>Biaya DP</li>
-                    <li>Syarat dan ketentuan keci</li>
-                </ul>
+                <p>{{ $artist->description }}</p>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+    function showFullscreen(imageSrc) {
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        fullscreenImage.src = imageSrc;
+        
+        const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+        imageModal.show();
+    }
+    </script>
   </body>
 </html>

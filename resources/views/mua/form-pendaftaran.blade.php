@@ -6,262 +6,7 @@
   <title>Submit Request MUA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    :root {
-      --primary: #D4A373;
-      --primary-dark: #A37A5B;
-      --secondary: #FAEDCD;
-      --dark: #3A1D0D;
-      --light: #FEFAE0;
-      --text: #2E1C14;
-      --text-light: #4D3D38;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--light);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    
-    .back-button {
-      position: fixed;
-      top: 30px;
-      left: 30px;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      z-index: 100;
-    }
-    
-    .back-button:hover {
-      background-color: var(--primary-dark);
-      transform: translateX(-3px);
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 800px;
-      background-color: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    
-    .container:hover {
-      transform: translateY(-5px);
-    }
-    
-    .header {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      padding: 30px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header::after {
-      content: "";
-      position: absolute;
-      bottom: -50px;
-      right: -50px;
-      width: 150px;
-      height: 150px;
-      background-color: rgba(255,255,255,0.1);
-      border-radius: 50%;
-    }
-    
-    .header::before {
-      content: "";
-      position: absolute;
-      top: -30px;
-      left: -30px;
-      width: 100px;
-      height: 100px;
-      background-color: rgba(255,255,255,0.1);
-      border-radius: 50%;
-    }
-    
-    .header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: white;
-      font-family: 'Playfair Display', serif;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .header p {
-      margin-top: 10px;
-      color: rgba(255,255,255,0.9);
-      font-size: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .form {
-      padding: 30px;
-    }
-    
-    .form-group {
-      margin-bottom: 25px;
-      position: relative;
-    }
-    
-    label {
-      font-weight: 500;
-      display: block;
-      margin-bottom: 8px;
-      color: var(--dark);
-      font-size: 0.95rem;
-    }
-    
-    input[type="text"],
-    input[type="email"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: 2px solid #e0e0e0;
-      background-color: white;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      font-family: 'Poppins', sans-serif;
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 15px center;
-      background-size: 1em;
-    }
-    
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--primary);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
-    }
-    
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-      background-image: none;
-    }
-    
-    .upload {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .upload input[type="file"] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    
-    .upload label {
-      background-color: var(--secondary);
-      padding: 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: all 0.3s ease;
-      border: 2px dashed var(--primary);
-    }
-    
-    .upload label:hover {
-      background-color: rgba(212, 163, 115, 0.1);
-    }
-    
-    .file-info {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-top: 5px;
-    }
-    
-    .submit-btn {
-      display: block;
-      width: 60%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 30px auto 10px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-    
-    .submit-btn:active {
-      transform: translateY(0);
-    }
-    
-    .form-footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 0.85rem;
-      color: var(--text-light);
-    }
-    
-    @media (max-width: 768px) {
-      .container {
-        width: 95%;
-      }
-      
-      .header h1 {
-        font-size: 2rem;
-      }
-      
-      .submit-btn {
-        width: 80%;
-      }
-      
-      .back-button {
-        top: 15px;
-        left: 15px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/form-submit-request.css') }}">
 </head>
 <body>
 
@@ -279,14 +24,14 @@
       @csrf
 
       @if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
       <div class="form-group">
         <label for="nama">Nama Lengkap</label>
         <input type="text" id="nama" name="name" placeholder="Masukkan Nama Asli Anda Sesuai KTP" required>
@@ -309,16 +54,27 @@
       </div>
 
       <div class="form-group">
-        <label for="address">Alamat</label>
-        <select id="address" name="address" required>
-          <option value="" disabled selected>Pilih Provinsi Anda</option>
+        <label for="link_map">Link Gmaps</label>
+        <input type="text" id="link_map" name="link_map" placeholder="Masukkan Link Gmaps" required>
+      </div>
+
+      <div class="form-group">
+        <label for="city">Kota</label>
+        <select id="city" name="city" required>
+          <option value="" disabled selected>Pilih Kota Anda</option>
           <option value="Jambi">Jambi</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="pengalaman">Jelaskan Secara Singkat Pengalaman Anda</label>
-        <textarea id="pengalaman" name="deskripsi" placeholder="Jelaskan secara singkat pengalaman Anda sebagai MUA dan keunggulan layanan Anda" required></textarea>
+        <label for="deskripsi">Jelaskan Secara Singkat Pengalaman Anda</label>
+        <textarea id="deskripsi" name="deskripsi" placeholder="Jelaskan secara singkat pengalaman Anda sebagai MUA dan keunggulan layanan Anda" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="photos">Upload Foto:</label>
+        <input type="file" name="photos[]" multiple accept="image/*">
+        <div class="file-info">Format: JPG, PNG (Maks. 5MB per file)</div>
       </div>
 
       <div class="form-group">

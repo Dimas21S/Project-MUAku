@@ -24,16 +24,20 @@
             justify-content: space-between;
             max-width: 1200px;
             margin: 50px auto;
+            flex-wrap: wrap;
         }
         
         .profile-info {
             width: 50%;
             padding-right: 50px;
+            order: 1;
         }
         
         .profile-image-container {
             width: 50%;
             text-align: right;
+            position: relative;
+            order: 2;
         }
         
         .profile-image {
@@ -41,6 +45,7 @@
             height: 400px;
             object-fit: cover;
             border-radius: 50%;
+            border: 5px solid #EECFC0;
         }
         
         .info-label {
@@ -112,7 +117,7 @@
         .btn-logout {
             background-color: #EECFC0;
             border: none;
-            width: 100%;
+            width: 50%;
             margin-top: 10px;
             transition: all 0.3s ease;
         }
@@ -121,30 +126,94 @@
             background-color: #A87648;
             color: white;
         }
+        
+        /* Tombol edit di atas foto profil */
+        .btn-edit-profile {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #A87648;
+            color: white;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit-profile:hover {
+            background-color: #8a5d38;
+            transform: scale(1.1);
+        }
             
         @media (max-width: 992px) {
             .profile-container {
                 flex-direction: column;
+                align-items: center;
             }
-            .profile-info,
+
             .profile-image-container {
                 width: 100%;
                 text-align: center;
-                padding-right: 0;
+                order: 0; /* tampilkan di atas */
             }
+
             .profile-image {
                 margin-top: 30px;
-                width: 300px;
-                height: 300px;
+                width: 220px;
+                height: 220px;
+            }
+
+            .btn-edit-profile {
+                bottom: 20px;
+                right: calc(50% - 25px);
+            }
+
+            .btn-logout {
+                width: 80%;
+                max-width: 200px;
+                margin: 20px auto 0;
+            }
+
+            .profile-info {
+                width: 100%;
+                padding: 20px;
+                text-align: center;
+                order: 1;
             }
         }
     </style>
   </head>
   <body>
-    <div class="profile-container">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session('password_success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('password_success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+     <div class="profile-container">
 
             <!-- Keterangan Profil User -->
-            <div class="profile-info">
+            <div class="profile-info mt-5"> 
                 <div class="mb-4">
                     <h5 class="info-label">USER NAME</h5>
                     <p class="info-value">{{$user->name}}</p>
@@ -158,6 +227,9 @@
                 <div class="mb-4">
                     <h5 class="info-label">PASSWORD</h5>
                     <p class="info-value">********</p>
+                    <button class="btn btn-primary" style="background-color: #A87648; border-radius: 10px;">
+                        <a href="{{ route('update.password') }}" class="text-white text-decoration-none">Ubah Password</a>
+                    </button>
                 </div>
                 
                 <div class="mb-4">
@@ -170,31 +242,32 @@
                         @endif
                     </p>
                 </div>
-
-                {{-- Tombol Logout --}}
-                <div>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-logout">
-                            <i class="fas fa-sign-out-alt"></i> Keluar
-                        </button>
-                    </form>
-                </div>
-                {{-- Tombol Edit --}}
-                <div>
-                    <button type="submit" class="btn btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> <a href="{{ route('update') }}" class="text-decoration-none text-dark">Edit Profil</a>
-                    </button>
-                </div>
             </div>
 
             <!-- Profile Image Section (Right) -->
             <div class="profile-image-container">
+                <div style="position: relative; display: inline-block;">
                     @if ($user->foto_profil)
                         <img src="{{ Storage::url($user->foto_profil) }}" class="profile-image" alt="Profile Picture">
                     @else
                         <img src="{{ asset('image/Profile-Foto.jpg') }}" class="profile-image" alt="Default Profile Picture">
                     @endif
+                    
+                    <!-- Tombol Edit Profil -->
+                    <a href="{{ route('update') }}" class="btn-edit-profile" title="Edit Profil">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </div>
+                
+                <!-- Tombol Logout -->
+                <div style="margin-top: 20px; margin-right: 50px;">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-logout"style="background-color: #901818D9; border-radius: 10px;">
+                            <i></i> Logout
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 

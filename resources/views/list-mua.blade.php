@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    </style>
   </head>
   <body>
     {{-- Tombol pada Carousel akan mengarah ke halaman paket-berlangganan --}}
@@ -54,9 +53,10 @@
               {{-- <img src="{{ asset('image/foto-cewek-1.jpg') }}" class="d-block w-auto" alt="Makeup Artist 1"> --}}
               <div class="container">
                 <div class="carousel-caption text-start">
+
                   {{-- Caption di dalam carousel --}}
-                  <h1>Kenapa Harus Berlangganan?</h1>
-                  <p class="opacity-75">Akses eksklusif ke konten premium, Lebih hemat dengan diskon khusus member, dan Bebas iklan & fitur tambahan eksklusif</p>
+                  <h4>Dapatkan Paket Berlangganan Eksklusif!</h4>
+                  <p class="opacity-75">Langganan sekarang untuk akses fitur premium & diskon spesial layanan makeup.</p>
                   <p><a class="btn btn-lg btn-primary" href="{{ route('payment') }}">Daftar sekarang</a></p>
                 </div>
               </div>
@@ -66,8 +66,9 @@
               {{-- <img src="{{ asset('image/foto-cewek-2.jpg') }}" class="d-block w-100" alt="Makeup Artist 2" style="border-radius: 40px;"> --}}
               <div class="container">
                 <div class="carousel-caption">
+
                   {{-- Caption di dalam carousel --}}
-                  <h1>Lebih Untung Langganan!</h1>
+                  <h4>Lebih Untung Langganan!</h4>
                   <p>Bayar sekali, nikmati sebulan penuh! dan Gratis update fitur terbaru</p>
                   <p><a class="btn btn-lg btn-primary" href="{{ route('payment') }}">Yuk, upgrade ke paket berlangganan dan rasakan bedanya!</a></p>
                 </div>
@@ -78,8 +79,9 @@
               {{-- <img src="{{ asset('image/foto-makeup.jpg') }}" class="d-block w-100" alt="Makeup Products"> --}}
               <div class="container">
                 <div class="carousel-caption text-end">
+                  
                   {{-- Caption di dalam carousel --}}
-                  <h1>Premium Quality Products</h1>
+                  <h4>Premium Quality Products</h4>
                   <p>We use only the best cosmetics for your skin.</p>
                   <p><a class="btn btn-lg btn-primary" href="#">Our Products</a></p>
                 </div>
@@ -171,7 +173,7 @@
                   <img src="{{ asset($artistId->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
                   <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
                     <p class="card-text small fw-normal mb-1 text-truncate">Kategori: {{ $artistId->category }}</p>
-                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat:  {{ $artistId->address }}</p>
+                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat:  {{ $artistId->address->city }}</p>
                     <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
                   </div>
                 </div>
@@ -186,7 +188,7 @@
                   <img src="{{ asset($artistId->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
                   <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
                     <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Kategori:  {{ $artistId->category }}</p>
-                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat:  {{ $artistId->address->alamat }}</p>
+                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat:  {{ $artistId->address->city }}</p>
                     <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
                   </div>
                 </div>

@@ -62,11 +62,6 @@
                            value="{{ old('email', $user->email) }}" required>
                     @error('email') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                    @error('password') <div class="text-danger">{{ $message }}</div> @enderror
-                </div>
 
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>

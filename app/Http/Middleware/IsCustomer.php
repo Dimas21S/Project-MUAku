@@ -16,10 +16,12 @@ class IsCustomer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() || Auth::user()->role == 'customer') {
+        if (Auth::user()->role == 'customer') {
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'Kamu harus berlangganan untuk mengakses halaman ini.');
+        session()->flash('error', 'Kamu harus berlangganan untuk mengakses fitur lainnya.');
+        return redirect('/payment');
+        // return redirect('/')->with('error', 'Kamu harus berlangganan untuk mengakses halaman ini.');
     }
 }

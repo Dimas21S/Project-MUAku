@@ -476,12 +476,12 @@
 <body>
   <div class="chat-container">
     <div class="chat-header">
-      <button class="back-button" onclick="window.history.back()">
+      <button class="back-button" onclick="window.location.href='{{ route('notif-chat') }}'">
         <i class="bi bi-arrow-left"></i>
       </button>
       
       <div class="recipient-info">
-        <img src="{{ asset($receiver->profile_photo ?? 'images/default-avatar.png') }}" alt="Profile" class="recipient-avatar" />
+        <img src="{{ asset($receiver->profile_photo ?? 'image/Profile-Foto.jpg') }}" alt="Profile" class="recipient-avatar" />
         <div>
           <div class="recipient-name">{{ $user->name }}</div>
           <div class="recipient-status">Online</div>

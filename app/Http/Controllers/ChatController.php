@@ -147,7 +147,18 @@ class ChatController extends Controller
             }
         }
 
-        return view('chat.notif-chat', compact('messages'));
+        $totalMessages = Message::where('receiver_id', $mua->id)
+            ->where('receiver_type', 'make_up_artist')
+            ->count();
+
+        // Tambahkan mapping jumlah pesan per sender
+        $messageCounts = Message::where('receiver_id', $mua->id)
+            ->where('receiver_type', 'make_up_artist')
+            ->groupBy('sender_id')
+            ->select('sender_id', DB::raw('count(*) as total'))
+            ->pluck('total', 'sender_id'); // hasilnya [sender_id => total]
+
+        return view('chat.notif-chat', compact('messages', 'totalMessages', 'messageCounts'));
     }
 
     public function showChatPage()

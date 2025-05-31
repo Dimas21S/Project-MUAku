@@ -123,7 +123,6 @@ class AuthController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|min:5',
             'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi' => 'nullable|max:500'
         ];
@@ -133,7 +132,6 @@ class AuthController extends Controller
             'email.required' => 'Email wajib diisi',
             'email.email' => 'Format email tidak valid',
             'email.unique' => 'Email sudah digunakan',
-            'password.min' => 'Password minimal 5 karakter',
             'foto_profil.image' => 'File harus berupa gambar',
             'foto_profil.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif',
             'foto_profil.max' => 'Ukuran gambar maksimal 2MB'
@@ -146,10 +144,6 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->deskripsi = $request->deskripsi;
 
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
         if ($request->hasFile('foto_profil')) {
             $file = $request->file('foto_profil');
             $filename = time() . '_' . $file->getClientOriginalName();
@@ -159,6 +153,44 @@ class AuthController extends Controller
 
         $user->save();
 
-        return redirect('profil-pengguna')->with('success', 'Profil berhasil diperbarui!');
+        return redirect('profile')->with('success', 'Profil berhasil diperbarui!');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $rules = [
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:8|confirmed',
+            'confirmPassword' => 'required_with:newPassword|same:newPassword',
+        ];
+
+        $messages = [
+            'currentPassword.required' => 'Password saat ini wajib diisi',
+            'newPassword.required' => 'Password baru wajib diisi',
+            'newPassword.min' => 'Password baru minimal 8 karakter',
+            'newPassword.confirmed' => 'Konfirmasi password tidak cocok',
+            'confirmPassword.required_with' => 'Konfirmasi password wajib diisi jika password baru diisi',
+            'confirmPassword.same' => 'Konfirmasi password harus sama dengan password baru',
+        ];
+
+        $request->validate($rules, $messages);
+
+        // Cek apakah password saat ini benar
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return redirect()->back()->withErrors(['currentPassword' => 'Password saat ini salah']);
+        }
+
+        // Update password baru
+        $user->password = Hash::make($request->newPassword);
+        $user->save();
+
+        return redirect('profile')->with('password-success', 'Password berhasil diperbarui!');
+    }
+
+    public function formUpdatePassword()
+    {
+        return view('user.update-password');
     }
 }

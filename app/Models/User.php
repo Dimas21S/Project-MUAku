@@ -36,6 +36,11 @@ class User extends Authenticatable
         return $this->morphMany(Message::class, 'sender');
     }
 
+    public function histories()
+    {
+        return $this->hasMany(UserHistory::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
