@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\MakeUpArtist;
 use App\Models\UserHistory;
 use Illuminate\Http\Request;
@@ -112,11 +113,16 @@ class ArtistController extends Controller
     // Menampilkan deskripsi make up artist
     public function artistDescription($id)
     {
+        $user = Auth::user();
+
         // Menggunakan model MakeUpArtist untuk mengambil data berdasarkan id dan menggunakan findOrFail untuk menangani jika data tidak ditemukan
         $artist = MakeUpArtist::findOrFail($id);
 
+        $likedArtistIds = $user->likes()->pluck('make_up_artist_id');
+
         if (Auth::check()) {
             $user = Auth::user();
+
 
             // Cek apakah sudah pernah disimpan
             $exists = UserHistory::where('user_id', $user->id)
@@ -132,7 +138,7 @@ class ArtistController extends Controller
             }
         }
 
-        return view('deskripsi-mua', compact('artist'));
+        return view('deskripsi-mua', compact('artist', 'likedArtistIds'));
     }
 
     // Menampilkan form pendaftaran make up artist
@@ -250,7 +256,7 @@ class ArtistController extends Controller
 
         $artist = $artistStatus->get();
 
-        return view('map', compact('artist'));
+        return view('user.map', compact('artist'));
     }
 
     public function historyUser()
@@ -270,7 +276,15 @@ class ArtistController extends Controller
                 ->get();
         }
 
-        return view('user-history', compact('artist', 'history'));
+        // Mengambil make up artist yang telah disukai oleh user
+        $likedArtists = Like::where('user_id', Auth::id())
+            ->with('makeUpArtist')
+            ->get();
+
+        // Mengambil hanya make up artist yang telah disukai
+        $likedArtists = $likedArtists->pluck('makeUpArtist');
+
+        return view('user.user-history', compact('artist', 'history', 'likedArtists'));
     }
 
     public function deleteHistory($id)

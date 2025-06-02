@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\LikeController;
 use App\Http\Middleware\IsCustomer;
 
 //Rute URL untuk admin
@@ -68,6 +69,8 @@ Route::controller(ArtistController::class)->group(function () {
 //Rute URL untuk yang sudah login (User yang belum login tidak bisa mengakses rute ini)
 Route::middleware(IsCustomer::class)->group(function () {
     Route::get('/deskripsi-mua/{id}', [ArtistController::class, 'artistDescription']);
+
+    Route::post('/toggle-like/{artistId}', [LikeController::class, 'toggleLike'])->name('toggle.like');
 
     Route::get('/map', [AdminController::class, 'map'])->name('map');
 

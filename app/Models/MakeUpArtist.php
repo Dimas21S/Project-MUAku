@@ -38,4 +38,14 @@ class MakeUpArtist extends Authenticatable
     {
         return $this->hasMany(Photo::class, 'make_up_artist_id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'make_up_artist_id');
+    }
+
+    public function isLikedBy(User $user)
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
 }

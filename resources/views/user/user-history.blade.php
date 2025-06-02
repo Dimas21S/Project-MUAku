@@ -79,12 +79,44 @@
             @endforeach
         </div>
         </div>
+    @else
+        <div class="container-fluid px-0 mt-5 mb-3">
+            <h4 class="fw-bold mb-4 ms-3">Riwayat MUA yang Pernah Dilihat</h4>
+            <div class="alert alert-info ms-3" role="alert">
+                Tidak ada riwayat MUA yang pernah dilihat.
+            </div>
     @endif
 
     <form action="{{ route('delete.history') }}" method="POST" class="mb-3 ms-3">
-  @csrf
-  <button type="submit" class="btn btn-outline-danger btn-sm">Hapus Semua Riwayat</button>
-</form>
+        @csrf
+        <button type="submit" class="btn btn-outline-danger btn-sm">Hapus Semua Riwayat</button>
+    </form>
+
+    @if ($likedArtists && count($likedArtists) > 0)
+        <div class="container-fluid px-0 mt-5 mb-3">
+        <h4 class="fw-bold mb-4 ms-3">MUA yang Disukai</h4>
+        <div class="row mx-0 mb-3 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-7">
+            @foreach($likedArtists as $artist)
+            <div class="col mb-4">
+                <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent;">
+                <img src="{{ asset($artist->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA" style="height: 200px; object-fit: cover;">
+                <div class="card-body p-2" style="background: #F0F0F0;">
+                    <p class="card-text small fw-normal mb-1 text-truncate">Kategori: {{ $artist->category }}</p>
+                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat: {{ $artist->address->city ?? '-' }}</p>
+                    <a href="/deskripsi-mua/{{ $artist->id }}" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
+                </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        </div>
+    @else
+        <div class="container-fluid px-0 mt-5 mb-3">
+            <h4 class="fw-bold mb-4 ms-3">MUA yang Disukai</h4>
+            <div class="alert alert-info ms-3" role="alert">
+                Tidak ada MUA yang disukai.
+            </div>
+    @endif
 
 <x-navbar></x-navbar>
 

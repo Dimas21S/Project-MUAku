@@ -90,11 +90,19 @@
           
           {{-- Grup tombol kanan --}}
           <div class="btn-group position-absolute end-0 me-3">
-            <button type="button" 
-                    class="btn btn-light rounded-circle btn-outline-dark"
-                    style="width: 40px; height: 40px;">
-              <i class="bi bi-heart-fill text-danger"></i>
-            </button>
+
+            <form action="{{ route('toggle.like', $artist->id) }}" method="POST">
+                @csrf
+                <button type="submit" 
+                        class="btn btn-light rounded-circle btn-outline-dark"
+                        style="width: 40px; height: 40px;">
+                    @if ($likedArtistIds->contains($artist->id))
+                        <i class="bi bi-heart-fill text-danger"></i>
+                    @else
+                        <i class="bi bi-heart"></i>
+                    @endif
+                </button>
+            </form>
             <button type="button" 
                     class="btn btn-light rounded-circle btn-outline-dark"
                     style="width: 40px; height: 40px;">
