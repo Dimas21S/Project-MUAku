@@ -41,14 +41,14 @@ class ArtistController extends Controller
             if ($mua->status == 'accepted') {
 
                 // Jika status make up artist diterima, maka akan mengarahkan ke halaman daftar make up artist
-                return redirect('/notif-chat');
+                return redirect('/notif-chat')->with('status', 'Selamat datang, ' . $mua->username . '! Anda telah berhasil login sebagai Make Up Artist.');
             }
 
             // Jika status make up artist tidak diterima, maka akan mengembalikan ke halaman submit request
             $request->session()->regenerate();
 
             // mengarahkan ke halaman pendaftaran sesuai dengan penulisan method name
-            return redirect()->route('get.pendaftaran');
+            return redirect()->route('get.pendaftaran')->with('status', 'Silakan lengkapi pendaftaran Anda terlebih dahulu sebelum melanjutkan.');
         }
 
         // Kalau login gagal, maka akan mengembalikan ke halaman login dengan pesan error
@@ -138,7 +138,7 @@ class ArtistController extends Controller
             }
         }
 
-        return view('deskripsi-mua', compact('artist', 'likedArtistIds'));
+        return view('deskripsi-mua', compact('artist', 'likedArtistIds', 'user'));
     }
 
     // Menampilkan form pendaftaran make up artist
@@ -259,39 +259,39 @@ class ArtistController extends Controller
         return view('user.map', compact('artist'));
     }
 
-    public function historyUser()
-    {
-        $artist = MakeUpArtist::all();
+    // public function historyUser()
+    // {
+    //     $artist = MakeUpArtist::all();
 
-        $history = [];
+    //     $history = [];
 
-        if (Auth::check()) {
-            $history = Auth::user()->histories()
-                ->with('makeupartist')
-                ->whereHas('makeupartist', function ($query) {
-                    $query->where('status', 'accepted');
-                })
-                ->latest()
-                ->take(5)
-                ->get();
-        }
+    //     if (Auth::check()) {
+    //         $history = Auth::user()->histories()
+    //             ->with('makeupartist')
+    //             ->whereHas('makeupartist', function ($query) {
+    //                 $query->where('status', 'accepted');
+    //             })
+    //             ->latest()
+    //             ->take(5)
+    //             ->get();
+    //     }
 
-        // Mengambil make up artist yang telah disukai oleh user
-        $likedArtists = Like::where('user_id', Auth::id())
-            ->with('makeUpArtist')
-            ->get();
+    //     // Mengambil make up artist yang telah disukai oleh user
+    //     $likedArtists = Like::where('user_id', Auth::id())
+    //         ->with('makeUpArtist')
+    //         ->get();
 
-        // Mengambil hanya make up artist yang telah disukai
-        $likedArtists = $likedArtists->pluck('makeUpArtist');
+    //     // Mengambil hanya make up artist yang telah disukai
+    //     $likedArtists = $likedArtists->pluck('makeUpArtist');
 
-        return view('user.user-history', compact('artist', 'history', 'likedArtists'));
-    }
+    //     return view('user.user-history', compact('artist', 'history', 'likedArtists'));
+    // }
 
-    public function deleteHistory($id)
-    {
-        Auth::user()->histories()->delete();
-        return redirect()->back()->with('status', 'Riwayat berhasil dihapus.');
-    }
+    // public function deleteHistory($id)
+    // {
+    //     Auth::user()->histories()->delete();
+    //     return redirect()->back()->with('status', 'Riwayat berhasil dihapus.');
+    // }
 
     public function artistLogout(Request $request)
     {

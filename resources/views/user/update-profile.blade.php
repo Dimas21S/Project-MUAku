@@ -35,8 +35,13 @@
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
                 
-                <img src="{{ Storage::url($user->foto_profil ?? 'images/default-profile.jpg') }}" 
+                @if ($user->foto_profil)
+                    <img src="{{ Storage::url($user->foto_profil) }}" 
                      alt="Profile Picture" class="profile-picture">
+                @else
+                    <img src="{{ asset('image/Profile-Foto.jpg') }}" 
+                     alt="Default Profile Picture" class="profile-picture">
+                @endif
             </div>
             
             <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">

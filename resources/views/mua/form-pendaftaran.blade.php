@@ -17,6 +17,11 @@
   <div class="container">
     <div class="header">
       <h1>SUBMIT REQUEST</h1>
+      @if (session('status'))
+          <div class="alert alert-success">
+              {{ session('status') }}
+          </div>
+      @endif
       <p>Isi formulir ini untuk mengajukan permintaan bergabung sebagai Make-Up Artist (MUA) di platform kami.</p>
     </div>
 

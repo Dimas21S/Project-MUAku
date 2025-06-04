@@ -132,43 +132,52 @@
 </head>
 <body>
 
- <div class="container mt-4">
-  <h3 class="mb-3">Pencarian Make Up Artist</h3>
-  <form action="{{ route('address') }}" method="GET">
-    <div class="search-box d-flex">
-      <input id="autocomplete" class="form-control border border-dark" type="text" placeholder="Cari lokasi..." name="search" aria-label="Search" value="{{ request('search') }}">
-      <button type="submit" class="btn btn-primary">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </form>
-</div>
-
-
-@foreach ($artist as $item)
-<div class="card mt-3">
-  <div class="card-body">
-    <div class="d-flex align-items-center"> <!-- Tambahkan flex container -->
-      <div class="me-3"> <!-- Beri margin kanan untuk foto -->
-        <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
-             alt="{{ $item->name }}" 
-             class="rounded-circle object-fit-cover shadow-sm" 
-             style="width: 70px; height: 70px; object-fit: cover;">
+  <div class="container mt-4">
+    <h3 class="mb-3">Pencarian Make Up Artist</h3>
+    <form action="{{ route('address') }}" method="GET">
+      <div class="search-box d-flex">
+        <input id="autocomplete" class="form-control border border-dark" type="text" placeholder="Cari lokasi..." name="search" aria-label="Search" value="{{ request('search') }}">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search"></i>
+        </button>
       </div>
-      <div> <!-- Container untuk teks -->
-        <h5 class="card-title mb-0">{{ $item->name }}</h5>
-        <!-- Anda bisa tambahkan elemen lain di sini -->
-        <small class="text-muted">{{ $item->category }}</small>
-      </div>
-      <div class="ms-auto"> <!-- Tambahkan margin kiri otomatis untuk mendorong ke kanan -->
-        <a href="{{ $item->link_map }}" class="btn btn-primary" target="_blank">
-          <i class="bi bi-geo-alt-fill"></i> Lihat Lokasi
-        </a>
-      </div>
-    </div>
+    </form>
   </div>
-</div>
-@endforeach
+
+  @if ($artist->isEmpty())
+    <div class="container mt-4">
+      <div class="alert alert-info" role="alert">
+        Tidak ada lokasi yang ditemukan.
+      </div>
+    </div>
+  @else
+
+    @foreach ($artist as $item)
+      <div class="card mt-3">
+        <div class="card-body">
+          <div class="d-flex align-items-center"> <!-- Tambahkan flex container -->
+            <div class="me-3"> <!-- Beri margin kanan untuk foto -->
+              <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
+                  alt="{{ $item->name }}" 
+                  class="rounded-circle object-fit-cover shadow-sm" 
+                  style="width: 70px; height: 70px; object-fit: cover;">
+            </div>
+            <div> <!-- Container untuk teks -->
+              <h5 class="card-title mb-0">{{ $item->name }}</h5>
+              <!-- Anda bisa tambahkan elemen lain di sini -->
+              <small class="text-muted">{{ $item->category }}</small>
+            </div>
+            <div class="ms-auto"> <!-- Tambahkan margin kiri otomatis untuk mendorong ke kanan -->
+              <a href="{{ $item->link_map }}" class="btn btn-primary" target="_blank">
+                <i class="bi bi-geo-alt-fill"></i> Lihat Lokasi
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+  @endif
+
 
   {{-- Component Navbar Bottom (Bisa dilihat di folder components) --}}
   {{-- Navbar Bottom --}}

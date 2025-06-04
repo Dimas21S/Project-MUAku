@@ -6,41 +6,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <title>Notifikasi Chat</title>
+    <link rel="stylesheet" href="{{ asset('css/notif-chat.css') }}">
     <style>
-        body {
-            background: linear-gradient(#EECFC0, #F6F6F6);
-            background-attachment: fixed;
-            min-height: 100vh;
-            padding-top: 20px;
-        }
-        .container {
-            max-width: 1400px;
-        }
-        .card {
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-        }
-        .card-body {
-            padding: 15px 20px;
-        }
-        .message-count-badge {
-            font-size: 0.7rem;
-            margin-left: 5px;
-        }
-        .sender-avatar {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-        }
-        .sender-name {
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
         .message-preview {
             color: #6c757d;
             font-size: 0.9rem;
@@ -49,44 +16,31 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        .time-ago {
-            font-size: 0.8rem;
-            color: #adb5bd;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .empty-state i {
-            font-size: 3rem;
-            color: #ffc107;
-            margin-bottom: 15px;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        .header-icon {
-            position: relative;
-            margin-right: 10px;
-        }
-        .badge-notification {
-            font-size: 0.6rem;
-            padding: 3px 6px;
-            top: -5px;
-            right: -5px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
+            @if (session('status'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('status') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <div class="header-title">
+                <h5 class="m-0">Notifikasi Chat</h5>
+            </div>
+            
             <div class="header-icon">
                 <i class="bi bi-chat-dots-fill fs-3 text-primary"></i>
                 @if($totalMessages > 0)
                     <span class="position-absolute badge badge-notification bg-danger">
                         {{ $totalMessages }}
+                    </span>
+                @else
+                    <span class="position-absolute badge badge-notification bg-secondary">
+                        0
                     </span>
                 @endif
             </div>

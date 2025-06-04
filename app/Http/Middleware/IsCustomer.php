@@ -20,8 +20,10 @@ class IsCustomer
             return $next($request);
         }
 
-        session()->flash('error', 'Kamu harus berlangganan untuk mengakses fitur lainnya.');
-        return redirect('/payment');
+        // session()->flash('error', 'Kamu harus berlangganan untuk mengakses fitur lainnya.');
+        // return redirect('/payment');
         // return redirect('/')->with('error', 'Kamu harus berlangganan untuk mengakses halaman ini.');
+
+        return back()->with('user-error', 'Kamu harus berlangganan untuk mengakses halaman ini.');
     }
 }
