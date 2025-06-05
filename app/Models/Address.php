@@ -10,10 +10,9 @@ class Address extends Model
     use HasFactory;
 
     protected $fillable = [
-        'city',
+        'kota',
         'alamat',
-        'longitude',
-        'latitude',
+        'link_map',
     ];
 
     // relasi dengan model MakeUpArtist

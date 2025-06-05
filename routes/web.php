@@ -16,11 +16,11 @@ use App\Http\Middleware\IsCustomer;
 Route::controller(AdminController::class)->group(function () {
     Route::get('/', 'index');
 
-    Route::get('/data-langganan', 'dataPelanggan');
+    Route::get('/data-langganan', 'dataPelanggan')->name('data-pelanggan');
 
     Route::get('/verified-admin', 'verifiedMakeUpArtist')->name('verified-admin');
 
-    Route::get('/vip-fitur', 'fiturVip');
+    Route::get('/vip-fitur', 'fiturVip')->name('vip-fitur');
 
     Route::post('/update-status/{artistId}', 'updateStatus')->name('admin.post.update-status');
 });
@@ -72,8 +72,6 @@ Route::middleware(IsCustomer::class)->group(function () {
 
     Route::get('/map', [AdminController::class, 'map'])->name('map');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
     Route::get('/address', [ArtistController::class, 'listAddressMakeUpArtist'])->name('address');
 
     Route::get('/profil/update', [UserController::class, 'userUpdate'])->name('update');
@@ -110,6 +108,8 @@ Route::controller(PaymentController::class)->group(function () {
 
 // Rute URL untuk profil pengguna
 Route::get('/profil', [UserController::class, 'userProfile'])->name('profile'); // Menampilkan profil pengguna
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 // Rute URL untuk notifikasi dari Midtrans
 // Rute ini tidak memerlukan middleware 'web' karena hanya digunakan untuk menerima notifikasi dari Midtrans

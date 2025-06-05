@@ -9,11 +9,11 @@
                 <div class="circle-effect"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-4" aria-disabled="true"><i class="bi bi-pie-chart-fill"></i></a>
+                <a class="nav-link fs-4" href="{{ route('data-pelanggan') }}"><i class="bi bi-pie-chart-fill"></i></a>
                 <div class="circle-effect"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-4" href="#" aria-expanded="false"><i class="bi bi-gear-fill"></i></a>
+                <a class="nav-link fs-4" href="{{ route('vip-fitur') }}"><i class="bi bi-gear-fill"></i></a>
                 <div class="circle-effect"></div>
               </li>
             </ul>
@@ -45,13 +45,13 @@
               <div class="navbar-collapse justify-content-center" id="navbarBottom">
                   <ul class="navbar-nav" style="gap: clamp(20px, 10vw, 60px);">
                       <li class="nav-item">
-                        <x-navlink href="{{ route('list-mua') }}" icon="bi bi-house" active="home" />
+                        <x-navlink href="{{ route('list-mua') }}" icon="bi bi-house" active="list-mua" />
                       </li>
                       <li class="nav-item">
                           <x-navlink href="{{ route('address') }}" icon="bi bi-geo-alt-fill" active="address" />
                       </li>
                       <li class="nav-item">
-                          <x-navlink href="{{ route('history') }}" icon="bi bi-heart" active="history" />
+                          <x-navlink href="{{ route('history') }}" icon="bi bi-heart-fill" active="history" />
                       </li>
                       <li class="nav-item">
                           <x-navlink href="{{ route('chat.page') }}" icon="bi bi-card-text" active="chat.page" />

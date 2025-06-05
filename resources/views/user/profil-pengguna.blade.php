@@ -101,19 +101,6 @@
           color: #332318 !important;
         }
 
-        /* Indikator aktif */
-        .navbar-nav .nav-link.active::after {
-          content: '';
-          position: absolute;
-          bottom: -8px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 6px;
-          height: 6px;
-          background-color: white;
-          border-radius: 50%;
-        }
-
         .btn-logout {
             background-color: #EECFC0;
             border: none;
@@ -150,6 +137,24 @@
             background-color: #8a5d38;
             transform: scale(1.1);
         }
+
+        /* Indikator aktif */
+      .navbar-nav .nav-link.active::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
+          background-color: white;
+          border-radius: 50%;
+          z-index: -1;
+      }
+
+      .navbar-nav .nav-link.active i {
+          color: #332318 !important;
+      }
             
         @media (max-width: 992px) {
             .profile-container {

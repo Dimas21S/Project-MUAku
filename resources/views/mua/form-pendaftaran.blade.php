@@ -59,6 +59,11 @@
       </div>
 
       <div class="form-group">
+        <label for="alamat">Alamat</label>
+        <input type="text" id="alamat" name="alamat" placeholder="Masukkan Link Gmaps" required>
+      </div>
+
+      <div class="form-group">
         <label for="link_map">Link Gmaps</label>
         <input type="text" id="link_map" name="link_map" placeholder="Masukkan Link Gmaps" required>
       </div>

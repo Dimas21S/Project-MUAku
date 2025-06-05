@@ -15,13 +15,14 @@ class CategoryButton extends Component
     public string $value;
     public string $image;
     public string $label;
+    public bool $active;
 
-
-    public function __construct(string $value, string $image, string $label)
+    public function __construct(string $value, string $image, string $label, bool $active)
     {
         $this->value = $value;
         $this->image = $image;
         $this->label = $label;
+        $this->active = $active;
     }
 
     /**

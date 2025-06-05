@@ -47,16 +47,22 @@
       }
 
       /* Indikator aktif */
+      ./* Indikator aktif */
       .navbar-nav .nav-link.active::after {
           content: '';
           position: absolute;
-          bottom: -8px;
+          top: 50%;
           left: 50%;
-          transform: translateX(-50%);
-          width: 6px;
-          height: 6px;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
           background-color: white;
           border-radius: 50%;
+          z-index: -1;
+      }
+
+      .navbar-nav .nav-link.active i {
+          color: #332318 !important;
       }
       </style>
   </head>
@@ -71,7 +77,7 @@
                 <img src="{{ asset($item->makeupartist->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA" style="height: 200px; object-fit: cover;">
                 <div class="card-body p-2" style="background: #F0F0F0;">
                     <p class="card-text small fw-normal mb-1 text-truncate">Kategori: {{ $item->makeupartist->category }}</p>
-                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat: {{ $item->makeupartist->address->city }}</p>
+                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat: {{ $item->makeupartist->address->kota }}</p>
                     <a href="/deskripsi-mua/{{ $item->makeupartist->id }}" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
                 </div>
                 </div>
@@ -102,7 +108,7 @@
                 <img src="{{ asset($artist->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA" style="height: 200px; object-fit: cover;">
                 <div class="card-body p-2" style="background: #F0F0F0;">
                     <p class="card-text small fw-normal mb-1 text-truncate">Kategori: {{ $artist->category }}</p>
-                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat: {{ $artist->address->city ?? '-' }}</p>
+                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat: {{ $artist->address->kota ?? '-' }}</p>
                     <a href="/deskripsi-mua/{{ $artist->id }}" class="btn btn-outline-dark btn-sm w-100">Lihat Profil</a>
                 </div>
                 </div>

@@ -121,19 +121,23 @@
               <x-category-button
                   value="Pesta dan Acara"
                   image="image/foto-cewek-2.jpg"
-                  label="Pesta<br>dan Acara" />
+                  label="Pesta<br>dan Acara" 
+                  :active="request('category') ==='Pesta dan Acara'" />
               <x-category-button
                   value="Pernikahan"
                   image="image/foto-cewek-3.jpg"
-                  label="Pengantin" />
+                  label="Pengantin" 
+                  :active="request('category') ==='Pengantin'"/>
               <x-category-button
                   value="Make Up Harian"
                   image="image/foto-cewek-4.jpg"
-                  label="Editorial" />
+                  label="Editorial" 
+                  :active="request('category') ==='Editorial'"/>
               <x-category-button
                   value="Make Up Natural"
                   image="image/foto-cewek-5.jpg"
-                  label="Artistik" />
+                  label="Artistik" 
+                  :active="request('category') ==='Artistik'"/>
 
           </div>
         </div>
@@ -147,16 +151,28 @@
 
           {{-- Jika role user adalah customer --}}
           @if ($user->role == 'customer')
-            @foreach ($artist as $artistId)
-              <!-- Card MUA -->
-              <x-artist-card :artist="$artistId" :blur="false" />
-            @endforeach
+            @if ($artist->isEmpty())
+              <div class="col-12 text-center text-muted fw-semibold fs-5">
+                  Belum ada Make Up Artist yang tersedia saat ini.
+              </div>
+            @else
+              @foreach ($artist as $artistId)
+                <!-- Card MUA -->
+                <x-artist-card :artist="$artistId" :blur="false" />
+              @endforeach
+            @endif
 
             {{-- Apabila role user adalah user maka tampilan card akan diblur --}}
           @elseif ($user->role == 'user')
-            @foreach ($artist as $artistId)
-              <x-artist-card :artist="$artistId" :blur="true" />
-            @endforeach
+            @if ($artist->isEmpty())
+              <div class="col-12 text-center text-muted fw-semibold fs-5">
+                  Belum ada Make Up Artist yang tersedia saat ini.
+              </div>
+            @else
+              @foreach ($artist as $artistId)
+                <x-artist-card :artist="$artistId" :blur="true" />
+              @endforeach
+            @endif
           @endif
         </div>
       </div>
