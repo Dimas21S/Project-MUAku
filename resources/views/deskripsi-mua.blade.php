@@ -105,7 +105,8 @@
             </form>
             <button type="button" 
                     class="btn btn-light rounded-circle btn-outline-dark"
-                    style="width: 40px; height: 40px;">
+                    style="width: 40px; height: 40px;"
+                    onclick="window.location.href='https://api.whatsapp.com/send?phone={{ $artist->phone }}&text=Halo%20{{ urlencode($artist->name) }},%20saya%20tertarik%20dengan%20jasa%20makeup%20Anda.'">
               <i class="bi bi-whatsapp text-success"></i>
             </button>
             <button type="button" 
@@ -118,7 +119,8 @@
           </div>
         </header>
 
-        <div class="content-wrapper">
+        @if ($user->role == 'customer')
+            <div class="content-wrapper">
             <div class="image-container">
                 <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
                     class="rounded img-fluid" 
@@ -162,6 +164,52 @@
                 <p>{{ $artist->description }}</p>
             </div>
         </div>
+        @else
+        <div class="content-wrapper">
+            <div class="image-container">
+                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
+                    class="rounded img-fluid" 
+                    alt="Foto MUA" 
+                    style="max-height: 640px; margin-left: 30px; margin-right: 5px;">
+
+                @foreach ($artist->photos as $photo)
+                    <div class="d-flex justify-content-center mt-3 mb-3 ms-3">
+                        <div class="d-flex flex-column align-items-center">
+                            <button type="button" class="btn btn-light btn-outline-dark me-2 overflow-hidden" 
+                                    style="width: 79px; height: 79px; border-radius: 8px;"
+                                    onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
+                                <img src="{{ Storage::url($photo->image_path) }}" alt="Preview" class="w-100 h-100 object-fit-cover">
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Modal untuk tampilan fullscreen -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content bg-transparent border-0">
+                        <div class="modal-header border-0 position-absolute top-0 end-0 z-1">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center p-0 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+                            <img id="fullscreenImage" src="" class="img-fluid" style="max-height: 90vh; max-width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="description-container">
+                <p class="mt-0 mb-3" style="filter: blur(5px);">Kategori Make up : {{ $artist->category }}</p>
+                <p class="mb-3" style="filter: blur(5px);">MUA : {{ $artist->name }}</p>
+                <p class="mb-3" style="filter: blur(5px);">Alamat : {{ $artist->address->alamat }}
+                    <br style="filter: blur(5px);">Telp : {{ $artist->phone }}
+                    <br style="filter: blur(5px);">Sosial Media : {{ $artist->email }}</p> 
+                <h4 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 25px; margin-top: 25px;">Deskripsi</h4>
+                <p style="filter: blur(5px);">{{ $artist->description }}</p>
+            </div>
+        </div>
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

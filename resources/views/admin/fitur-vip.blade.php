@@ -132,24 +132,7 @@
         </main>
       </div>
 
-
-    <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; width: 340px; border-radius: 50px; margin-left: 40%; margin-bottom: 20px; padding: 5px 0;">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-          <ul class="navbar-nav nav-brand" style="gap: 60px;">
-            <li class="nav-item">
-              <a class="nav-link fs-4" href="#"><i class="bi bi-person-fill-check"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fs-4" aria-disabled="true"><i class="bi bi-pie-chart-fill"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fs-4" href="#" aria-expanded="false"><i class="bi bi-gear-fill"></i></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+      <x-navbar/>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>

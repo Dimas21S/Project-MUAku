@@ -4,19 +4,22 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
     <title>List MakeUpArtist</title>
     <link rel="stylesheet" href="{{ asset('css/list-mua.css') }}">
+
     {{-- Google Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
+
     {{-- Tombol pada Carousel akan mengarah ke halaman paket-berlangganan --}}
-    <main>
+    <main> 
       <div class="container-fluid px-4 mt-4">
         <div class="d-flex justify-content-between align-items-center">
           <div>
@@ -44,6 +47,11 @@
           </div>
         </div>
       </div>
+
+      <!-- Toast Container (Tempat toast akan muncul) -->
+      @if (session('user-error'))
+          <x-toast :message="session('user-error')" />
+      @endif
 
       {{-- Carousel --}}
       <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-top: 20px;">
@@ -110,50 +118,27 @@
           <h4 class=" fw-bold" style="padding-left: 0px;">Kategori Make Up</h4>
           <div class="row gx-2 mt-3 mb-3">
 
-              <div class="col-auto mb-3 mx-3">
-                <button class="btn p-0 border-0 bg-transparent text-center" name="category" value="Pesta dan Acara">
-                  <div class="d-flex flex-column align-items-center">
-                    <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
-                        alt="Makeup Artist 1" 
-                        class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                        style="width: 70px; height: 70px; object-fit: cover;">
-                    <span class="fw-semibold text-dark">Pesta <br>dan Acara</span>
-                  </div>
-                </button>
-              </div>
-              <div class="col-auto mb-3 mx-3">
-                <button class="btn p-0 border-0 bg-transparent text-center" name="category" value="Pengantin">
-                  <div class="d-flex flex-column align-items-center">
-                    <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
-                        alt="Makeup Artist 1" 
-                        class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                        style="width: 70px; height: 70px; object-fit: cover;">
-                    <span class="fw-semibold text-dark">Pengantin</span>
-                  </div>
-                </button>
-              </div>
-              <div class="col-auto mb-3 mx-3">
-                <button class="btn p-0 border-0 bg-transparent text-center" name="category" value="Editorial">
-                  <div class="d-flex flex-column align-items-center">
-                    <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
-                        alt="Makeup Artist 1" 
-                        class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                        style="width: 70px; height: 70px; object-fit: cover;">
-                    <span class="fw-semibold text-dark">Editorial</span>
-                  </div>
-                </button>
-              </div>
-              <div class="col-auto mb-3 mx-3">
-                <button class="btn p-0 border-0 bg-transparent text-center" name="category" value="Artistik">
-                  <div class="d-flex flex-column align-items-center">
-                    <img src="{{ asset('image/foto-cewek-2.jpg') }}" 
-                        alt="Makeup Artist 1" 
-                        class="rounded-circle object-fit-cover mb-2 shadow-sm" 
-                        style="width: 70px; height: 70px; object-fit: cover;">
-                    <span class="fw-semibold text-dark">Artistik</span>
-                  </div>
-                </button>
-              </div>
+              <x-category-button
+                  value="Pesta dan Acara"
+                  image="image/foto-cewek-2.jpg"
+                  label="Pesta<br>dan Acara" 
+                  :active="request('category') ==='Pesta dan Acara'" />
+              <x-category-button
+                  value="Pernikahan"
+                  image="image/foto-cewek-3.jpg"
+                  label="Pengantin" 
+                  :active="request('category') ==='Pengantin'"/>
+              <x-category-button
+                  value="Make Up Harian"
+                  image="image/foto-cewek-4.jpg"
+                  label="Editorial" 
+                  :active="request('category') ==='Editorial'"/>
+              <x-category-button
+                  value="Make Up Natural"
+                  image="image/foto-cewek-5.jpg"
+                  label="Artistik" 
+                  :active="request('category') ==='Artistik'"/>
+
           </div>
         </div>
       </form>
@@ -166,34 +151,28 @@
 
           {{-- Jika role user adalah customer --}}
           @if ($user->role == 'customer')
-            @foreach ($artist as $artistId)
-              <!-- Card MUA -->
-              <div class="col mb-4">
-                <div class="card border border-dark px-1 py-1 shadow-sm h-100" style="background: transparent; position: relative;">
-                  <img src="{{ asset($artistId->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
-                  <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
-                    <p class="card-text small fw-normal mb-1 text-truncate">Kategori: {{ $artistId->category }}</p>
-                    <p class="card-text small fw-normal mb-1 text-truncate">Alamat:  {{ $artistId->address->city }}</p>
-                    <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
-                  </div>
-                </div>
+            @if ($artist->isEmpty())
+              <div class="col-12 text-center text-muted fw-semibold fs-5">
+                  Belum ada Make Up Artist yang tersedia saat ini.
               </div>
-            @endforeach
+            @else
+              @foreach ($artist as $artistId)
+                <!-- Card MUA -->
+                <x-artist-card :artist="$artistId" :blur="false" />
+              @endforeach
+            @endif
 
             {{-- Apabila role user adalah user maka tampilan card akan diblur --}}
           @elseif ($user->role == 'user')
-            @foreach ($artist as $artistId)
-              <div class="col mb-4">
-                <div class="card border border-dark px-1 py-1 shadow-sm h-80" style="background: transparent; position: relative;">
-                  <img src="{{ asset($artistId->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="card-img-top" alt="MUA 1" style="height: 200px; object-fit: cover;">
-                  <div class="card-body p-2" style="background: #E0DEE7; position: relative; z-index: 2;">
-                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Kategori:  {{ $artistId->category }}</p>
-                    <p class="card-text small fw-normal mb-1" style="filter:blur(3px)">Alamat:  {{ $artistId->address->city }}</p>
-                    <a href="/deskripsi-mua/{{ $artistId->id }}" class="btn btn-outline-dark btn-sm w-100" style="position: relative; z-index: 3;">Lihat Profil</a>
-                  </div>
-                </div>
+            @if ($artist->isEmpty())
+              <div class="col-12 text-center text-muted fw-semibold fs-5">
+                  Belum ada Make Up Artist yang tersedia saat ini.
               </div>
-            @endforeach
+            @else
+              @foreach ($artist as $artistId)
+                <x-artist-card :artist="$artistId" :blur="true" />
+              @endforeach
+            @endif
           @endif
         </div>
       </div>
@@ -208,38 +187,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <!-- Script untuk efek smooth carousel -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var myCarousel = document.querySelector('#myCarousel');
-        var carousel = new bootstrap.Carousel(myCarousel, {
-          interval: 5000,
-          wrap: true
-        });
-      });
+    <script src="{{ asset('js/carousel.js') }}"></script>
 
-      const messages = [
-          "Apa makeup favoritmu hari ini?",
-          "Temukan MUA terbaik di sekitarmu!",
-          "Siap tampil maksimal hari ini?",
-          "Makeup bagus, mood pun ikut baik!",
-          "Jangan lupa skin care sebelum makeup!"
-        ];
-        
-        const welcomeElement = document.getElementById('welcome-message');
-        let currentIndex = 0;
-        
-        function rotateMessage() {
-          welcomeElement.style.opacity = 0;
-          setTimeout(() => {
-            currentIndex = (currentIndex + 1) % messages.length;
-            welcomeElement.textContent = messages[currentIndex];
-            welcomeElement.style.opacity = 1;
-          }, 500);
-        }
-        
-        // Change message every 5 seconds
-        setInterval(rotateMessage, 5000);
-      });
-    </script>
+    <!-- Script untuk menampilkan toast -->
+    <script src="{{ asset('js/toast.js') }}"></script>
   </body>
 </html>

@@ -41,14 +41,14 @@ class ArtistController extends Controller
             if ($mua->status == 'accepted') {
 
                 // Jika status make up artist diterima, maka akan mengarahkan ke halaman daftar make up artist
-                return redirect('/notif-chat');
+                return redirect('/notif-chat')->with('status', 'Selamat datang, ' . $mua->username . '! Anda telah berhasil login sebagai Make Up Artist.');
             }
 
             // Jika status make up artist tidak diterima, maka akan mengembalikan ke halaman submit request
             $request->session()->regenerate();
 
             // mengarahkan ke halaman pendaftaran sesuai dengan penulisan method name
-            return redirect()->route('get.pendaftaran');
+            return redirect()->route('get.pendaftaran')->with('status', 'Silakan lengkapi pendaftaran Anda terlebih dahulu sebelum melanjutkan.');
         }
 
         // Kalau login gagal, maka akan mengembalikan ke halaman login dengan pesan error
@@ -138,7 +138,7 @@ class ArtistController extends Controller
             }
         }
 
-        return view('deskripsi-mua', compact('artist', 'likedArtistIds'));
+        return view('deskripsi-mua', compact('artist', 'likedArtistIds', 'user'));
     }
 
     // Menampilkan form pendaftaran make up artist
@@ -155,6 +155,7 @@ class ArtistController extends Controller
             'phone' => 'required|string|max:15',
             'link_map' => 'nullable|url',
             'category' => 'required|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
+            'alamat' => 'required|string|max:255',
             'city' => 'required|in:Jambi',
             'photos' => 'nullable|array',
             'photos.*' => 'file|mimes:jpg,jpeg,png|max:2048', // Validasi untuk setiap foto
@@ -164,9 +165,11 @@ class ArtistController extends Controller
 
         $pesan_validasi = [
             'name.required' =>  'name harus diisi',
-            'phone.rquired' => 'Nomor Telepon harus diisi',
+            'phone.required' => 'Nomor Telepon harus diisi',
             'category.required' => 'Kategori harus dipilih',
-            'address.required' => 'Kota harus dipilih',
+            'city.required' => 'Kota harus dipilih',
+            'alamat.required' => 'Alamat harus diisi',
+            'link_map.required' => 'Link Gmaps harus diisi',
             'photos.array' => 'Foto harus berupa array',
             'photos.*.file' => 'Setiap foto harus berupa file',
             'photos.*.mimes' => 'Foto harus berupa file dengan format jpg, jpeg, atau png',
@@ -220,7 +223,6 @@ class ArtistController extends Controller
         $artist->update([
             'name' => $request->name,
             'phone' => $request->phone,
-            'link_map' => $request->link_map,
             'category' => $request->category,
             'file_certificate' => $path,
             'status' => 'pending',
@@ -228,7 +230,9 @@ class ArtistController extends Controller
         ]);
 
         $artist->address()->updateOrCreate([], [
-            'city' => $request->city,
+            'kota' => $request->city,
+            'alamat' => $request->alamat,
+            'link_map' => $request->link_map,
         ]);
 
 
@@ -259,40 +263,6 @@ class ArtistController extends Controller
         return view('user.map', compact('artist'));
     }
 
-    public function historyUser()
-    {
-        $artist = MakeUpArtist::all();
-
-        $history = [];
-
-        if (Auth::check()) {
-            $history = Auth::user()->histories()
-                ->with('makeupartist')
-                ->whereHas('makeupartist', function ($query) {
-                    $query->where('status', 'accepted');
-                })
-                ->latest()
-                ->take(5)
-                ->get();
-        }
-
-        // Mengambil make up artist yang telah disukai oleh user
-        $likedArtists = Like::where('user_id', Auth::id())
-            ->with('makeUpArtist')
-            ->get();
-
-        // Mengambil hanya make up artist yang telah disukai
-        $likedArtists = $likedArtists->pluck('makeUpArtist');
-
-        return view('user.user-history', compact('artist', 'history', 'likedArtists'));
-    }
-
-    public function deleteHistory($id)
-    {
-        Auth::user()->histories()->delete();
-        return redirect()->back()->with('status', 'Riwayat berhasil dihapus.');
-    }
-
     public function artistLogout(Request $request)
     {
         Auth::guard('makeup_artist')->logout();
@@ -315,6 +285,7 @@ class ArtistController extends Controller
 
         return view('mua.edit-profile', compact('mua'));
     }
+
     public function updateMakeUpArtist(Request $request)
     {
         $mua = Auth::guard('makeup_artist')->user();

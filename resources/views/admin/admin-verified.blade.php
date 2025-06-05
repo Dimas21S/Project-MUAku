@@ -175,12 +175,6 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <span class="fw-bold">{{ $artist->name }}</span>
-          {{-- @if ($artist->profile_photo)
-            <img src="{{ asset($artist->profile_photo) }}" alt="Profile Photo" class="user-avatar">
-          @else
-            <img src="{{ asset('image/Profile-Foto.jpg') }}" alt="Default Profile Photo" class="user-avatar">
-          @endif --}}
-
           @if ($artist->status == 'accepted')
           <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
           @else
@@ -254,24 +248,7 @@
     </div>
   </div>
 
-  <!-- Navbar Bottom -->
-  <nav class="navbar fixed-bottom navbar-expand-sm" style="background-color: #332318; width: 340px; border-radius: 50px; margin-left: 40%; margin-bottom: 20px; padding: 5px 0;">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse justify-content-md-center">
-        <ul class="navbar-nav nav-brand" style="gap: 60px;">
-          <li class="nav-item">
-            <a class="nav-link fs-4 active" href="#"><i class="bi bi-person-fill-check"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-4" href="#"><i class="bi bi-pie-chart-fill"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-4" href="#"><i class="bi bi-gear-fill"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <x-navbar/>
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

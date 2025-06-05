@@ -12,8 +12,11 @@
     <style>
       body {
         background-image: url('{{ asset('image/background-landing-page.jpg') }}');
-        min-height: 100vh;
         background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
       }
       </style>
   </head>

@@ -108,14 +108,15 @@
                 </div>
                 <div class="card h-100 rounded-0 border-0">
                     <div class="card-body p-0 mua-list-container">
-                        <ul class="list-unstyled mb-0 mua-list">
-                            {{-- Menampilkan daftar mua yang berstatus 'accepted' --}}
-                            @foreach ($muas as $mua)
-                            <li class="p-3 border-bottom mua-list-item {{ $selectedMua && $selectedMua->id == $mua->id ? 'active' : '' }}">
-                                <a href="{{ route('chat.page', ['mua_id' => $mua->id]) }}" class="d-flex justify-content-between text-decoration-none text-dark">
-                                    <div class="d-flex flex-row">
-                                        <img src="{{ $mua->profile_photo ?? asset('image/Profile-Foto.jpg') }}" 
-                                             class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
+                        @if ($muas->count() > 0)
+                            <ul class="list-unstyled mb-0 mua-list">
+                                {{-- Menampilkan daftar mua yang berstatus 'accepted' --}}
+                                @foreach ($muas as $mua)
+                                <li class="p-3 border-bottom mua-list-item {{ $selectedMua && $selectedMua->id == $mua->id ? 'active' : '' }}">
+                                    <a href="{{ route('chat.page', ['mua_id' => $mua->id]) }}" class="d-flex justify-content-between text-decoration-none text-dark">
+                                        <div class="d-flex flex-row">
+                                            <img src="{{ $mua->profile_photo ?? asset('image/Profile-Foto.jpg') }}" 
+                                                 class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" 
                                              width="60" height="60">
                                         <div class="pt-1">
                                             <p class="fw-bold mb-0">{{ $mua->name }}</p>
@@ -129,6 +130,11 @@
                             </li>
                             @endforeach
                         </ul>
+                        @else
+                        <div class="text-center p-3">
+                            <p class="text-muted">Tidak ada MUA yang tersedia.</p>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -195,9 +201,15 @@
                 @else
                 <div class="no-mua-selected">
                     <div class="text-center">
-                        <i class="fas fa-comments fa-4x text-muted mb-3"></i>
-                        <h5>Pilih MUA untuk memulai percakapan</h5>
-                        <p class="text-muted">Klik salah satu MUA di daftar sebelah kiri</p>
+                        @if ($muas->count() > 0)
+                            <i class="fas fa-comments fa-4x text-muted mb-3"></i>
+                            <h5>Pilih MUA untuk memulai percakapan</h5>
+                            <p class="text-muted">Klik salah satu MUA di daftar sebelah kiri</p>
+                        @else
+                            <i class="fas fa-comments fa-4x text-muted mb-3"></i>
+                            <h5>Tidak ada MUA yang tersedia</h5>
+                            <p class="text-muted">Silakan tambahkan MUA terlebih dahulu</p>
+                        @endif
                     </div>
                 </div>
                 @endif

@@ -15,7 +15,23 @@
         <!-- Lembar kertas utama (form login) -->
         <div class="front-paper">
             <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">Login</h1>
-            
+
+            @if ($errors->any())
+                <div class="bg-red-100 text-red-700 p-4 rounded mb-6">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>                
+            @endif
+
+            @if (session('status'))
+                <div class="bg-green-100 text-green-700 p-4 rounded mb-6">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <form class="flex-grow" action="{{ route('login-mua.post') }}" method="POST">
                 @csrf
                 <div class="input-field">
