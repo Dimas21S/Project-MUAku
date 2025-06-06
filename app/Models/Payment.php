@@ -20,8 +20,8 @@ class Payment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function makeUpArtist()
+    public function package()
     {
-        return $this->belongsTo(MakeUpArtist::class);
+        return $this->belongsTo(Package::class);
     }
 }

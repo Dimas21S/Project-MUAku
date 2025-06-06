@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->string('package_type');
+            $table->bigInteger('price');
+            $table->text('description');
             $table->timestamps();
         });
     }

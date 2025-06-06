@@ -23,6 +23,10 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/vip-fitur', 'fiturVip')->name('vip-fitur');
 
     Route::post('/update-status/{artistId}', 'updateStatus')->name('admin.post.update-status');
+
+    Route::get('/package/{id}/edit', 'formEditPackage')->name('form-edit');
+
+    Route::put('/package/{id}', 'editPackage')->name('update-package');
 });
 
 //Rute URL untuk yang belum login maupun register (User yang sudah login tidak bisa mengakses rute ini)

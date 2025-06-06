@@ -20,28 +20,13 @@ class DatabaseSeeder extends Seeder
         // Pembuatan data user dan make up artist
         // Menggunakan factory untuk membuat data user dan make up artist
         // Menggunakan model User dan MakeUpArtist untuk membuat data
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'user@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-        ]);
 
-        // MakeUpArtist::factory()
-        //     ->has(Address::factory()->state([
-        //         'alamat' => 'Jalan Tuna 7',
-        //         'city' => 'Jambi',
-        //     ]))
-        //     ->create([
-        //         'username' => 'riri123',
-        //         'name' => 'Rini',
-        //         'password' => bcrypt('rini123'),
-        //         'email' => 'rini@gmail.com',
-        //         'phone' => '192837465',
-        //         'status' => 'accepted',
-        //         'category' => 'Editorial',
-        //         'file_certificate' => 'path/to/certificate.jpg',
-        //         'profile_photo' => 'path/to/profile.jpg',
-        //     ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'user@example.com',
+        //     'password' => bcrypt('password'),
+        //     'role' => 'admin',
+        // ]);
+
     }
 }
