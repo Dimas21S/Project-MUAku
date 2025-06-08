@@ -1,6 +1,6 @@
 @php
     $btnClass = $active 
-        ? 'border-primary border-2' 
+        ? 'category-btn-active border-2' 
         : 'border-0';
 @endphp
 

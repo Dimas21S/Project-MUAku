@@ -70,10 +70,6 @@
           background-color: #D5CFE1 !important;
       }
 
-      .btn-outline-primary {
-          transition: all 0.3s ease;
-      }
-
       .card:hover .btn-outline-dark {
           background-color: #A87648;
           color: white !important;
@@ -162,6 +158,21 @@
       .navbar-nav .nav-link.active i {
           color: #332318 !important;
       }
+
+      /* Tambahan efek untuk tombol kategori */
+.category-btn-active {
+  border-color: #332318 !important;
+  border-width: 2px !important;
+  background-color: #f8f4f2;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-btn-active span {
+  color: #332318 !important;
+}
+
 
     @media (max-width: 768px) {
         .carousel-caption h1 {

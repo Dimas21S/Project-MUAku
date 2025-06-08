@@ -12,7 +12,7 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient( #EECFC0, #F6F6F6);
+            background: #ffffff;
             background-attachment: fixed;
         }
         
@@ -80,67 +80,101 @@
     </style>
   </head>
   <body>
-    <div class="container-fluid py-3 px-4"> <!-- Changed to container-fluid and added px-4 -->
-        <header class="d-flex align-items-center justify-content-center position-relative py-3">
-          <!-- Tombol kembali (diposisikan absolute di kiri) -->
-           <a href="{{ route('list-mua') }}"
-                class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+    <header class="d-flex align-items-center justify-content-center position-relative"
+        style="background-color: #E4CFCE; width:100%; height: 70px;">
+  
+            <!-- Tombol Kembali (Kiri) -->
+            <a href="{{ route('list-mua') }}"
+                class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3"
+                style="width: 40px; height: 40px;">
                 <i class="bi bi-arrow-left"></i>
             </a>
-          
-          {{-- Grup tombol kanan --}}
-          <div class="btn-group position-absolute end-0 me-3">
 
-            <form action="{{ route('toggle.like', $artist->id) }}" method="POST">
+            <!-- Grup Tombol Aksi (Kanan) -->
+            <div class="btn-group position-absolute end-0 me-3">
+                
+                <!-- Like -->
+                <form action="{{ route('toggle.like', $artist->id) }}" method="POST">
                 @csrf
-                <button type="submit" 
-                        class="btn btn-light rounded-circle btn-outline-dark"
+                <button type="submit" class="btn btn-light rounded-circle btn-outline-dark"
                         style="width: 40px; height: 40px;">
                     @if ($likedArtistIds->contains($artist->id))
-                        <i class="bi bi-heart-fill text-danger"></i>
+                    <i class="bi bi-heart-fill text-danger"></i>
                     @else
-                        <i class="bi bi-heart"></i>
+                    <i class="bi bi-heart"></i>
                     @endif
                 </button>
-            </form>
-            <button type="button" 
-                    class="btn btn-light rounded-circle btn-outline-dark"
-                    style="width: 40px; height: 40px;"
-                    onclick="window.location.href='https://api.whatsapp.com/send?phone={{ $artist->phone }}&text=Halo%20{{ urlencode($artist->name) }},%20saya%20tertarik%20dengan%20jasa%20makeup%20Anda.'">
-              <i class="bi bi-whatsapp text-success"></i>
-            </button>
-            <button type="button" 
-                class="btn btn-light rounded-circle btn-outline-dark"
-                style="width: 40px; height: 40px;"
-                onclick="window.location.href='{{ route('chat.user.to.mua', ['mua_id' => $artist->id]) }}'">
+                </form>
+
+                <!-- WhatsApp -->
+                <button type="button" class="btn btn-light rounded-circle btn-outline-dark"
+                        style="width: 40px; height: 40px;"
+                        onclick="window.location.href='https://api.whatsapp.com/send?phone={{ $artist->phone }}&text=Halo%20{{ urlencode($artist->name) }},%20saya%20tertarik%20dengan%20jasa%20makeup%20Anda.'">
+                <i class="bi bi-whatsapp text-success"></i>
+                </button>
+
+                <!-- Chat -->
+                <button type="button" class="btn btn-light rounded-circle btn-outline-dark"
+                        style="width: 40px; height: 40px;"
+                        onclick="window.location.href='{{ route('chat.user.to.mua', ['mua_id' => $artist->id]) }}'">
                 <i class="bi bi-chat-left-text text-primary"></i>
-            </button>
-        
-          </div>
-        </header>
+                </button>
 
+            </div>
+    </header>
+
+    <div class="container-fluid py-3 px-4"> <!-- Changed to container-fluid and added px-4 -->
         @if ($user->role == 'customer')
-            <div class="content-wrapper">
-            <div class="image-container">
-                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
-                    class="rounded img-fluid" 
-                    alt="Foto MUA" 
-                    style="max-height: 640px; margin-left: 30px; margin-right: 5px;">
+            <div class="row">
+                <!-- Foto Profil -->
+                <div class="col-md-5 text-center">
+                    <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
+                        class="rounded img-fluid" 
+                        alt="Foto MUA" 
+                        style="height: 474px; width: 452px;">
+                </div>
 
-                @foreach ($artist->photos as $photo)
-                    <div class="d-flex justify-content-center mt-3 mb-3 ms-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <button type="button" class="btn btn-light btn-outline-dark me-2 overflow-hidden" 
-                                    style="width: 79px; height: 79px; border-radius: 8px;"
-                                    onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
-                                <img src="{{ Storage::url($photo->image_path) }}" alt="Preview" class="w-100 h-100 object-fit-cover">
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
+                <div class="col-md-7">
+                    <h1 class="mb-3">{{ $artist->name }}</h1>
+                    <h5 class="text-muted">{{ $artist->category }}</h5>
+                    <p class="mb-3">
+                        <strong>Alamat:</strong> {{ $artist->address->alamat }}<br>
+                        <strong>Telp:</strong> {{ $artist->phone }}<br>
+                        <strong>Sosial Media:</strong> {{ $artist->email }}
+                    </p>
+                </div>
             </div>
 
-            <!-- Modal untuk tampilan fullscreen -->
+            <!-- Garis Pemisah -->
+            <hr class="my-4" />
+
+            <!-- Section Deskripsi -->
+            <div class="mt-3 border border-dark">
+                <h4 class="fw-bold text-center" style="font-family: 'DM Serif Display', serif;">Deskripsi</h4>
+                <p style="margin-left: 150px;">{{ $artist->description }}</p>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Galeri Foto -->
+            <div class="mt-5">
+                <h3 class="text-center fw-bold">Galeri Karya</h3>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
+                    @foreach ($artist->photos as $photo)
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" 
+                                onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
+                                <img src="{{ Storage::url($photo->image_path) }}" 
+                                    class="card-img-top object-fit-cover" 
+                                    style="height: 200px; border-radius: 10px;" 
+                                    alt="Preview">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Modal Fullscreen -->
             <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content bg-transparent border-0">
@@ -152,37 +186,58 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="description-container">
-                <p class="mt-0 mb-3">Kategori Make up : {{ $artist->category }}</p>
-                <p class="mb-3">MUA : {{ $artist->name }}</p>
-                <p class="mb-3">Alamat : {{ $artist->address->alamat }}
-                    <br>Telp : {{ $artist->phone }}
-                    <br>Sosial Media : {{ $artist->email }}</p> 
-                <h4 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 25px; margin-top: 25px;">Deskripsi</h4>
-                <p>{{ $artist->description }}</p>
             </div>
         </div>
+
         @else
         <div class="content-wrapper">
-            <div class="image-container">
-                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
-                    class="rounded img-fluid" 
-                    alt="Foto MUA" 
-                    style="max-height: 640px; margin-left: 30px; margin-right: 5px;">
+            <div class="row">
+                <!-- Foto Profil -->
+                <div class="col-md-5 text-center">
+                    <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
+                        class="rounded img-fluid" 
+                        alt="Foto MUA" 
+                        style="height: 474px; width: 452px;">
+                </div>
 
-                @foreach ($artist->photos as $photo)
-                    <div class="d-flex justify-content-center mt-3 mb-3 ms-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <button type="button" class="btn btn-light btn-outline-dark me-2 overflow-hidden" 
-                                    style="width: 79px; height: 79px; border-radius: 8px;"
-                                    onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
-                                <img src="{{ Storage::url($photo->image_path) }}" alt="Preview" class="w-100 h-100 object-fit-cover">
-                            </button>
+                <div class="col-md-7">
+                    <h1 class="mb-3">{{ $artist->name }}</h1>
+                    <h5 class="text-muted">{{ $artist->category }}</h5>
+                    <p class="mb-3">
+                        <strong>Alamat:</strong> {{ $artist->address->alamat }}<br>
+                        <strong>Telp:</strong> {{ $artist->phone }}<br>
+                        <strong>Sosial Media:</strong> {{ $artist->email }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Garis Pemisah -->
+            <hr class="my-4" />
+
+            <!-- Section Deskripsi -->
+            <div class="mt-3 border border-dark">
+                <h4 class="fw-bold text-center" style="font-family: 'DM Serif Display', serif;">Deskripsi</h4>
+                <p style="margin-left: 150px;">{{ $artist->description }}</p>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Galeri Foto -->
+            <div class="mt-5">
+                <h3 class="text-center fw-bold">Galeri Karya</h3>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
+                    @foreach ($artist->photos as $photo)
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" 
+                                onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
+                                <img src="{{ Storage::url($photo->image_path) }}" 
+                                    class="card-img-top object-fit-cover" 
+                                    style="height: 200px; border-radius: 10px;" 
+                                    alt="Preview">
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
 
             <!-- Modal untuk tampilan fullscreen -->
@@ -197,16 +252,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="description-container">
-                <p class="mt-0 mb-3" style="filter: blur(5px);">Kategori Make up : {{ $artist->category }}</p>
-                <p class="mb-3" style="filter: blur(5px);">MUA : {{ $artist->name }}</p>
-                <p class="mb-3" style="filter: blur(5px);">Alamat : {{ $artist->address->alamat }}
-                    <br style="filter: blur(5px);">Telp : {{ $artist->phone }}
-                    <br style="filter: blur(5px);">Sosial Media : {{ $artist->email }}</p> 
-                <h4 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 25px; margin-top: 25px;">Deskripsi</h4>
-                <p style="filter: blur(5px);">{{ $artist->description }}</p>
             </div>
         </div>
         @endif

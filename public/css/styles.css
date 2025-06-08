@@ -41,49 +41,31 @@ body {
 }
 
 .input-field {
-    position: relative;
     margin-bottom: 1.5rem;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .input-field input {
     width: 100%;
-    padding: 12px 0;
+    padding: 10px 12px;
     font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #e2e8f0;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
     outline: none;
-    background: transparent;
+    background: white;
+    transition: border-color 0.2s;
 }
 
-.input-field label {
-    position: absolute;
-    top: 12px;
-    left: 0;
-    color: #94a3b8;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.input-field input:focus ~ label,
-.input-field input:valid ~ label {
-    top: -12px;
-    font-size: 13px;
-    color: #6366f1;
-    font-weight: 500;
-}
-
-.input-highlight {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #6366f1, #8b5cf6);
-    transition: width 0.4s ease;
-}
-
-.input-field input:focus ~ .input-highlight {
-    width: 100%;
+.input-field input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 1px #6366f1;
 }
 
 .login-btn {

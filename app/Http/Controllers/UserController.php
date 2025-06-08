@@ -139,4 +139,9 @@ class UserController extends Controller
         Auth::user()->histories()->delete();
         return redirect()->back()->with('status', 'Riwayat berhasil dihapus.');
     }
+
+    public function locationsMap()
+    {
+        return view("user.map");
+    }
 }

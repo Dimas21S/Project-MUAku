@@ -74,7 +74,7 @@ Route::middleware(IsCustomer::class)->group(function () {
 
     Route::post('/toggle-like/{artistId}', [LikeController::class, 'toggleLike'])->name('toggle.like');
 
-    Route::get('/map', [AdminController::class, 'map'])->name('map');
+    Route::get('/map', [ArtistController::class, 'listAddressMakeUpArtist'])->name('map');
 
     Route::get('/address', [ArtistController::class, 'listAddressMakeUpArtist'])->name('address');
 

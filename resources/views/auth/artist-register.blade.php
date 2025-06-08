@@ -17,20 +17,20 @@
             <form class="flex-grow" action="{{ route('register-mua.post') }}" method="POST">
                 @csrf
                 <div class="input-field">
-                    <input type="text" id="username" name="username" autocomplete="off" required>
                     <label for="username">Username</label>
+                    <input type="text" id="username" name="username" autocomplete="off" required>
                     <div class="input-highlight"></div>
                 </div>
 
                 <div class="input-field">
-                    <input type="text" id="email" name="email" autocomplete="off" required>
                     <label for="email">Email</label>
+                    <input type="text" id="email" name="email" autocomplete="off" required>
                     <div class="input-highlight"></div>
                 </div>
                 
                 <div class="input-field">
-                    <input type="password" id="password" name="password" autocomplete="off" required>
                     <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="off" required>
                     <div class="input-highlight"></div>
                 </div>
                 
