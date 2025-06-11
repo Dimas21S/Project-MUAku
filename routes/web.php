@@ -14,7 +14,11 @@ use App\Http\Middleware\IsCustomer;
 
 //Rute URL untuk admin
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('landing-page');
+
+    Route::get('/about-us', 'aboutUs')->name('about-us');
+
+    Route::get('/contact', 'contactPage')->name('contact');
 
     Route::get('/data-langganan', 'dataPelanggan')->name('data-pelanggan');
 
@@ -99,8 +103,6 @@ Route::middleware(IsCustomer::class)->group(function () {
     Route::get('/mua/chat/user/{user_id}', [ChatController::class, 'muaToUser'])->name('chat.mua.to.user');
 
     Route::post('/mua/chat/user/{user_id}', [ChatController::class, 'muaSendToUser'])->name('chat.mua.send.user');
-
-    Route::get('/notif-chat', [ChatController::class, 'receivedMessages'])->name('notif-chat');
 });
 
 // Rute URL pembayaran
@@ -113,6 +115,8 @@ Route::controller(PaymentController::class)->group(function () {
 // Rute URL untuk profil pengguna
 Route::get('/profil', [UserController::class, 'userProfile'])->name('profile'); // Menampilkan profil pengguna
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/notif-chat', [ChatController::class, 'receivedMessages'])->name('notif-chat');
+
 
 
 // Rute URL untuk notifikasi dari Midtrans

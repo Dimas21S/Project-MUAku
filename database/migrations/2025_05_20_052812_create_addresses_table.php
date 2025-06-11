@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('make_up_artist_id')->constrained('make_up_artists')->onDelete('cascade');
-            $table->string('kota');
-            $table->string('alamat');
+            $table->string('kota')->default('Jambi');
+            $table->string('alamat')->nullable();
             $table->string('link_map');
             $table->timestamps();
         });

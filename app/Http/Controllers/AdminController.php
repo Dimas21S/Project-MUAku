@@ -16,6 +16,16 @@ class AdminController extends Controller
         return view('landing-page');
     }
 
+    public function aboutUs()
+    {
+        return view('about-us');
+    }
+
+    public function contactPage()
+    {
+        return view('contact');
+    }
+
     // Tampilan untuk melihat data user yang berlangganan
     public function dataPelanggan()
     {

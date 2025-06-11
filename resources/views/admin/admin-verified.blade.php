@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data Pengguna Berlangganan</title>
+  <title>Admin ~ Verrified</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +16,8 @@
 
   <style>
     body {
+      background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
       min-height: 100vh;
-      background-image: url('{{ asset('image/foto-makeup.jpg') }}');
       background-size: cover;
       background-position: center 48%;
       font-family: 'DM Serif Display', serif;
@@ -26,7 +26,7 @@
     .user-card {
       width: 100%;
       height: 70px;
-      background-color: white;
+      background-color: #F2E6E8;
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 15px;
@@ -157,13 +157,10 @@
   </style>
 </head>
 <body>
-
-  <div class="container mt-2 mb-3">
-    <h1 class="text-center mb-4 mt-3">VERIFIED AS ADMIN</h1>
-  </div>
+  <x-navbar/>
 
   {{-- Daftar Artist --}}
-  <main class="container">
+  <main class="container mt-3">
     @foreach ($artistsItem as $artist)
     <div class="user-card" data-bs-toggle="modal" data-bs-target="#userModal"
          data-name="{{ $artist->name }}"
@@ -171,16 +168,19 @@
          data-phone="{{ $artist->phone }}"
          data-email="{{ $artist->email }}"
          data-status="{{ $artist->status }}"
-         data-portfolio="{{ $artist->file_certificate }}">
+         data-category="{{ $artist->category }}"
+         data-portfolio-url="{{ Storage::url($artist->file_certificate) }}"
+         data-description="{{ $artist->description }}">
       <div class="d-flex justify-content-between align-items-center">
         <div>
+          <img src="{{ asset('image/MUAku-Icon.png') }}" style="object-fit: cover; width: 40px; height: auto; margin-right: 10px; vertical-align: middle;" \>
           <span class="fw-bold">{{ $artist->name }}</span>
           @if ($artist->status == 'accepted')
           <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
           @else
           <span class="verified-badge"><i class="bi bi-patch-exclamation-fill"></i> Not Verified</span>
           @endif
-          <div class="text-muted">{{ $artist->address->alamat }}</div>
+          <div class="text-muted ms-5">{{ $artist->category }}</div>
         </div>
         @if ($artist->status == 'accepted')
           <span class="badge bg-success">Verified</span>
@@ -195,34 +195,101 @@
     @endforeach
   </main>
 
-  <!-- Pop Up Detail Artist -->
-  <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header border-0">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Pop Up Detail Artist -->
+    <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <h1 class="fw-bold text-center">Request</h1>
+          <div class="modal-body">
+            <div class="row">
+              <!-- Left Column - Basic Info -->
+              <div class="col-md-6 pe-4 border-end">
+                <div class="text-center mb-4">
+                  
+                  <div class="col-6 mb-3">
+                    <div class="fw-bold text-muted small">Username</div>
+                    <div class="p-2 bg-light rounded" id="modalUserName">Nama Artist</div>
+                  </div>
+                  
+                  <div class="col-6 mb-3">
+                    <div class="fw-bold text-muted small">Address</div>
+                    <div class="p-2 bg-light rounded" id="modalUserLocation">
+                     </div>
+                  </div>
+
+                  <div class="col-6 mb-3">
+                    <div class="fw-bold text-muted small">Status</div>
+                    <div class="p-2 bg-light rounded" id="modalUserStatus">Aktif/Tersedia</div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="fw-bold text-muted small">Email</div>
+                    <div class="p-2 bg-light rounded" id="modalUserEmail">artist@example.com</div>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <!-- Right Column - Contact Info -->
+              <div class="col-md-6 ps-4">
+                <div class="mb-4">
+                  <h6 class="fw-bold">Informasi Kontak</h6>
+                  
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <div class="fw-bold text-muted small">Telepon</div>
+                      <div class="p-2 bg-light rounded" id="modalUserPhone">0812-3456-7890</div>
+                    </div>
+                  </div>
+                  
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <div class="fw-bold text-muted small">Category</div>
+                      <div class="p-2 bg-light rounded fw-bold" id="modalUserCategory">Category</div>
+                    </div>
+                  </div>
+                                    
+                  <div class="mb-3">
+                    <div class="fw-bold text-muted small">Deskripsi</div>
+                    <div class="p-2 bg-light rounded" id="modalUserDeskripsi" style="min-height: 100px;">
+                      Deskripsi artist akan muncul di sini...
+                    </div>
+                  </div>
+
+                                    <div class="d-grid gap-2 mb-4">
+                    <button class="btn btn-outline-primary btn-sm" id="showPortfolioBtn">
+                      <i class="bi bi-folder2-open"></i> Lihat Portofolio
+                    </button>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="modal-footer border-0">
+            @if ($artist->status == 'pending')
+            <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}" class="w-100">
+              @csrf
+              <div class="d-flex justify-content-center gap-3">
+                <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
+                  <i class="bi bi-check-circle"></i> Terima
+                </button>
+                <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
+                  <i class="bi bi-x-circle"></i> Tolak
+                </button>
+              </div>
+            </form>
+            @endif
+          </div>
         </div>
-        <div class="modal-body text-center">
-          <img src="{{ asset($artistItem->profile_photo ?? 'image/Profile-Foto.jpg') }}" class="user-avatar" id="modalUserAvatar">
-          <h5 class="mb-1" id="modalUserName">Nama</h5><i class="bi bi-patch-check-fill"></i>
-          <p class="text-muted mb-3" id="modalUserLocation">Alamat</p>
-          <div class="d-flex justify-content-center gap-3 mb-4">
-            <div>
-              <div class="fw-bold">Phone</div>
-              <div class="text-muted small" id="modalUserPhone">-</div>
-            </div>
-            <div>
-              <div class="fw-bold">Email</div>
-              <div class="text-muted small" id="modalUserEmail">-</div>
-            </div>
-            <div>
-              <div class="fw-bold">Status</div>
-              <div class="text-muted small" id="modalUserStatus">-</div>
-            </div>
-            <div>
-              <div class="fw-bold">Portofolio</div>
-              <div class="text-muted small portfolio-icon" id="showPortfolioBtn"><i class="bi bi-folder2-open"></i></div>
-            </div>
+      </div>
+    </div>
           
             <!-- Portfolio Overlay (tambahkan sebelum </body>) -->
             <div class="portfolio-overlay" id="portfolioOverlay">
@@ -247,9 +314,6 @@
       </div>
     </div>
   </div>
-
-  <x-navbar/>
-
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   {{-- Script Pop Up Detail Artist & Portfolio --}}
@@ -257,6 +321,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         // User modal functionality
         var userModal = document.getElementById('userModal');
+        let currentPortfolioUrl = '';
+
         userModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
             document.getElementById('modalUserName').textContent = button.getAttribute('data-name');
@@ -264,7 +330,9 @@
             document.getElementById('modalUserPhone').textContent = button.getAttribute('data-phone');
             document.getElementById('modalUserEmail').textContent = button.getAttribute('data-email');
             document.getElementById('modalUserStatus').textContent = button.getAttribute('data-status');
-            const portfolio = button.getAttribute('data-portfolio');
+            document.getElementById('modalUserCategory').textContent = button.getAttribute('data-category');
+            document.getElementById('modalUserDeskripsi').textContent = button.getAttribute('data-description');
+            currentPortfolioUrl = button.getAttribute('data-portfolio-url');
             
             // Reset portfolio preview when modal opens
             const portfolioPreview = document.getElementById('portfolioPreview');
@@ -289,7 +357,7 @@
             
 
         showPortfolioBtn.addEventListener('click', function() {
-          portfolioImage.src = portfolioImageUrl;
+          portfolioImage.src = currentPortfolioUrl;
           portfolioOverlay.style.display = 'flex';
         });
 

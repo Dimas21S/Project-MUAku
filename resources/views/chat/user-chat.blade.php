@@ -19,7 +19,7 @@
       width: 100%;
       height: 100%;
       border-radius: 0;
-      background: linear-gradient(to bottom, #f0cfc3, #f8f1ee);
+      background: #ffffff;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -66,7 +66,7 @@
     }
 
     .back-button {
-      background-color: white;
+      background-color: #E5D3D2;
       border-radius: 50%;
       width: 40px;
       height: 40px;
@@ -119,16 +119,21 @@
     }
 
     .sent-bubble {
-      background-color: #fceeea;
+      background-color: #7879F1;
       border-bottom-right-radius: 5px;
-      color: #333;
+      color: #ffffff;
     }
 
     .received-bubble {
-      background-color: white;
-      border-bottom-left-radius: 5px;
-      color: #333;
+      background-color: #ffffff;
+      border: 2px solid #A5A6F6;
+      border-radius: 15px 15px 15px 5px; /* Sudut bawah kiri lebih tajam */
+      padding: 10px 15px;
+      color: #5D5FEF;
+      word-wrap: break-word;
+      margin-bottom: 10px;
     }
+
 
     .message-time {
       font-size: 0.75rem;
@@ -155,8 +160,8 @@
       flex-grow: 1;
       padding: 12px 20px;
       border-radius: 25px;
-      border: none;
-      background-color: #f4cec0;
+      border-color: #A5A6F6;
+      background-color: #ffffff;
       outline: none;
       font-size: 0.9rem;
     }
@@ -208,23 +213,7 @@
           <div class="recipient-status">Online</div>
         </div>
       </div>
-      
-      <div class="action-buttons">
-        <button type="button" class="btn btn-light rounded-circle" style="width: 40px; height: 40px;" title="Favorite">
-          <i class="bi bi-heart-fill text-danger"></i>
-        </button>
-        <button type="button" class="btn btn-light rounded-circle" style="width: 40px; height: 40px;" title="WhatsApp">
-          <i class="bi bi-whatsapp text-success"></i>
-        </button>
-      </div>
     </div>
-
-    @if (session('success'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    @endif
 
     <div class="chat-messages" id="chatMessages">
       @foreach($messages as $message)
@@ -252,9 +241,9 @@
       <form method="POST" action="{{ route('chat.user.send.mua', $mua->id) }}" class="chat-form">
         @csrf
         <input type="text" name="message" class="message-input" placeholder="Ketik pesan..." required>
-        <button type="submit" class="send-button">
-          <i class="bi bi-send-fill"></i>
-        </button>
+          <button type="submit" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            <i class="bi bi-send-fill"></i>
+          </button>
       </form>
     </div>
   </div>

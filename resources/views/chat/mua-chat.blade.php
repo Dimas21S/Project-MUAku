@@ -12,14 +12,14 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: #f8f1ee;
+      background-color: #ffffff;
     }
     
     .chat-container {
       width: 100%;
       height: 100%;
       border-radius: 0;
-      background: linear-gradient(to bottom, #f0cfc3, #f8f1ee);
+      background: #ffffff;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -119,16 +119,19 @@
     }
 
     .sent-bubble {
-      background-color: #fceeea;
+      background-color: #7879F1;
       border-bottom-right-radius: 5px;
-      color: #333;
+      color: #ffffff;
     }
 
-    .received-bubble {
-      background-color: white;
-      border-bottom-left-radius: 5px;
-      color: #333;
-    }
+.received-bubble {
+  background-color: #ffffff;
+  border: 2px solid #A5A6F6;
+  border-radius: 15px 15px 15px 5px; /* Sudut bawah kiri lebih tajam */
+  padding: 10px 15px;
+  color: #5D5FEF;
+  margin-bottom: 10px;
+}
 
     .message-time {
       font-size: 0.75rem;
@@ -196,13 +199,6 @@
 </head>
 <body>
   <div class="chat-container">
-    @if (session('success'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    @endif
-
 
     <div class="chat-header">
       <button class="back-button" onclick="window.location.href='{{ route('notif-chat') }}'">
@@ -216,15 +212,6 @@
           <div class="recipient-status">Online</div>
         </div>
       </div>
-      
-      <div class="action-buttons">
-        <button type="button" class="btn btn-light rounded-circle" style="width: 40px; height: 40px;" title="Favorite">
-          <i class="bi bi-heart-fill text-danger"></i>
-        </button>
-        <button type="button" class="btn btn-light rounded-circle" style="width: 40px; height: 40px;" title="WhatsApp">
-          <i class="bi bi-whatsapp text-success"></i>
-        </button>
-      </div>
     </div>
 
     <div class="chat-messages" id="chatMessages">
@@ -232,7 +219,8 @@
         <div class="message-container {{ $message->sender_type === 'make_up_artist' ? 'message-sent' : 'message-received' }}">
           <div class="message-bubble {{ $message->sender_type === 'make_up_artist' ? 'sent-bubble' : 'received-bubble' }}">
             {{ $message->message }}
-            @if($message->sender_type === 'make_up_artist')
+          </div>
+          @if($message->sender_type === 'make_up_artist')
               <span class="message-status">
                 @if(!$message->is_read)
                   <i class="bi bi-check"></i>
@@ -241,7 +229,6 @@
                 @endif
               </span>
             @endif
-          </div>
           <div class="message-time">
             {{ $message->created_at->format('H:i') }}
           </div>

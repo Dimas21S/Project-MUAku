@@ -152,13 +152,10 @@ class ArtistController extends Controller
     {
         $rule_validasi = [
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
             'link_map' => 'nullable|url',
-            'category' => 'required|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
-            'alamat' => 'required|string|max:255',
-            'city' => 'required|in:Jambi',
-            'photos' => 'nullable|array',
-            'photos.*' => 'file|mimes:jpg,jpeg,png|max:2048', // Validasi untuk setiap foto
+            'category' => 'required|in:Pesta dan Acara,Pengantin,Artistik',
             'portfolio' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5048',
             'deskripsi' => 'nullable|string|max:1000'
         ];
@@ -168,43 +165,13 @@ class ArtistController extends Controller
             'phone.required' => 'Nomor Telepon harus diisi',
             'category.required' => 'Kategori harus dipilih',
             'city.required' => 'Kota harus dipilih',
-            'alamat.required' => 'Alamat harus diisi',
             'link_map.required' => 'Link Gmaps harus diisi',
-            'photos.array' => 'Foto harus berupa array',
-            'photos.*.file' => 'Setiap foto harus berupa file',
-            'photos.*.mimes' => 'Foto harus berupa file dengan format jpg, jpeg, atau png',
-            'photos.*.max' => 'Setiap foto maksimal 2MB',
             'portfolio.required' => 'Portofolio harus diisi',
         ];
 
         $request->validate($rule_validasi, $pesan_validasi);
 
         $artist = auth()->guard('makeup_artist')->user();
-
-        // Menangani upload foto
-        if ($request->hasFile('photos')) {
-            $photos = $request->file('photos');
-            $photoPaths = [];
-
-            foreach ($photos as $photo) {
-                // Menggunakan time() untuk memberikan nama unik pada file
-                $filename = time() . '_' . $photo->getClientOriginalName();
-
-                // Menggunakan Storage untuk menyimpan file ke public disk
-                $path = $photo->storeAs('uploads', $filename, 'public');
-
-                // Menyimpan path foto ke array
-                $photoPaths[] = $path;
-            }
-
-            // Menyimpan foto ke database
-            foreach ($photoPaths as $path) {
-                $artist->photos()->create([
-                    'image_path' => $path,
-                    'make_up_artist_id' => $artist->id
-                ]);
-            }
-        }
 
         // Menangani upload file portfolio
         // Menggunakan storeAs untuk menyimpan file dengan nama yang ditentukan
@@ -222,7 +189,8 @@ class ArtistController extends Controller
 
         $artist->update([
             'name' => $request->name,
-            'phone' => $request->phone,
+            'username' => $request->username,
+            'email' => $request->email,
             'category' => $request->category,
             'file_certificate' => $path,
             'status' => 'pending',
@@ -230,8 +198,6 @@ class ArtistController extends Controller
         ]);
 
         $artist->address()->updateOrCreate([], [
-            'kota' => $request->city,
-            'alamat' => $request->alamat,
             'link_map' => $request->link_map,
         ]);
 
@@ -283,7 +249,9 @@ class ArtistController extends Controller
             return redirect()->back()->withErrors(['error' => 'Unauthorized action.']);
         }
 
-        return view('mua.edit-profile', compact('mua'));
+        $categories = ['Pesta dan Acara', 'Pengantin', 'Editorial'];
+
+        return view('mua.edit-profile', compact('mua', 'categories'));
     }
 
     public function updateMakeUpArtist(Request $request)
@@ -297,15 +265,44 @@ class ArtistController extends Controller
             'link_map' => 'nullable|url',
             'category' => 'required|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
             'description' => 'nullable|string|max:1000',
+            'photos' => 'nullable|array',
+            'photos.*' => 'file|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        // Menangani upload foto
+        if ($request->hasFile('photos')) {
+            $photos = $request->file('photos');
+            $photoPaths = [];
+
+            foreach ($photos as $photo) {
+                // Menggunakan time() untuk memberikan nama unik pada file
+                $filename = time() . '_' . $photo->getClientOriginalName();
+
+                // Menggunakan Storage untuk menyimpan file ke public disk
+                $path = $photo->storeAs('uploads', $filename, 'public');
+
+                // Menyimpan path foto ke array
+                $photoPaths[] = $path;
+            }
+
+            // Menyimpan foto ke database
+            foreach ($photoPaths as $path) {
+                $mua->photos()->create([
+                    'image_path' => $path,
+                    'make_up_artist_id' => $mua->id
+                ]);
+            }
+        }
 
         // Update data make up artist
         $mua->update([
             'name' => $request->name,
             'phone' => $request->phone,
-            'link_map' => $request->link_map,
             'category' => $request->category,
             'description' => $request->description,
+        ]);
+        $mua->address()->updateOrCreate([], [
+            'link_map' => $request->link_map,
         ]);
 
         return redirect()->route('index-mua')->with('status', 'Profil berhasil diperbarui.');

@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -190,7 +190,7 @@
                      alt="Profil {{ $artist->name }}">
                 
                      {{-- Daftar --}}
-                <div class="thumbnail-container">
+                {{-- <div class="thumbnail-container">
                     <button type="button" class="thumbnail-btn">
                         <img src="{{ asset('image/foto-cewek-1.jpg') }}" alt="Preview" class="thumbnail-img">
                     </button>
@@ -274,6 +274,219 @@
                 }
             });
         });
+    </script>
+  </body>
+</html> --}}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Profil Make Up Artist ~ {{ $artist->name ?? 'Artist' }}</title>
+    <style>
+        body {
+            min-height: 100vh;
+            background: #ffffff;
+            background-attachment: fixed;
+        }
+        
+        li {
+            margin-right: 1.5rem;
+        }
+        
+        .card-body {
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-body button {
+            margin-top: auto;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        }
+        .navbar-brand {
+        font-family: 'DM Serif Display', serif;
+        font-weight: 100;
+        font-style: normal;
+        color: #A87648;
+        font-size: 20px;
+        margin-left: 12px; /* Added to match container padding */
+      }
+      
+      .nav-link {
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+      }
+
+      .nav-link:hover {
+        font-color: #A87648 !important;
+      }
+
+      .right-navbar .nav-link {
+        color: #000000 !important;
+        font-weight: 500;
+        margin: 0 15px;
+        transition: color 0.3s ease;
+      }
+        
+        .image-container {
+            flex: 0 0 480px;
+        }
+        
+        .description-container {
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .modal-content {
+            padding-top: 2rem; /* Tambah ruang agar tombol close tidak mentok */
+            z-index: 1055;
+            position: relative;
+            }
+
+        .modal-header {
+            z-index: 9999;
+        }
+
+        .btn-close {
+            z-index: 9999;
+            position: relative;
+        }
+
+        
+        @media (max-width: 992px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .image-container {
+                flex: 1;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .image-container img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg py-2" style="background-color: #E4CFCE">
+        <div class="container">
+          <a class="navbar-brand" href="#"><img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" style="width: 130px; height: 60px; object-fit:cover;"/></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto right-navbar">
+              <li class="nav-item" style="margin-right: 100px"> 
+                <a class="nav-link text-black" href="{{ route('index-mua') }}">Profil</a>
+              </li>
+              <li class="nav-item" style="margin-right: 100px">
+                <a class="nav-link text-black" href="{{ route('notif-chat') }}">Chat</a>
+              </li>
+              <li class="nav-item" style="margin-right: 100px">
+                <a class="nav-link font-dark" href="#">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-3 px-4">
+            <div class="row">
+                <!-- Foto Profil -->
+                <div class="col-md-5 text-center">
+                    <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/Profile-Foto.jpg') }}" 
+                        class="rounded img-fluid" 
+                        alt="Foto MUA" 
+                        style="height: 474px; width: 452px;">
+                </div>
+
+
+                <div class="col-md-7">
+                    <h1 class="mb-3">{{ $artist->name }}</h1>
+                    <h5 class="text-muted">{{ $artist->category }}</h5>
+                    <p class="mb-3">
+                        <strong>Alamat:</strong> {{ $artist->address->alamat }}<br>
+                        <strong>Telp:</strong> {{ $artist->phone }}<br>
+                        <strong>Sosial Media:</strong> {{ $artist->email }}
+                    </p>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('edit-mua') }}'">Edit Profil</button>
+                </div>
+            </div>
+
+            <!-- Garis Pemisah -->
+            <hr class="my-4" />
+
+            <!-- Section Deskripsi -->
+            <div class="mt-3 border border-dark">
+                <h4 class="fw-bold text-center" style="font-family: 'DM Serif Display', serif;">Deskripsi</h4>
+                <p style="margin-left: 150px; margin-right: 150px; text-align: justify;">{{ $artist->description }}</p>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Galeri Foto -->
+            <div class="mt-5">
+                <h3 class="text-center fw-bold">Galeri Karya</h3>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
+                    @foreach ($artist->photos as $photo)
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" 
+                                onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
+                                <img src="{{ Storage::url($photo->image_path) }}" 
+                                    class="card-img-top object-fit-cover" 
+                                    style="height: 200px; border-radius: 10px;" 
+                                    alt="Preview">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Modal Fullscreen -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content bg-transparent border-0">
+                        <div class="modal-header border-0 position-absolute top-0 end-0 z-1">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center p-0 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+                            <img id="fullscreenImage" src="" class="img-fluid" style="max-height: 90vh; max-width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+    function showFullscreen(imageSrc) {
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        fullscreenImage.src = imageSrc;
+        
+        const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+        imageModal.show();
+    }
     </script>
   </body>
 </html>

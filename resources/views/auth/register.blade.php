@@ -244,9 +244,9 @@
           <div class="form-section w-100">
 
             <h1 class="mb-4 text-center text-login">Sign Up</h1>
-            <p class="mb-4">If you already have an account<br>You can <a href="{{ route('login') }}" class="register-link">Register here!</a></p>
+            <p class="mb-4">If you already have an account<br>You can <a href="{{ route('login') }}" class="register-link">Login here!</a></p>
             
-            <form action="{{ route('login.post') }}" method="POST">
+            <form action="{{ route('register.post') }}" method="POST">
               @csrf
 
               <div class="input-field">
@@ -260,7 +260,7 @@
               <div class="input-field">
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" placeholder="Enter your Email" required autofocus>
-                @error('name')
+                @error('email')
                   <span class="text-red-500">{{ $message }}</span>
                 @enderror
               </div>

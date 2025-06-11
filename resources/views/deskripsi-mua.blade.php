@@ -40,9 +40,23 @@
             flex: 0 0 480px;
         }
         
-        .description-container {
-            flex: 1;
-            padding-right: 1rem;
+        .description-section {
+            border-top: 1px solid #D9D9D9;
+            border-bottom: 1px solid #000000;
+            padding: 30px 0;
+        }
+        
+        .description-title {
+            font-size: 24px;
+            line-height: 36px;
+            color: #000000;
+        }
+        
+        .description-text {
+            font-size: 16px;
+            line-height: 24px;
+            color: #9F9F9F;
+            text-align: justify;
         }
 
         .modal-content {
@@ -58,6 +72,12 @@
         .btn-close {
             z-index: 9999;
             position: relative;
+        }
+
+                .product-hours {
+            font-size: 24.6885px;
+            line-height: 37px;
+            color: #9F9F9F;
         }
 
         
@@ -85,7 +105,7 @@
   
             <!-- Tombol Kembali (Kiri) -->
             <a href="{{ route('list-mua') }}"
-                class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3"
+                class="btn btn-light rounded-circle position-absolute start-0 ms-3"
                 style="width: 40px; height: 40px;">
                 <i class="bi bi-arrow-left"></i>
             </a>
@@ -96,7 +116,7 @@
                 <!-- Like -->
                 <form action="{{ route('toggle.like', $artist->id) }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-light rounded-circle btn-outline-dark"
+                <button type="submit" class="btn btn-light rounded-circle me-3"
                         style="width: 40px; height: 40px;">
                     @if ($likedArtistIds->contains($artist->id))
                     <i class="bi bi-heart-fill text-danger"></i>
@@ -107,14 +127,14 @@
                 </form>
 
                 <!-- WhatsApp -->
-                <button type="button" class="btn btn-light rounded-circle btn-outline-dark"
+                <button type="button" class="btn btn-light rounded-circle me-3"
                         style="width: 40px; height: 40px;"
                         onclick="window.location.href='https://api.whatsapp.com/send?phone={{ $artist->phone }}&text=Halo%20{{ urlencode($artist->name) }},%20saya%20tertarik%20dengan%20jasa%20makeup%20Anda.'">
                 <i class="bi bi-whatsapp text-success"></i>
                 </button>
 
                 <!-- Chat -->
-                <button type="button" class="btn btn-light rounded-circle btn-outline-dark"
+                <button type="button" class="btn btn-light rounded-circle"
                         style="width: 40px; height: 40px;"
                         onclick="window.location.href='{{ route('chat.user.to.mua', ['mua_id' => $artist->id]) }}'">
                 <i class="bi bi-chat-left-text text-primary"></i>
@@ -131,16 +151,21 @@
                     <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/foto-cewek-1.jpg') }}" 
                         class="rounded img-fluid" 
                         alt="Foto MUA" 
-                        style="height: 474px; width: 452px;">
+                        style="height: 474px; width: 442px;">
                 </div>
 
                 <div class="col-md-7">
                     <h1 class="mb-3">{{ $artist->name }}</h1>
                     <h5 class="text-muted">{{ $artist->category }}</h5>
-                    <p class="mb-3">
+                    {{-- <p class="mb-3">
                         <strong>Alamat:</strong> {{ $artist->address->alamat }}<br>
                         <strong>Telp:</strong> {{ $artist->phone }}<br>
                         <strong>Sosial Media:</strong> {{ $artist->email }}
+                    </p> --}}
+                    <p class="product-hours">
+                        Available Hours <br>
+                        Monday – Friday : 08:00 AM – 08:00 PM (WIB)<br>
+                        Saturday & Sunday : 07:00 AM – 10:00 PM (WIB)
                     </p>
                 </div>
             </div>
@@ -149,9 +174,10 @@
             <hr class="my-4" />
 
             <!-- Section Deskripsi -->
-            <div class="mt-3 border border-dark">
+            <div class="mt-3 border border-dark description-section" style="height: 300px;">
                 <h4 class="fw-bold text-center" style="font-family: 'DM Serif Display', serif;">Deskripsi</h4>
-                <p style="margin-left: 150px;">{{ $artist->description }}</p>
+                <p style="margin-left: 150px; margin-right: 150px; text-align: justify;">
+                    {{ $artist->description }}</p>
             </div>
 
             <hr class="my-4" />
@@ -159,14 +185,14 @@
             <!-- Galeri Foto -->
             <div class="mt-5">
                 <h3 class="text-center fw-bold">Galeri Karya</h3>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
+                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
                     @foreach ($artist->photos as $photo)
                         <div class="col">
                             <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" 
                                 onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
                                 <img src="{{ Storage::url($photo->image_path) }}" 
                                     class="card-img-top object-fit-cover" 
-                                    style="height: 200px; border-radius: 10px;" 
+                                    style="height: 300px; border-radius: 10px;" 
                                     alt="Preview">
                             </div>
                         </div>
