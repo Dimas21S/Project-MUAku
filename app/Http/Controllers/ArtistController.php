@@ -90,7 +90,7 @@ class ArtistController extends Controller
         $artist->save();
 
         // Redirect to the intended page or dashboard
-        return redirect()->route('login-mua')->with('Registrasi Berhasil');
+        return redirect()->route('login-mua')->with('status', 'Registrasi Berhasil');
     }
 
     // Menampilkan daftar make up artist
@@ -98,7 +98,7 @@ class ArtistController extends Controller
     {
         $user = Auth::user();
 
-        $query = MakeUpArtist::query();
+        $query = MakeUpArtist::where('status', 'accepted');
 
         if (request()->has('category')) {
             $category = request()->input('category');

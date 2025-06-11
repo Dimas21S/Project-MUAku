@@ -80,7 +80,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>User ~ Sign Up</title>
+    <title>User ~ Register</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -251,7 +251,7 @@
 
               <div class="input-field">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="name" placeholder="Enter your Username" required autofocus>
+                <input type="text" id="username" name="username" placeholder="Enter your Username" required autofocus>
                 @error('name')
                   <span class="text-red-500">{{ $message }}</span>
                 @enderror
@@ -273,7 +273,7 @@
                 @enderror
               </div>
 
-              <button type="submit" class="login-btn">Login</button>
+              <button type="submit" class="login-btn">Register</button>
               
               <div class="divider">Or continue with</div>
               

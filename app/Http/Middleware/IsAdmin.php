@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class IsCustomer
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,11 @@ class IsCustomer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == 'customer') {
+        if (Auth::user()->role == 'admin') {
             return $next($request);
         }
 
-        // session()->flash('error', 'Kamu harus berlangganan untuk mengakses fitur lainnya.');
-        // return redirect('/payment');
-        // return redirect('/')->with('error', 'Kamu harus berlangganan untuk mengakses halaman ini.');
-
-        return back()->with('user-error', ' Subscribe Now, Come On !.');
+        // Optionally, you can return a 403 Forbidden response for non-customers
+        abort(403, 'Unauthorized action.');
     }
 }

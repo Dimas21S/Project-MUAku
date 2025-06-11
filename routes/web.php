@@ -9,13 +9,15 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsCustomer;
+
+
+Route::get('/', [AdminController::class, 'index'])->name('landing-page');
+
 
 //Rute URL untuk admin
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/', 'index')->name('landing-page');
-
     Route::get('/about-us', 'aboutUs')->name('about-us');
 
     Route::get('/contact', 'contactPage')->name('contact');
@@ -31,7 +33,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/package/{id}/edit', 'formEditPackage')->name('form-edit');
 
     Route::put('/package/{id}', 'editPackage')->name('update-package');
-});
+})->middleware(IsAdmin::class);
 
 //Rute URL untuk yang belum login maupun register (User yang sudah login tidak bisa mengakses rute ini)
 Route::middleware('guest')->group(function () {
@@ -93,8 +95,6 @@ Route::middleware(IsCustomer::class)->group(function () {
     Route::get('/riwayat', [UserController::class, 'historyUser'])->name('history');
 
     Route::post('/hapus-riwayat', [UserController::class, 'deleteHistory'])->name('delete.history');
-
-    Route::get('/chat-page', [ChatController::class, 'showChatPage'])->name('chat.page');
 
     Route::get('/chat/mua/{mua_id}', [ChatController::class, 'userToMua'])->name('chat.user.to.mua');
 

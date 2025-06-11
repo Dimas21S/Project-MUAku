@@ -1,5 +1,5 @@
 <div>
-    @if ($role === 'admin')
+    @if ($role == 'admin')
       <nav class="navbar navbar-expand-lg navbar-light bg-white py-2"> <!-- py-2 lebih kecil dari py-3 -->
         <div class="container">
           <a class="navbar-brand" href="#"><img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" style="width: 130px; height: 60px; object-fit:cover;"/></a>

@@ -425,7 +425,7 @@
                     <h1 class="mb-3">{{ $artist->name }}</h1>
                     <h5 class="text-muted">{{ $artist->category }}</h5>
                     <p class="mb-3">
-                        <strong>Alamat:</strong> {{ $artist->address->alamat }}<br>
+                        <strong>Alamat:</strong> {{ $artist->address->kota }}<br>
                         <strong>Telp:</strong> {{ $artist->phone }}<br>
                         <strong>Sosial Media:</strong> {{ $artist->email }}
                     </p>

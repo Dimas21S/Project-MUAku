@@ -13,6 +13,8 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+
 
   <style>
     body {
@@ -154,17 +156,55 @@
       font-size: 1.5rem;
       color: #332318;
     }
+
+    .icon-container {
+    width: 80px;
+    height: 80px;
+    background-color: #e63946;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .exclamation-icon {
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <x-navbar/>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white py-2"> <!-- py-2 lebih kecil dari py-3 -->
+        <div class="container">
+          <a class="navbar-brand" href="#"><img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" style="width: 130px; height: 60px; object-fit:cover;"/></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto right-navbar">
+              <li class="nav-item" style="margin-right: 100px"> 
+                <a class="nav-link text-black" href="{{ route('verified-admin') }}">GlamGate</a>
+              </li>
+              <li class="nav-item" style="margin-right: 100px">
+                <a class="nav-link text-black" href="{{ route('data-pelanggan') }}">ClientSphere</a>
+              </li>
+              <li class="nav-item" style="margin-right: 100px">
+                <a class="nav-link text-black" href="{{ route('vip-fitur') }}">PayFlow</a>
+              </li>
+              <button type="submit" class="btn btn-logout" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
+            <i class="bi bi-box-arrow-right me-1"></i> Logout
+          </button>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
   {{-- Daftar Artist --}}
   <main class="container mt-3">
     @foreach ($artistsItem as $artist)
     <div class="user-card" data-bs-toggle="modal" data-bs-target="#userModal"
-         data-name="{{ $artist->name }}"
-         data-location="{{ $artist->address->alamat }}"
+         data-name="{{ $artist->username }}"
+         data-location="{{ $artist->address->kota }}"
          data-phone="{{ $artist->phone }}"
          data-email="{{ $artist->email }}"
          data-status="{{ $artist->status }}"
@@ -174,7 +214,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <img src="{{ asset('image/MUAku-Icon.png') }}" style="object-fit: cover; width: 40px; height: auto; margin-right: 10px; vertical-align: middle;" \>
-          <span class="fw-bold">{{ $artist->name }}</span>
+          <span class="fw-bold">{{ $artist->username }}</span>
           @if ($artist->status == 'accepted')
           <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
           @else
@@ -264,6 +304,21 @@
                       <i class="bi bi-folder2-open"></i> Lihat Portofolio
                     </button>
                   </div>
+                            <!-- Action Buttons -->
+                    <div class="modal-footer border-0">
+                      @if ($artist->status == 'pending')
+                      <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}" class="w-100">
+                        @csrf
+                        <div class="d-flex justify-content-center gap-3">
+                          <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
+                            <i class="bi bi-check-circle"></i> Terima
+                          </button>
+                          <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
+                            <i class="bi bi-x-circle"></i> Tolak
+                          </button>
+                        </div>
+                      </form>
+                      @endif
                     </div>
                   </div>
                 </div>
@@ -271,21 +326,6 @@
             </div>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="modal-footer border-0">
-            @if ($artist->status == 'pending')
-            <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}" class="w-100">
-              @csrf
-              <div class="d-flex justify-content-center gap-3">
-                <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
-                  <i class="bi bi-check-circle"></i> Terima
-                </button>
-                <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
-                  <i class="bi bi-x-circle"></i> Tolak
-                </button>
-              </div>
-            </form>
-            @endif
           </div>
         </div>
       </div>
@@ -301,18 +341,31 @@
               </div>
             </div>          
           </div>
-
-          {{-- Tombol Aksi --}}
-            @if ($artist->status == 'pending')
-            <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}">
-              @csrf
-              <button type="submit" name="status" value="accepted">Terima</button>
-              <button type="submit" name="status" value="rejected">Tolak</button>
-            </form>
-            @endif
         </div>
       </div>
     </div>
+            <!-- Modal Logout -->
+      <div class="modal fade" id="customLogoutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-center p-4 custom-modal">
+            <h4 class="fw-bold mb-3">Logout</h4>
+            <div class="mb-3">
+              <div class="icon-container mx-auto">
+                <span class="exclamation-icon">!</span>
+              </div>
+            </div>
+            <p class="mb-4">Are you sure you want to logout?</p>
+            <div class="d-flex justify-content-center gap-3">
+              <!-- Form Logout -->
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-success px-4">Yes</button>
+              </form>
+              <button class="btn btn-danger px-4" data-bs-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -373,6 +426,13 @@
         });
         }
     });
+
+        function confirmLogout(event) {
+        event.preventDefault();
+        if (confirm('Apakah Anda yakin ingin logout?')) {
+            document.getElementById('logout-form').submit();
+        }
+    }
 </script>
 </body>
 </html>

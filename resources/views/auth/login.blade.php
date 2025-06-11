@@ -1,84 +1,9 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-</head>
-<body class="min-h-screen flex items-center justify-center p-6">
-    <div class="paper-container">
-        <!-- Lembar kertas kedua (belakang) yang miring ke kanan -->
-        <div class="back-paper"></div>
-        
-        <!-- Lembar kertas utama (form login) -->
-        <div class="front-paper">
-            <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">Login</h1>
-
-            @if($errors->any())
-                <div class="mb-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-700">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            
-            <!-- Tampilkan pesan sukses registrasi -->
-            @if(session('message'))
-                <div class="mb-4 p-3 bg-green-100 border-l-4 border-green-500 text-green-700">
-                    {{ session('message') }}
-                </div>
-            @endif
-            
-            <form class="flex-grow" action="{{ route('login.post') }}" method="POST">
-                @csrf
-                <div class="input-field">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="name" autocomplete="off" placeholder="" required>
-                    <div class="input-highlight"></div>
-                    @error('name')
-                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
-                
-                <div class="input-field">
-                    <label for="password">Password</label>    
-                    <input type="password" id="password" name="password" autocomplete="off" placeholder="" required>
-                    <div class="input-highlight"></div>
-                    @error('password')
-                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="remember" class="mr-2">
-                        <label for="remember" class="text-sm text-gray-600">Ingat saya</label>
-                    </div>
-                    <a href="#" class="text-sm text-indigo-600 hover:text-indigo-500">Lupa password?</a>
-                </div>
-                
-                <button type="submit" class="login-btn w-full">Masuk</button>
-            </form>
-            
-            <div class="text-center text-sm text-gray-500 mt-4">
-                Belum punya akun? 
-                <a href="{{ route('register') }}" class="text-indigo-600 font-medium">Daftar disini</a>
-            </div>
-        </div>
-    </div>
-</body>
-</html> --}}
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>User ~ Sign In</title>
+    <title>User ~ Login</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -222,6 +147,65 @@
         margin-top: 0.25rem;
         display: block;
       }
+
+      .success-modal .modal-content {
+        border: 3px solid #000000;
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      
+      .success-icon {
+        width: 111px;
+        height: 111px;
+        margin: 0 auto 20px;
+        position: relative;
+      }
+      
+      .icon-background {
+        width: 100%;
+        height: 100%;
+        background: #79B33E;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .icon-background::after {
+        content: "✓";
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+      }
+      
+      .success-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 10px;
+      }
+      
+      .success-message {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 20px;
+      }
+      
+      .modal-footer {
+        border-top: none;
+        justify-content: center;
+      }
+      
+      .btn-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+      }
       @media (max-width: 991.98px) {
         .image-section {
           display: none;      
@@ -243,6 +227,7 @@
           <div class="form-section w-100">
 
             <h1 class="mb-4 text-center text-login">Sign In</h1>
+            <!-- Tampilkan pesan sukses registrasi -->
             <p class="mb-4">If you don't have an account<br>You can <a href="{{ route('register') }}" class="register-link">Register here!</a></p>
             
             <form action="{{ route('login.post') }}" method="POST">
@@ -290,6 +275,22 @@
       </div>
     </div>
 
+        <!-- Success Modal -->
+    @if(session('message'))
+    <x-modal-success :message="session('message')"/>
+    @endif
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    </script>
+    
+    @if(session('message'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      });
+    </script>
+    @endif
+
   </body>
 </html>

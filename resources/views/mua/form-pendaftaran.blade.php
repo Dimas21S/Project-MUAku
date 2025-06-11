@@ -308,7 +308,7 @@
             
             <div class="form-group">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" name="link_map" placeholder="Enter your address">
+              <input type="text" class="form-control" id="address" name="link_map" placeholder="Enter your link gmap location">
             </div>
           </div>
           

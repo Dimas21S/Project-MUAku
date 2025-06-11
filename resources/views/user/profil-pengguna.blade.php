@@ -162,17 +162,7 @@
 
     {{-- Alert Messages --}}
     @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('success') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    @endif
-
-    @if (session('password_success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('password_success') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    <x-modal-success :message="session(success)" />
     @endif
 
     @if (session('user-error'))
@@ -192,6 +182,7 @@
     <div class="profile-container">
         <div class="container py-4 border border-dark mt-3" style="background-color: white;">
     <div class="row">
+      
     
     <!-- Kolom Foto Profil - Kiri -->
     <div class="col-md-4 text-center mb-4">
@@ -201,11 +192,6 @@
         @else
           <img src="{{ asset('image/Profile-Foto.jpg') }}" class="profile-image" alt="Default Profile Picture">
         @endif
-
-        <!-- Tombol Edit Foto -->
-        <a href="{{ route('update') }}" class="btn-edit-profile" title="Edit Profil">
-          <i class="bi bi-pencil-fill"></i>
-        </a>
       </div>
     </div>
 
@@ -229,7 +215,7 @@
           <button type="submit" class="btn btn-logout" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
             <i class="bi bi-box-arrow-right me-1"></i> Logout
           </button>
-        <a href="{{ route('update.password') }}" class="btn btn-sm text-white" style="background-color: #A87648; border-radius: 10px;">Ubah Password</a>
+        <a href="{{ route('update') }}" class="btn btn-sm text-white" style="background-color: #A87648; border-radius: 10px;">Edit Profil</a>
       </div>
     </div>
 
@@ -255,8 +241,6 @@
           </div>
         </div>
       </div>
-
-
 
       </div>
     </div>
