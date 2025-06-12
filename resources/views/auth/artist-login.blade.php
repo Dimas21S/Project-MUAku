@@ -147,6 +147,65 @@
         margin-top: 0.25rem;
         display: block;
       }
+
+      .success-modal .modal-content {
+        border: 3px solid #000000;
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      
+      .success-icon {
+        width: 111px;
+        height: 111px;
+        margin: 0 auto 20px;
+        position: relative;
+      }
+      
+      .icon-background {
+        width: 100%;
+        height: 100%;
+        background: #79B33E;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .icon-background::after {
+        content: "✓";
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+      }
+      
+      .success-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 10px;
+      }
+      
+      .success-message {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 20px;
+      }
+      
+      .modal-footer {
+        border-top: none;
+        justify-content: center;
+      }
+      
+      .btn-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+      }
       @media (max-width: 991.98px) {
         .image-section {
           display: none;      
@@ -164,14 +223,11 @@
         <div class="col-lg-7 d-flex align-items-center">
           <div class="logo-container d-flex mb-4 navbar-custom">
             <img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" alt="MUAku Logo" style="width: 130px; height: 60px; object-fit:cover;">
-
-            @if (session('status'))
-                <x-modal-success :message="session('status')"
-            @endif
           </div>
           <div class="form-section w-100">
 
             <h1 class="mb-4 text-center text-login">Sign In</h1>
+            <!-- Tampilkan pesan sukses registrasi -->
             <p class="mb-4">If you don't have an account<br>You can <a href="{{ route('register-mua') }}" class="register-link">Register here!</a></p>
             
             <form action="{{ route('login-mua.post') }}" method="POST">
@@ -180,7 +236,7 @@
               <div class="input-field">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your Username" required autofocus>
-                @error('name')
+                @error('username')
                   <span class="text-red-500">{{ $message }}</span>
                 @enderror
               </div>
@@ -219,14 +275,22 @@
       </div>
     </div>
 
+        <!-- Success Modal -->
+    @if(session('status'))
+    <x-modal-success :message="session('status')"/>
+    @endif
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-      @if(session('status'))
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-          successModal.show();
-        });
-      </script>
-      @endif
+    </script>
+
+    @if(session('status'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      });
+    </script>
+    @endif
+
   </body>
 </html>

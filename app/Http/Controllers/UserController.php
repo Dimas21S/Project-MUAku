@@ -106,7 +106,7 @@ class UserController extends Controller
     }
 
 
-    public function historyUser()
+    public function favouriteUser()
     {
         $artist = MakeUpArtist::all();
 

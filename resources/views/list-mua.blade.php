@@ -98,7 +98,7 @@
       </div>
 
       @if (session('user-error'))
-          <x-toast :message="session('user-error')" />
+          <x-flash-message :message="session('user-error')" />
       @endif
 
      <form method="GET" action="{{ route('list-mua') }}">
@@ -186,7 +186,14 @@
     <!-- Script untuk efek smooth carousel -->
     <script src="{{ asset('js/carousel.js') }}"></script>
 
-    <!-- Script untuk menampilkan toast -->
-    <script src="{{ asset('js/toast.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const toastEl = document.querySelector('.toast');
+        if (toastEl) {
+          const toast = new bootstrap.Toast(toastEl, {delay: 3000});
+          toast.show();
+        }
+      });
+    </script>
   </body>
 </html>

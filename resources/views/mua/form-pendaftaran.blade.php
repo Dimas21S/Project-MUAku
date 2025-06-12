@@ -1,151 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Submit Request MUA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="{{ asset('css/form-submit-request.css') }}">
-</head>
-<body>
-
-  <button class="back-button" onclick="window.history.back()">
-    <i class="fas fa-arrow-left"></i>
-  </button>
-
-  <div class="container">
-    <div class="header">
-      <h1>SUBMIT REQUEST</h1>
-      @if (session('status'))
-          <div class="alert alert-success">
-              {{ session('status') }}
-          </div>
-      @endif
-      <p>Isi formulir ini untuk mengajukan permintaan bergabung sebagai Make-Up Artist (MUA) di platform kami.</p>
-    </div>
-
-    <form class="form" action="{{ route('post.pendaftaran') }}" method="POST" enctype="multipart/form-data" id="muaForm">
-      @csrf
-
-      @if($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-      @endif
-      <div class="form-group">
-        <label for="nama">Nama Lengkap</label>
-        <input type="text" id="nama" name="name" placeholder="Masukkan Nama Asli Anda Sesuai KTP" required>
-      </div>
-
-      <div class="form-group">
-        <label for="category">Kategori</label>
-        <select id="category" name="category" required>
-          <option value="" disabled selected>Pilih Kategori MUA Anda</option>
-          <option value="Pesta dan Acara">Pesta dan Acara</option>
-          <option value="Pengantin">Pengantin</option>
-          <option value="Editorial">Editorial</option>
-          <option value="Artistik">Artistik</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">No. Telepon</label>
-        <input type="text" id="phone" name="phone" placeholder="Masukkan No. Telepon Aktif" required>
-      </div>
-
-      <div class="form-group">
-        <label for="alamat">Alamat</label>
-        <input type="text" id="alamat" name="alamat" placeholder="Masukkan Link Gmaps" required>
-      </div>
-
-      <div class="form-group">
-        <label for="link_map">Link Gmaps</label>
-        <input type="text" id="link_map" name="link_map" placeholder="Masukkan Link Gmaps" required>
-      </div>
-
-      <div class="form-group">
-        <label for="city">Kota</label>
-        <select id="city" name="city" required>
-          <option value="" disabled selected>Pilih Kota Anda</option>
-          <option value="Jambi">Jambi</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="deskripsi">Jelaskan Secara Singkat Pengalaman Anda</label>
-        <textarea id="deskripsi" name="deskripsi" placeholder="Jelaskan secara singkat pengalaman Anda sebagai MUA dan keunggulan layanan Anda" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="photos">Upload Foto:</label>
-        <input type="file" name="photos[]" multiple accept="image/*">
-        <div class="file-info">Format: JPG, PNG (Maks. 5MB per file)</div>
-      </div>
-
-      <div class="form-group">
-        <label for="sertifikat">Sertifikat MUA (Portofolio)</label>
-        <div class="upload">
-          <input type="file" id="sertifikat" name="portfolio" accept="image/*,.pdf" required>
-          <label for="sertifikat">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <span>Unggah Sertifikat/Portofolio Anda</span>
-          </label>
-          <div class="file-info" id="fileInfo">Format: JPG, PNG, PDF (Maks. 5MB)</div>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn">
-        <i class="fas fa-paper-plane"></i> SUBMIT PENDAFTARAN
-      </button>
-      
-      <div class="form-footer">
-        Data yang Anda berikan akan dijaga kerahasiaannya
-      </div>
-    </form>
-  </div>
-
-  <script>
-    // File upload display
-    document.getElementById('sertifikat').addEventListener('change', function(e) {
-      const fileInfo = document.getElementById('fileInfo');
-      if (this.files.length > 0) {
-        const file = this.files[0];
-        fileInfo.innerHTML = `File terpilih: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-        fileInfo.style.color = '#4CAF50';
-      } else {
-        fileInfo.innerHTML = 'Format: JPG, PNG, PDF (Maks. 5MB)';
-        fileInfo.style.color = '';
-      }
-    });
-    
-    // Form validation
-    document.getElementById('muaForm').addEventListener('submit', function(e) {
-      const inputs = this.querySelectorAll('input[required], textarea[required], select[required]');
-      let isValid = true;
-      
-      inputs.forEach(input => {
-        if (!input.value.trim()) {
-          input.style.borderColor = 'red';
-          isValid = false;
-        } else {
-          input.style.borderColor = '';
-        }
-      });
-      
-      if (!isValid) {
-        e.preventDefault();
-        alert('Harap lengkapi semua field yang wajib diisi!');
-      }
-    });
-  </script>
-</body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,6 +93,54 @@
       transform: translateY(-2px);
       box-shadow: 0px 15px 30px rgba(1, 11, 253, 0.2);
     }
+
+          .success-modal .modal-content {
+        border: 3px solid #000000;
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      
+      .success-icon {
+        width: 111px;
+        height: 111px;
+        margin: 0 auto 20px;
+        position: relative;
+      }
+      
+      .icon-background {
+        width: 100%;
+        height: 100%;
+        background: #79B33E;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .icon-background::after {
+        content: "✓";
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+      }
+      
+      .success-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 10px;
+      }
+      
+      .success-message {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 20px;
+      }
     
     .footer {
       background: white;
@@ -294,21 +194,33 @@
             <div class="form-group">
               <label for="name" class="form-label">Full Name</label>
               <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name">
+              @error('name')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
             
             <div class="form-group">
-              <label for="username" class="form-label">Nickname</label>
-              <input type="text" class="form-control" id="username" name="username" placeholder="Enter your nickname">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
+              @error('phone')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
             
             <div class="form-group">
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+              @error('email')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
             
             <div class="form-group">
               <label for="address" class="form-label">Address</label>
               <input type="text" class="form-control" id="address" name="link_map" placeholder="Enter your link gmap location">
+              @error('link_map')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
           </div>
           
@@ -330,11 +242,17 @@
                   <label class="form-check-label" for="category3">Artistik</label>
                 </div>
               </div>
+              @error('category')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
             
             <div class="form-group">
               <label for="description" class="form-label">Experience</label>
               <textarea class="form-control" id="description" name="deskripsi" placeholder="Describe your experience"></textarea>
+              @error('deskripsi')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
             
             <div class="form-group">
@@ -344,6 +262,9 @@
                 <span class="input-group-text bg-dark text-white">
                   <i class="bi bi-upload"></i>
                 </span>
+                @error('portfolio')
+                  <span class="text-danger">{{ $message }}</span>                  
+                @enderror
               </div>
             </div>
           </div>
@@ -355,6 +276,10 @@
       </form>
     </div>
   </div>
+
+  @if (session('status'))
+    <x-modal-success :message="session('status')" />
+  @endif
   
   <footer class="footer">
     <p class="footer-text m-0">© 2023 All Rights Reserved</p>
@@ -375,5 +300,14 @@
       }
     });
   </script>
+
+      @if(session('status'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      });
+    </script>
+    @endif
 </body>
 </html>

@@ -92,7 +92,7 @@ Route::middleware(IsCustomer::class)->group(function () {
 
     Route::patch('/profil/update-password', [UserController::class, 'updatePassword'])->name('update.password.post');
 
-    Route::get('/riwayat', [UserController::class, 'historyUser'])->name('history');
+    Route::get('/favourite', [UserController::class, 'favouriteUser'])->name('favourite');
 
     Route::post('/hapus-riwayat', [UserController::class, 'deleteHistory'])->name('delete.history');
 

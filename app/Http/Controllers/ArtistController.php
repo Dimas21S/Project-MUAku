@@ -152,9 +152,9 @@ class ArtistController extends Controller
     {
         $rule_validasi = [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
             'email' => 'required|string|max:255',
             'link_map' => 'nullable|url',
+            'phone' => 'required|string|max:15',
             'category' => 'required|in:Pesta dan Acara,Pengantin,Artistik',
             'portfolio' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5048',
             'deskripsi' => 'nullable|string|max:1000'
@@ -164,7 +164,8 @@ class ArtistController extends Controller
             'name.required' =>  'name harus diisi',
             'phone.required' => 'Nomor Telepon harus diisi',
             'category.required' => 'Kategori harus dipilih',
-            'city.required' => 'Kota harus dipilih',
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email tidak valid',
             'link_map.required' => 'Link Gmaps harus diisi',
             'portfolio.required' => 'Portofolio harus diisi',
         ];
@@ -189,7 +190,7 @@ class ArtistController extends Controller
 
         $artist->update([
             'name' => $request->name,
-            'username' => $request->username,
+            'phone' => $request->phone,
             'email' => $request->email,
             'category' => $request->category,
             'file_certificate' => $path,

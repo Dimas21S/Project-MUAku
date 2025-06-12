@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function verifiedMakeUpArtist()
     {
         // Menggunakan model MakeUpArtist untuk mengambil semua data dengan method all()
-        $artistsItem = MakeUpArtist::all();
+        $artistsItem = MakeUpArtist::with('address')->get();
 
         return view('admin.admin-verified', compact('artistsItem'));
     }

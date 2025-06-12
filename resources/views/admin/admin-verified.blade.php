@@ -192,144 +192,144 @@
                 <a class="nav-link text-black" href="{{ route('vip-fitur') }}">PayFlow</a>
               </li>
               <button type="submit" class="btn btn-logout" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
-            <i class="bi bi-box-arrow-right me-1"></i> Logout
-          </button>
+                <i class="bi bi-box-arrow-right me-1"></i> Logout
+              </button>
             </ul>
           </div>
         </div>
       </nav>
 
-  {{-- Daftar Artist --}}
-  <main class="container mt-3">
-    @foreach ($artistsItem as $artist)
-    <div class="user-card" data-bs-toggle="modal" data-bs-target="#userModal"
-         data-name="{{ $artist->username }}"
-         data-location="{{ $artist->address->kota }}"
-         data-phone="{{ $artist->phone }}"
-         data-email="{{ $artist->email }}"
-         data-status="{{ $artist->status }}"
-         data-category="{{ $artist->category }}"
-         data-portfolio-url="{{ Storage::url($artist->file_certificate) }}"
-         data-description="{{ $artist->description }}">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <img src="{{ asset('image/MUAku-Icon.png') }}" style="object-fit: cover; width: 40px; height: auto; margin-right: 10px; vertical-align: middle;" \>
-          <span class="fw-bold">{{ $artist->username }}</span>
-          @if ($artist->status == 'accepted')
-          <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
-          @else
-          <span class="verified-badge"><i class="bi bi-patch-exclamation-fill"></i> Not Verified</span>
-          @endif
-          <div class="text-muted ms-5">{{ $artist->category }}</div>
-        </div>
-        @if ($artist->status == 'accepted')
-          <span class="badge bg-success">Verified</span>
-        @elseif ($artist->status == 'pending')
-          <span class="badge bg-secondary">Pending</span>
-        @else
-          <span class="badge bg-danger">Rejected</span>
-        @endif
-        <i class="bi bi-chevron-right"></i>
-      </div>
-    </div>
-    @endforeach
-  </main>
-
-    <!-- Pop Up Detail Artist -->
-    <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header border-0">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      {{-- Daftar Artist --}}
+      <main class="container mt-3">
+        @foreach ($artistsItem as $artist)
+        <div class="user-card" data-bs-toggle="modal" data-bs-target="#userModal"
+            data-name="{{ $artist->username }}"
+            data-location="{{ $artist->address->kota ?? 'Jambi'}}"
+            data-phone="{{ $artist->phone }}"
+            data-email="{{ $artist->email }}"
+            data-status="{{ $artist->status }}"
+            data-category="{{ $artist->category }}"
+            data-portfolio-url="{{ Storage::url($artist->file_certificate) }}"
+            data-description="{{ $artist->description }}">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <img src="{{ asset('image/MUAku-Icon.png') }}" style="object-fit: cover; width: 40px; height: auto; margin-right: 10px; vertical-align: middle;" \>
+              <span class="fw-bold">{{ $artist->username }}</span>
+              @if ($artist->status == 'accepted')
+              <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
+              @else
+              <span class="verified-badge"><i class="bi bi-patch-exclamation-fill"></i> Not Verified</span>
+              @endif
+              <div class="text-muted ms-5">{{ $artist->category }}</div>
+            </div>
+            @if ($artist->status == 'accepted')
+              <span class="badge bg-success">Verified</span>
+            @elseif ($artist->status == 'pending')
+              <span class="badge bg-secondary">Pending</span>
+            @else
+              <span class="badge bg-danger">Rejected</span>
+            @endif
+            <i class="bi bi-chevron-right"></i>
           </div>
-          <h1 class="fw-bold text-center">Request</h1>
-          <div class="modal-body">
-            <div class="row">
-              <!-- Left Column - Basic Info -->
-              <div class="col-md-6 pe-4 border-end">
-                <div class="text-center mb-4">
-                  
-                  <div class="col-6 mb-3">
-                    <div class="fw-bold text-muted small">Username</div>
-                    <div class="p-2 bg-light rounded" id="modalUserName">Nama Artist</div>
-                  </div>
-                  
-                  <div class="col-6 mb-3">
-                    <div class="fw-bold text-muted small">Address</div>
-                    <div class="p-2 bg-light rounded" id="modalUserLocation">
-                     </div>
+        </div>
+        @endforeach
+      </main>
+
+        <!-- Pop Up Detail Artist -->
+        <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <h1 class="fw-bold text-center">Request</h1>
+              <div class="modal-body">
+                <div class="row">
+                  <!-- Left Column - Basic Info -->
+                  <div class="col-md-6 pe-4 border-end">
+                    <div class="text-center mb-4">
+                      
+                      <div class="col-6 mb-3">
+                        <div class="fw-bold text-muted small">Username</div>
+                        <div class="p-2 bg-light rounded" id="modalUserName">Nama Artist</div>
+                      </div>
+                      
+                      <div class="col-6 mb-3">
+                        <div class="fw-bold text-muted small">Address</div>
+                        <div class="p-2 bg-light rounded" id="modalUserLocation">
+                        </div>
+                      </div>
+
+                      <div class="col-6 mb-3">
+                        <div class="fw-bold text-muted small">Status</div>
+                        <div class="p-2 bg-light rounded" id="modalUserStatus">Aktif/Tersedia</div>
+                      </div>
+
+                      <div class="col-6">
+                        <div class="fw-bold text-muted small">Email</div>
+                        <div class="p-2 bg-light rounded" id="modalUserEmail">artist@example.com</div>
+                      </div>
+                      
+                    </div>
                   </div>
 
-                  <div class="col-6 mb-3">
-                    <div class="fw-bold text-muted small">Status</div>
-                    <div class="p-2 bg-light rounded" id="modalUserStatus">Aktif/Tersedia</div>
-                  </div>
+                  <!-- Right Column - Contact Info -->
+                  <div class="col-md-6 ps-4">
+                    <div class="mb-4">
+                      <h6 class="fw-bold">Informasi Kontak</h6>
+                      
+                      <div class="row mb-3">
+                        <div class="col-6">
+                          <div class="fw-bold text-muted small">Telepon</div>
+                          <div class="p-2 bg-light rounded" id="modalUserPhone">0812-3456-7890</div>
+                        </div>
+                      </div>
+                      
+                      <div class="row mb-3">
+                        <div class="col-6">
+                          <div class="fw-bold text-muted small">Category</div>
+                          <div class="p-2 bg-light rounded fw-bold" id="modalUserCategory">Category</div>
+                        </div>
+                      </div>
+                                        
+                      <div class="mb-3">
+                        <div class="fw-bold text-muted small">Deskripsi</div>
+                        <div class="p-2 bg-light rounded" id="modalUserDeskripsi" style="min-height: 100px;">
+                          Deskripsi artist akan muncul di sini...
+                        </div>
+                      </div>
 
-                  <div class="col-6">
-                    <div class="fw-bold text-muted small">Email</div>
-                    <div class="p-2 bg-light rounded" id="modalUserEmail">artist@example.com</div>
+                                        <div class="d-grid gap-2 mb-4">
+                        <button class="btn btn-outline-primary btn-sm" id="showPortfolioBtn">
+                          <i class="bi bi-folder2-open"></i> Lihat Portofolio
+                        </button>
+                      </div>
+                                <!-- Action Buttons -->
+                        <div class="modal-footer border-0">
+                          @if ($artist->status == 'pending')
+                          <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}" class="w-100">
+                            @csrf
+                            <div class="d-flex justify-content-center gap-3">
+                              <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
+                                <i class="bi bi-check-circle"></i> Terima
+                              </button>
+                              <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
+                                <i class="bi bi-x-circle"></i> Tolak
+                              </button>
+                            </div>
+                          </form>
+                          @endif
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  
                 </div>
               </div>
 
-              <!-- Right Column - Contact Info -->
-              <div class="col-md-6 ps-4">
-                <div class="mb-4">
-                  <h6 class="fw-bold">Informasi Kontak</h6>
-                  
-                  <div class="row mb-3">
-                    <div class="col-6">
-                      <div class="fw-bold text-muted small">Telepon</div>
-                      <div class="p-2 bg-light rounded" id="modalUserPhone">0812-3456-7890</div>
-                    </div>
-                  </div>
-                  
-                  <div class="row mb-3">
-                    <div class="col-6">
-                      <div class="fw-bold text-muted small">Category</div>
-                      <div class="p-2 bg-light rounded fw-bold" id="modalUserCategory">Category</div>
-                    </div>
-                  </div>
-                                    
-                  <div class="mb-3">
-                    <div class="fw-bold text-muted small">Deskripsi</div>
-                    <div class="p-2 bg-light rounded" id="modalUserDeskripsi" style="min-height: 100px;">
-                      Deskripsi artist akan muncul di sini...
-                    </div>
-                  </div>
-
-                                    <div class="d-grid gap-2 mb-4">
-                    <button class="btn btn-outline-primary btn-sm" id="showPortfolioBtn">
-                      <i class="bi bi-folder2-open"></i> Lihat Portofolio
-                    </button>
-                  </div>
-                            <!-- Action Buttons -->
-                    <div class="modal-footer border-0">
-                      @if ($artist->status == 'pending')
-                      <form method="POST" action="{{ route('admin.post.update-status', $artist->id) }}" class="w-100">
-                        @csrf
-                        <div class="d-flex justify-content-center gap-3">
-                          <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
-                            <i class="bi bi-check-circle"></i> Terima
-                          </button>
-                          <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
-                            <i class="bi bi-x-circle"></i> Tolak
-                          </button>
-                        </div>
-                      </form>
-                      @endif
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
-
-          </div>
         </div>
-      </div>
-    </div>
           
             <!-- Portfolio Overlay (tambahkan sebelum </body>) -->
             <div class="portfolio-overlay" id="portfolioOverlay">
@@ -345,27 +345,7 @@
       </div>
     </div>
             <!-- Modal Logout -->
-      <div class="modal fade" id="customLogoutModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content text-center p-4 custom-modal">
-            <h4 class="fw-bold mb-3">Logout</h4>
-            <div class="mb-3">
-              <div class="icon-container mx-auto">
-                <span class="exclamation-icon">!</span>
-              </div>
-            </div>
-            <p class="mb-4">Are you sure you want to logout?</p>
-            <div class="d-flex justify-content-center gap-3">
-              <!-- Form Logout -->
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-success px-4">Yes</button>
-              </form>
-              <button class="btn btn-danger px-4" data-bs-dismiss="modal">No</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <x-modal-logout/>
   </div>
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
