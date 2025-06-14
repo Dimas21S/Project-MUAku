@@ -367,6 +367,21 @@
             position: relative;
         }
 
+        icon-container {
+          width: 80px;
+          height: 80px;
+          background-color: #e63946;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .exclamation-icon {
+          color: white;
+          font-size: 40px;
+          font-weight: bold;
+      }
         
         @media (max-width: 992px) {
             .content-wrapper {
@@ -404,13 +419,14 @@
                 <div class="col-md-7">
                     <h1 class="mb-3">{{ $artist->name }}</h1>
                     <h5 class="text-muted">{{ $artist->category }}</h5>
-                    <p class="mb-3">
-                        <strong>Alamat:</strong> {{ $artist->address->kota }}<br>
-                        <strong>Telp:</strong> {{ $artist->phone }}<br>
-                        <strong>Sosial Media:</strong> {{ $artist->email }}
-                    </p>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('edit-mua') }}'">Edit Profil</button>
+                    <h5 class="text-muted">{{ $artist->address->kota }}, {{ $artist->address->kelurahan }}</h5>
                 </div>
+                <!-- Tombol Edit di kanan bawah -->
+                <button type="button" class="btn text-light position-absolute" 
+                    onclick="window.location.href='{{ route('edit-mua') }}'" 
+                    style="background: #1E2772; width: 150px; bottom: 190px; right: 200px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    Edit Profil
+                </button>
             </div>
 
             <!-- Garis Pemisah -->
@@ -458,6 +474,28 @@
         </div>
     </div>
 
+    <div class="modal fade" id="customLogoutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4 custom-modal">
+            <h4 class="fw-bold mb-3">Logout</h4>
+            <div class="mb-3">
+                <div class="icon-container mx-auto">
+                <span class="exclamation-icon">!</span>
+                </div>
+            </div>
+            <p class="mb-4">Are you sure you want to logout?</p>
+            <div class="d-flex justify-content-center gap-3">
+                <!-- Form Logout -->
+                <form method="POST" action="{{ route('log-out') }}">
+                @csrf
+                <button type="submit" class="btn btn-success px-4">Yes</button>
+                </form>
+                <button class="btn btn-danger px-4" data-bs-dismiss="modal">No</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
     function showFullscreen(imageSrc) {
@@ -468,5 +506,13 @@
         imageModal.show();
     }
     </script>
+    <script>
+    function confirmLogout(event) {
+        event.preventDefault();
+        if (confirm('Apakah Anda yakin ingin logout?')) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+  </script>
   </body>
 </html>

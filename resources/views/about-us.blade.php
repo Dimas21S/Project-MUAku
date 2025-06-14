@@ -11,6 +11,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <title>About Us</title>
     <style>
@@ -70,6 +71,9 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light py-2 navbar-custom">
+      <a href="{{ route('landing-page') }}" class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+        <i class="bi bi-arrow-left"></i>
+      </a>
       <div class="container">
         <a class="navbar-brand" href="{{ route('landing-page') }}" style="color: #A87648;">MUAku</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

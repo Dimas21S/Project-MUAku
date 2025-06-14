@@ -53,6 +53,22 @@
         border-bottom: 2px solid #7c3aed;
         box-shadow: none;
       }
+
+      .input-field select {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid #ced4da;
+      padding: 0.5rem 0;
+      background-color: transparent;
+      transition: border-color 0.2s;
+      appearance: none; /* Untuk hilangkan panah default di beberapa browser */
+    }
+
+    .input-field select:focus {
+      outline: none;
+      border-bottom: 2px solid #7c3aed;
+      box-shadow: none;
+    }
       .login-btn {
         background-color: #231D4F;
         color: white;
@@ -191,7 +207,7 @@
               <div class="input-field">
                 <label for="address">Kelurahan</label>
                 <select id="address" name="address" required autofocus>
-                  <option value="">-- Pilih Kelurahan --</option>
+                  <option value="">-- Choose Kelurahan --</option>
                   <option value="Alam Barajo">Alam Barajo</option>
                   <option value="Danau Sipin">Danau Sipin</option>
                   <option value="Danau Teluk">Danau Teluk</option>

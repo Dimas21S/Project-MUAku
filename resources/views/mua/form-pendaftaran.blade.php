@@ -94,7 +94,7 @@
       box-shadow: 0px 15px 30px rgba(1, 11, 253, 0.2);
     }
 
-          .success-modal .modal-content {
+      .success-modal .modal-content {
         border: 3px solid #000000;
         border-radius: 16px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -140,6 +140,11 @@
         text-align: center;
         color: #000000;
         margin-bottom: 20px;
+      }
+      
+      .modal-footer {
+        border-top: none;
+        justify-content: center;
       }
     
     .footer {

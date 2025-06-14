@@ -11,99 +11,103 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <title>Contact Page</title>
     <style>
-      body {
-        background: linear-gradient(#BBB4D6, #403879, #231D4F);
-        min-height: 200vh;
+        body {
+          background: linear-gradient(#BBB4D6, #403879, #231D4F);
+          min-height: 200vh;
+        }
+
+        .navbar-brand {
+          font-family: 'DM Serif Display', serif;
+          font-weight: 400;
+          font-style: normal;
+          color: #A87648;
+          font-size: 48px;
+          margin-left: 12px; /* Added to match container padding */
+        }
+        
+        .nav-link {
+          font-weight: 500;
+          margin: 0 15px;
+          font-family: 'Inter', sans-serif;
+          font-size: 29px;
+        }
+
+        .nav-link:hover {
+          font-color: #A87648 !important;
+        }
+
+        .right-navbar .nav-link {
+          color: #000000 !important;
+          font-weight: 500;
+          margin: 0 15px;
+          transition: color 0.3s ease;
+        }
+
+        .navbar-custom{
+          background: linear-gradient(to left, #DFDBDC, #E6DBD9, #E4CFCE, #DCBFD3);
+        }
+
+        .btn-purple {
+        background-color: #6F679C;
+        color: white;
+      }
+      .btn-purple:hover {
+        background-color: #5a5182;
+        color: white;
+      }
+      .form-section {
+        border-radius: 10px;
+        overflow: hidden;
+        min-height: 100%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
-      .navbar-brand {
-        font-family: 'DM Serif Display', serif;
-        font-weight: 400;
-        font-style: normal;
-        color: #A87648;
-        font-size: 48px;
-        margin-left: 12px; /* Added to match container padding */
+      .contact-info {
+        background-color: #6F679C;
+        color: white;
+        min-height: 100%;
+        padding: 30px;
       }
-      
-      .nav-link {
-        font-weight: 500;
-        margin: 0 15px;
-        font-family: 'Inter', sans-serif;
-        font-size: 29px;
+      .contact-form {
+        padding: 30px;
       }
-
-      .nav-link:hover {
-        font-color: #A87648 !important;
+      .circle-decoration {
+        position: relative;
+        height: 100px;
+        margin-top: 40px;
       }
-
-      .right-navbar .nav-link {
-        color: #000000 !important;
-        font-weight: 500;
-        margin: 0 15px;
-        transition: color 0.3s ease;
+      .circle-decoration .circle1 {
+        width: 150px;
+        height: 150px;
+        background-color: #fff;
+        opacity: 0.3;
+        border-radius: 50%;
+        position: absolute;
+        left: 80%;
+        bottom: 20%;
       }
-
-      .navbar-custom{
-        background: linear-gradient(to left, #DFDBDC, #E6DBD9, #E4CFCE, #DCBFD3);
+      .circle-decoration .circle2 {
+        width: 80px;
+        height: 80px;
+        background-color: #000;
+        opacity: 0.3;
+        border-radius: 50%;
+        position: absolute;
+        right: 12%;
+        bottom: 100%;
       }
-      
-      .btn-purple {
-      background-color: #6F679C;
-      color: white;
-    }
-    .btn-purple:hover {
-      background-color: #5a5182;
-      color: white;
-    }
-    .form-section {
-      border-radius: 10px;
-      overflow: hidden;
-      min-height: 100%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-info {
-      background-color: #6F679C;
-      color: white;
-      min-height: 100%;
-      padding: 30px;
-    }
-    .contact-form {
-      padding: 30px;
-    }
-    .circle-decoration {
-      position: relative;
-      height: 100px;
-      margin-top: 40px;
-    }
-    .circle-decoration .circle1 {
-      width: 150px;
-      height: 150px;
-      background-color: #fff;
-      opacity: 0.3;
-      border-radius: 50%;
-      position: absolute;
-      left: 80%;
-      bottom: 20%;
-    }
-    .circle-decoration .circle2 {
-      width: 80px;
-      height: 80px;
-      background-color: #000;
-      opacity: 0.3;
-      border-radius: 50%;
-      position: absolute;
-      right: 12%;
-      bottom: 100%;
-    }
     </style>
   </head>
   <body>
     
     <nav class="navbar navbar-expand-lg navbar-light py-2 navbar-custom">
+      <a href="{{ route('landing-page') }}" class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+          <i class="bi bi-arrow-left"></i>
+      </a>
       <div class="container">
         <a class="navbar-brand" href="{{ route('landing-page') }}" style="color: #A87648;">MUAku</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
