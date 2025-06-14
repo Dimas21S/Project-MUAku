@@ -16,6 +16,23 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
+        
+          .icon-container {
+      width: 80px;
+      height: 80px;
+      background-color: #e63946;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exclamation-icon {
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+    }
     </style>
 </head>
 <body>
@@ -97,9 +114,18 @@
             </div>
         @endif
 
-        <x-pagination :paginator="$messages" />
+        {{-- <x-pagination :paginator="$messages" /> --}}
+        <x-modal-logout/>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+    function confirmLogout(event) {
+        event.preventDefault();
+        if (confirm('Apakah Anda yakin ingin logout?')) {
+            document.getElementById('logout-form').submit();
+        }
+    }
+    </script>
 </body>
 </html>

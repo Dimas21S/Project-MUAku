@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Membuat 100 MakeUpArtist lengkap dengan address, photos, dan social media links
-        MakeUpArtist::factory(100)->create()->each(function ($artist) {
+        // Membuat 50 MakeUpArtist lengkap dengan address, photos, dan social media links
+        MakeUpArtist::factory(50)->create()->each(function ($artist) {
             // Tambah alamat
             $artist->address()->save(Address::factory()->make());
         });

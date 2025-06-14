@@ -147,8 +147,23 @@
         padding: 1.5rem;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        margin-top: 2rem;
       }
+
+          .icon-container {
+      width: 80px;
+      height: 80px;
+      background-color: #e63946;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exclamation-icon {
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+    }
       
       /* Responsive Adjustments */
       @media (max-width: 992px) {
@@ -228,9 +243,7 @@
     <x-modal-logout/>
 
     <!-- Footer -->
-    <footer class="footer">
-      <p class="mb-0">© 2025 MUAku. All rights reserved.</p>
-    </footer>
+    <x-footer/>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

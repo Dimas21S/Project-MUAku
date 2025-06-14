@@ -3,33 +3,29 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MakeUpArtist>
  */
 class MakeUpArtistFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
             'username' => $this->faker->userName,
             'name' => $this->faker->name,
-            'password' => bcrypt('password'), // atau Hash::make()
+            'password' => Hash::make('password'),
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'status' => 'accepted',
             'category' => $this->faker->randomElement(['Pesta dan Acara', 'Pengantin', 'Artistik']),
             'description' => $this->faker->paragraph,
-            'file_certificate' => 'storage/uploads/' . $this->faker->randomElement([
+            'file_certificate' => 'uploads/' . $this->faker->randomElement([
                 '1748491075_Screenshot 2025-05-08 201441.png',
                 '1748491046_Screenshot 2025-05-08 201441.png'
             ]),
-            'profile_photo' => 'profiles/sample.jpg',
+            'profile_photo' => 'uploads/1748491075_Screenshot 2025-05-08 201441.png'
         ];
     }
 }

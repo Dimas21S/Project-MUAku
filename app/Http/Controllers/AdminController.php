@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function dataPelanggan()
     {
         // Mengambil data pembayaran dari model Payment dan mengaitkannya dengan model User
-        $itemPembayaran = Payment::with('user')->get();
+        $itemPembayaran = Payment::with('user')->paginate(10);
 
         return view('admin.data-berlangganan', compact('itemPembayaran'));
     }
@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function verifiedMakeUpArtist()
     {
         // Menggunakan model MakeUpArtist untuk mengambil semua data dengan method all()
-        $artistsItem = MakeUpArtist::with('address')->get();
+        $artistsItem = MakeUpArtist::with('address')->paginate(10);
 
         return view('admin.admin-verified', compact('artistsItem'));
     }

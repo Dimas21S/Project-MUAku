@@ -202,10 +202,12 @@
           <p class="info-value">********</p>
         </div>
 
+        <div class="d-flex flex-wrap gap-2">
           <button type="submit" class="btn btn-logout" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
             <i class="bi bi-box-arrow-right me-1"></i> Logout
           </button>
-        <a href="{{ route('update') }}" class="btn btn-sm text-white" style="background-color: #A87648; border-radius: 10px;">Edit Profil</a>
+        <a href="{{ route('update') }}" class="btn btn-logout" style="background-color: #A87648; border-radius: 10px;">Edit Profil</a>
+        </div>
       </div>
     </div>
 

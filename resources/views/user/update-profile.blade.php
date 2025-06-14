@@ -124,10 +124,6 @@
         transition: all 0.3s ease;
       }
 
-      .btn-cancel:hover {
-        background-color: #f8f9fa;
-      }
-
       .file-upload {
         display: none;
       }
@@ -207,7 +203,7 @@
                 </div>
                 
                 <div class="d-flex gap-3 mt-4">
-                    <a href="{{ url()->previous() }}" class="btn btn-cancel flex-grow-1">Batal</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-cancel flex-grow-1 text-dark">Batal</a>
                     <button type="submit" class="btn btn-submit flex-grow-1">
                         <i class="bi bi-save-fill me-2"></i>Simpan Perubahan
                     </button>

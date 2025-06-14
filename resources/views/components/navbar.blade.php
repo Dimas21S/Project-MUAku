@@ -74,8 +74,8 @@
             <li class="nav-item me-4">
               <x-nav-link href="{{ route('vip-fitur') }}" :active="request()->routeIs('vip-fitur')">PayFlow</x-nav-link>
             </li>
-            <button type="submit" class="btn btn-logout text-danger" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
-              <i class="bi bi-box-arrow-right me-1"></i> Logout
+            <button type="submit" class="btn btn-logout text-danger border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
+              Logout
             </button>
             @break
 
@@ -86,8 +86,8 @@
             <li class="nav-item me-4">
               <x-nav-link href="{{ route('notif-chat') }}" :active="request()->routeIs('notif-chat')">Chat</x-nav-link>
             </li>
-            <button type="submit" class="btn btn-logout text-danger" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
-              <i class="bi bi-box-arrow-right me-1"></i> Logout
+            <button type="submit" class="btn btn-logout text-danger border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
+              Logout
             </button>
             @break
 

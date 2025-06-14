@@ -183,7 +183,7 @@
             @endif
         </div>
 
-        <x-pagination :paginator="$likedArtists" />
+        {{-- <x-pagination :paginator="$likedArtists" /> --}}
     </div>
 
     <x-footer/>

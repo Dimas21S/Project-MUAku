@@ -72,7 +72,7 @@
               <p class="file-upload-text">Klik untuk unggah foto profil baru</p>
               <input type="file" class="form-control d-none" id="profile_photo" name="profile_photo">
               <img id="previewProfile" class="img-fluid mt-3 rounded" style="max-height: 200px;" 
-                  src="{{ $mua->profile_photo ?? '' }}" alt="Foto Profil">
+                  src="{{ $mua->profile_photo ?? asset('image/Profile-Foto.jpg') }}" alt="Foto Profil">
             </label>
           </div>
 
@@ -151,17 +151,39 @@
           @foreach ($mua->photos ?? [] as $photo)
             <div class="position-relative" style="width: 200px;">
               <img src="{{ Storage::url($photo->image_path) }}" class="img-fluid rounded" style="object-fit: cover; height: 200px; width: 100%;">
-              <!-- Tombol Hapus -->
-              <form action="{{ route('delete-photo', $photo->id) }}" method="POST" class="position-absolute top-0 end-0 m-1">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm rounded-circle shadow-sm" onclick="return confirm('Hapus foto ini?')">
-                  <i class="bi bi-trash-fill"></i>
-                </button>
-              </form>
+
+              <!-- Tombol Trigger Modal -->
+              <button type="button" class="btn btn-danger btn-sm rounded-circle shadow-sm position-absolute top-0 end-0 m-1"
+                      data-bs-toggle="modal" data-bs-target="#deletePhotoModal{{ $photo->id }}">
+                <i class="bi bi-trash-fill"></i>
+              </button>
             </div>
-          @endforeach
-        </div>
+
+            <!-- Modal Konfirmasi -->
+              <div class="modal fade" id="deletePhotoModal{{ $photo->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $photo->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                      <h5 class="modal-title" id="modalLabel{{ $photo->id }}">Konfirmasi Hapus</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Yakin ingin menghapus foto ini?
+                    </div>
+                    <div class="modal-footer">
+                      <form action="{{ route('delete-photo', $photo->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @endforeach
+          </div>
+
     </div>
 
     <!-- Bootstrap JS -->
