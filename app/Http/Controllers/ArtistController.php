@@ -67,6 +67,7 @@ class ArtistController extends Controller
         $rule_validasi = [
             'username' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'address' => 'required|in:Alam Barajo,Danau Teluk,Telanaipura,Jelutung,Pelayangan,Pasar,Jambi Selatan,Jambi Timur',
             'password' => 'required|min:8',
         ];
 
@@ -75,6 +76,8 @@ class ArtistController extends Controller
             'email.required' => 'Email harus diisi',
             'email.email' => 'Format email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
+            'address.required' => 'Kelurahan harus dipilih',
+            'address.in' => 'Kelurahan tidak valid',
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal 8 karakter'
         ];
@@ -85,6 +88,11 @@ class ArtistController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        // Menyimpan alamat make up artist
+        $artist->address()->create([
+            'kelurahan' => $request->address,
         ]);
 
         $artist->save();
@@ -220,9 +228,17 @@ class ArtistController extends Controller
                 $query->where('name', 'like', '%' . $search . '%')
                     ->orWhere('category', 'like', '%' . $search . '%')
                     ->orWhereHas('address', function ($query) use ($search) {
-                        $query->where('alamat', 'like', '%' . $search . '%');
+                        $query->where('kota', 'like', '%' . $search . '%');
                     });
             });
+        }
+
+        if ($location = request('location')) {
+            if ($location !== 'all') {
+                $artistStatus->whereHas('address', function ($q) use ($location) {
+                    $q->whereRaw('LOWER(REPLACE(kelurahan, " ", "-")) = ?', [strtolower($location)]);
+                });
+            }
         }
 
         $artist = $artistStatus->get();

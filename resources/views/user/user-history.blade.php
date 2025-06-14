@@ -18,14 +18,25 @@
             --text-light: #F8F1EE;
             --bg-light: #F9F5F3;
         }
-        
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+         
+        main {
+            flex: 1;
+        }
         body {
-                min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            margin: 0;
             background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-           .navbar-brand {
+        .navbar-brand {
         font-family: 'DM Serif Display', serif;
         font-weight: 100;
         font-style: normal;
@@ -172,6 +183,8 @@
             @endif
         </div>
     </div>
+
+    <x-footer/>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

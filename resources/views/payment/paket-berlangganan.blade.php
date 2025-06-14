@@ -22,7 +22,7 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(#F6F6F6, #EECFC0);
+            background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
             background-attachment: fixed;
             margin: 0;
             padding: 0;
@@ -41,11 +41,173 @@
         .card-body button {
             margin-top: auto;
         }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 100px;
+        }
+
+        .pricing-table {
+            width: 821px;
+            height: 405px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15.1667px);
+            border-radius: 22.5333px;
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+        }
+
+        .header-text {
+            position: relative;
+            z-index: 1;
+            margin-top: 2rem;
+            margin-left: 60px;
+            margin-bottom: 2rem;
+        }
+
+        .plan-title {
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #231D4F;
+        }
+
+        .plan-description {
+            font-size: 0.9rem;
+            color: #848199;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #231D4F;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: #848199;
+        }
+        
+        .pricing-plan {
+            width: 250px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15.1667px);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pricing-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: #8FB3F2;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .feature-item {
+            font-weight: 500;
+            font-size: 12px;
+            color: #848199;
+            margin-bottom: 8.67px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-icon {
+            width: 17.33px;
+            height: 17.33px;
+            background: rgba(82, 67, 194, 0.15);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .feature-icon::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #BB6BD9;
+            border-radius: 50%;
+        }
+        
+        .choose-plan-btn {
+            width: 180.06px;
+            height: 39px;
+            background: #231D4F;
+            opacity: 0.5;
+            border-radius: 20.8px;
+            color: white;
+            font-weight: 500;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .choose-plan-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .main-title {
+            font-weight: 400;
+            font-size: 34.6667px;
+            line-height: 52px;
+            color: #231D4F;
+            margin-bottom: 21.67px;
+        }
+        
+        .subtitle {
+            font-weight: 500;
+            font-size: 15.6px;
+            line-height: 23px;
+            color: #848199;
+        }
+
+          .sun {
+            font-size: 10rem;
+            color: rgb(60, 98, 169); /* Warna kuning emas */
+            text-shadow: 0 0 10px rgba(29, 21, 105, 0.7);
+            position: fixed;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-table {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+                align-items: center;
+            }
+            
+            .pricing-plan {
+                margin-bottom: 20px;
+            }
+            
+            .header-text {
+                margin-left: 20px;
+                margin-right: 20px;
+                text-align: center;
+            }
+        }
     </style>
   </head>
   <body>
-    <div class="container py-3">
-      <header class="d-flex align-items-center justify-content-center position-relative py-3">
+    <div class="container">
+      <header class="d-flex align-items-center justify-content-center position-relative">
         <a href="{{ route('list-mua') }}"
            class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
             <i class="bi bi-arrow-left"></i>
@@ -53,9 +215,11 @@
         
         {{-- Judul --}}
         <div class="text-center">
-            <h1 class="display-4 fw-normal m-0" style="font-family: 'DM Serif Display', serif; font-weight: 400;">
-                PREMIUM
-            </h1>
+          <img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" style="width: 130px; height: 60px; object-fit:cover;"/>
+        </div>
+
+        <div class="sun text-center position-absolute end-0 me-3">
+            <i class="bi bi-moon-stars-fill"></i>
         </div>
 
         @if (session('error'))
@@ -64,69 +228,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-    </header>
+      </header>
       
-    {{-- Daftar Paket --}}
-    <div>
+      {{-- Daftar Paket --}}
+      <div>
         <main>
-          <h1 style="font-family: 'DM Serif Display', serif;font-weight: 400;font-style: normal; margin-bottom: 20px; margin-top: 70px; margin-left: 70px">Content digital premium access</h1>
-          <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" style="margin-left: 55px; margin-right: 5px;">
-            
-            {{-- Card Paket Dasar --}}
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm" style="width: 88%; margin-right: 5px;">
-                <div class="card-header py-3" style="background-color: #332318; color: #fff;">
-                  <h5 class="my-0 fw-bold">PAKET DASAR</h5>
-                  <h1 class="fw-bold">RP 4.000,-</h1>
-                </div>
-                <div class="card-body">
-                  <ul class=" mt-3 mx-auto mb-4 text-start" style="padding-left: 0;">
-                    <li>Akses peta interaktif</li>
-                    <li>Data lebih lengkap & detail</li>
-                    <li>Fitur chat</li>
-                    <li>Berlangganan selama 1 hari</li>
-                  </ul>
-                  <button type="button" id="pay-button-1" class="w-50 btn btn-lg fw-bold" style="background: #EECFC0; margin-left: 70px">Langganan</button>
-                </div>
-              </div>
-            </div>
+          <div class="header-text text-center text-md-start">
+            <h1 class="main-title">Content digital premium access</h1>
+            <p class="subtitle">Whether your time-saving automation needs are large or small, <br> we're here to help you scale.</p>
+          </div>
+          
+          <div class="pricing-container">
+            <div class="pricing-table mb-5">
+              {{-- Card Paket Dasar --}}
+              @foreach ($packages as $package)
+                  <div class="pricing-plan">
+                    <div class="price">${{ $package->price }}</div>
+                    <div class="price-period">/month</div>
+                    <h3 class="plan-title">{{ $package->name }}</h3>
+                    <p class="plan-description">{{ $package->description }}</p>
 
-            {{-- Card Paket Medium --}}
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm" style="width: 88%;">
-                <div class="card-header py-3" style="background-color: #332318; color: #fff;">
-                  <h5 class="my-0 fw-bold">PAKET MEDIUM</h5>
-                  <h1 class="fw-bold">RP 13.000,-</h1>
+                    <button class="choose-plan-btn" id="pay-button-{{ $package->id }}">Choose plan</button>
                 </div>
-                <div class="card-body">
-                  <ul class="mt-3 mx-auto mb-4 text-start" style="padding-left: 0;">
-                    <li>Akses peta interaktif</li>
-                    <li>Data lebih lengkap & detail</li>
-                    <li>Fitur chat</li>
-                    <li>Berlangganan selama 7 hari</li>
-                  </ul>
-                  <button type="button" id="pay-button-2" class="w-50 btn btn-lg fw-bold" style="background: #EECFC0; margin-left: 70px">Langganan</button>
-                </div>
-              </div>
-            </div>
-
-            {{-- Card Paket High --}}
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm" style="width: 88%;">
-                <div class="card-header py-3" style="background-color: #332318; color: #fff;">
-                  <h5 class="my-0 fw-bold">PAKET HIGH</h5>
-                  <h1 class="fw-bold">RP 150.000,-</h1>
-                </div>
-                <div class="card-body">
-                  <ul class="mt-3 mx-auto mb-4 text-start" style="padding-left: 0;">
-                    <li>Akses peta interaktif</li>
-                    <li>Data lebih lengkap & detail</li>
-                    <li>Fitur chat</li>
-                    <li>Berlangganan selama 365 hari</li>
-                  </ul>
-                  <button type="button" id="pay-button-3" class="w-50 btn btn-lg fw-bold" style="background: #EECFC0; margin-left: 70px">Langganan</button>
-                </div>
-              </div>
+                @endforeach
             </div>
           </div>
         </main>
@@ -205,7 +329,7 @@
               }
           });
       };
-  </script>
+    </script>
 
   </body>
 </html>

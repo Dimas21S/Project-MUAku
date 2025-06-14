@@ -388,27 +388,7 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg py-2" style="background-color: #E4CFCE">
-        <div class="container">
-          <a class="navbar-brand" href="#"><img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" style="width: 130px; height: 60px; object-fit:cover;"/></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto right-navbar">
-              <li class="nav-item" style="margin-right: 100px"> 
-                <a class="nav-link text-black" href="{{ route('index-mua') }}">Profil</a>
-              </li>
-              <li class="nav-item" style="margin-right: 100px">
-                <a class="nav-link text-black" href="{{ route('notif-chat') }}">Chat</a>
-              </li>
-              <li class="nav-item" style="margin-right: 100px">
-                <a class="nav-link font-dark" href="#">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+    <x-navbar />
 
     <div class="container-fluid py-3 px-4">
             <div class="row">

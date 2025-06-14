@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Package;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class PaymentController extends Controller
     // Menampilkan halaman pembayaran
     public function paymentIndex()
     {
-        return view('payment.paket-berlangganan');
+        $packages = Package::all();
+        return view('payment.paket-berlangganan', compact('packages'));
     }
 
     // Mendapatkan token Snap untuk pembayaran

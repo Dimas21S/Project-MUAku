@@ -11,7 +11,7 @@ class Address extends Model
 
     protected $fillable = [
         'kota',
-        'alamat',
+        'kelurahan',
         'link_map',
     ];
 

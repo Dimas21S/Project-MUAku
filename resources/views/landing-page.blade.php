@@ -531,36 +531,10 @@
     </section>
 
     <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header border-0">
-            <h5 class="modal-title" id="loginModalLabel">Login As</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center py-4">
-            <a href="{{ route('login') }}" class="btn btn-login bg-white me-3 text-decoration-none text-black">User</a>
-            <a href="{{ route('login-mua') }}" class="btn btn-register bg-white text-decoration-none text-black">MakeUp Artist</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <x-modal-auth id="loginModal" title="Login As" userRoute="{{ route('login') }}" muaRoute="{{ route('login-mua') }}" />
 
     <!-- Register Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header border-0">
-            <h5 class="modal-title" id="registerModalLabel">Register As</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center py-4">
-            <a href="{{ route('register') }}" class="btn btn-login me-3 bg-white text-decoration-none text-black">User</a>
-            <a href="{{ route('register-mua') }}" class="btn btn-register bg-white text-decoration-none text-black">MakeUp Artist</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <x-modal-auth id="registerModal" title="Register As" userRoute="{{ route('register') }}" muaRoute="{{ route('register-mua') }}" />
 
     <!-- Footer -->
     <footer>

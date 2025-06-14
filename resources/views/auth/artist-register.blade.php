@@ -189,6 +189,25 @@
               </div>
 
               <div class="input-field">
+                <label for="address">Kelurahan</label>
+                <select id="address" name="address" required autofocus>
+                  <option value="">-- Pilih Kelurahan --</option>
+                  <option value="Alam Barajo">Alam Barajo</option>
+                  <option value="Danau Sipin">Danau Sipin</option>
+                  <option value="Danau Teluk">Danau Teluk</option>
+                  <option value="Telanaipura">Telanaipura</option>
+                  <option value="Jelutung">Jelutung</option>
+                  <option value="Pelayangan">Pelayangan</option>
+                  <option value="Pasar">Pasar</option>
+                  <option value="Jambi Selatan">Jambi Selatan</option>
+                  <option value="Jambi Timur">Jambi Timur</option>
+                </select>
+                @error('address')
+                  <span class="text-red-500">{{ $message }}</span>
+                @enderror
+              </div>
+
+              <div class="input-field">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your Password" required>
                 @error('password')

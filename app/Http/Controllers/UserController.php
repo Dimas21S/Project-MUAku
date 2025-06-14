@@ -64,7 +64,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->intended('profile')->with('success', 'Profil berhasil diperbarui!');
+        return redirect()->intended('profil')->with('success', 'Profil berhasil diperbarui!');
     }
 
     public function updatePassword(Request $request)

@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
 
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex: 1 0 auto;
+      }
       body {
         background: linear-gradient(to bottom, #E6DBD9, #6B4D34);
         background-attachment: fixed;
@@ -18,12 +27,14 @@
       }
 
       .profile-container {
+        width: 100%;
         max-width: 1200px;
         margin: 50px auto;
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
         justify-content: center;
+        padding: 1rem;
         align-items: flex-start;
       }
 
@@ -64,28 +75,6 @@
         object-fit: cover;
         border-radius: 50%;
         border: 5px solid #EECFC0;
-      }
-
-      .btn-edit-profile {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background-color: #A87648;
-        color: white;
-        border: 2px solid white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .btn-edit-profile:hover {
-        background-color: #8a5d38;
-        transform: scale(1.1);
       }
 
       .profile-info {
@@ -162,7 +151,7 @@
 
     {{-- Alert Messages --}}
     @if (session('success'))
-    <x-modal-success :message="session(success)" />
+    <x-modal-success :message="session('success')" />
     @endif
 
     @if (session('user-error'))
@@ -185,6 +174,7 @@
       
     
     <!-- Kolom Foto Profil - Kiri -->
+    
     <div class="col-md-4 text-center mb-4">
       <div class="profile-image-container">
         @if ($user->foto_profil)
@@ -226,6 +216,8 @@
     </div>
 
     </div>
+
+    <x-footer/>
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

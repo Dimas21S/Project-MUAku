@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Peta Kampus</title>
+  <title>Location</title>
 
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,6 +13,11 @@
       height: 100%;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body{
       background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
       background-attachment: fixed;
       background-size: cover;
@@ -44,7 +49,7 @@
         transition: color 0.3s ease;
       }
     
-    #autocomplete:focus {
+        #autocomplete:focus {
         box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
         border-color: #86b7fe;
         outline: 0;
@@ -59,7 +64,8 @@
     }
 
     .artist-list {
-        max-width: 85%;
+        width: 80%;
+        max-width: 100%;
         margin: 25px auto;
     }
     
@@ -79,6 +85,57 @@
         padding: 0.35em 0.65em;
     }
     
+    /* Filter Group Styles */
+    .filter-group {
+        margin: 20px auto;
+        max-width: 85%;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 20px;
+        padding: 8px 18px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .filter-btn:hover {
+        background-color: #f8f1eb;
+        border-color: #A87648;
+    }
+    
+    .filter-btn.active {
+        background-color: #A87648;
+        color: white;
+        border-color: #A87648;
+    }
+
+    main{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer {
+    flex-shrink: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* Sesuaikan dengan warna yang diinginkan */
+    padding: 20px 0;
+    bottom: 0; /* Ini akan mendorong footer ke bawah */
+}
+    
     @media (max-width: 576px) {
         .card-body {
             padding: 1rem !important;
@@ -97,11 +154,20 @@
             margin-left: auto !important;
             margin-top: 10px;
         }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
     }
     
     @media (max-width: 768px) {
         .input-group {
             max-width: 100% !important;
+        }
+        
+        .filter-options {
+            gap: 8px;
         }
     }
   </style>
@@ -112,78 +178,90 @@
       <x-navbar/>
 
     <div class="container mt-4">
-    <h3 class="mb-3 fw-semibold">Pencarian Make Up Artist</h3>
-    <form action="{{ route('address') }}" method="GET" class="search-form">
-        <div class="input-group shadow-sm rounded-3 overflow-hidden" style="max-width: 600px; background-color: #F2E6E8; border-radius: 20px;">
-            <input id="autocomplete" 
-                   class="form-control border-end-0 py-2 ps-3" 
-                   type="search" 
-                   placeholder="Cari lokasi..." 
-                   name="search" 
-                   aria-label="Cari lokasi Make Up Artist"
-                   value="{{ request('search') }}"
-                   autocomplete="off">
-            <button type="submit" 
-                    class="btn btn-primary px-3" 
-                    aria-label="Tombol pencarian">
-                <i class="bi bi-search fs-5"></i>
-            </button>
-        </div>
-    </form>
-</div>
+        <h3 class="mb-3 fw-semibold">Pencarian Make Up Artist</h3>
+            <form action="{{ route('address') }}" method="GET" class="search-form">
+                <div class="input-group shadow-sm rounded-3 overflow-hidden" style="max-width: 600px; background-color: #F2E6E8; border-radius: 20px;">
+                    <input id="autocomplete" 
+                        class="form-control border-end-0 py-2 ps-3" 
+                        type="search" 
+                        placeholder="Cari lokasi..." 
+                        name="search" 
+                        aria-label="Cari lokasi Make Up Artist"
+                        value="{{ request('search') }}"
+                        autocomplete="off">
+                    <button type="submit" 
+                            class="btn btn-cream px-3" 
+                            aria-label="Tombol pencarian">
+                        <i class="bi bi-search fs-5"></i>
+                    </button>
+                </div>
+            </form>
+    </div>
 
+    <div class="filter-group">
+        <form action="{{ route('address') }}" method="GET" class="search-form">
+            <div class="filter-options">
+                <x-filter-button value="all" label="Semua Lokasi" :active="request('location') == 'all'"/>
+                <x-filter-button value="alam-barajo" label="Alam Barajo" :active="request('location') == 'alam-barajo'"/>
+                <x-filter-button value="jambi-timur" label="Jambi Timur" :active="request('location') == 'jambi-timur'"/>
+                <x-filter-button value="telanaipura" label="Telanaipura" :active="request('location') == 'telanaipura'"/>
+                <x-filter-button value="jambi-selatan" label="Jambi Selatan" :active="request('location') == 'jambi-selatan'"/>
+                <x-filter-button value="pasar" label="Pasar" :active="request('location') == 'pasar'"/>
+            </div>
+        </form>
+    </div>
+
+    <main>
   @if ($artist->isEmpty())
     <div class="container mt-4">
-        <div class="alert alert-info d-flex align-items-center" role="alert">
-            <i class="bi bi-info-circle-fill me-2"></i>
-            <div>Tidak ada lokasi yang ditemukan.</div>
+        <div class="alert alert-warning d-flex align-items-center p-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+            <div>
+                <h5 class="alert-heading mb-2">Lokasi Tidak Ditemukan</h5>
+                <p class="mb-0">Maaf, kami tidak dapat menemukan kata kunci yang Anda cari. Silakan coba dengan kata kunci yang berbeda atau periksa kembali ejaan.</p>
+            </div>
         </div>
     </div>
     @else
         <div class="artist-list">
             @foreach ($artist as $item)
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body p-3 border border-dark" style="background-color: #F2E6E8; border-radius: 15px; object-fit:cover; overflow:hidden; min-width: 100%">
-                    <div class="d-flex align-items-center">
-                        <!-- Artist Avatar -->
-                        <div class="flex-shrink-0 me-3">
-                            <img src="{{ asset($item->profile_photo ?? 'image/foto-cewek-2.jpg') }}" 
-                                alt="{{ $item->name }}" 
-                                class="rounded-circle object-fit-cover border border-dark" 
-                                style="width: 70px; height: 70px; object-fit: cover;">
-                        </div>
-                        
-                        <!-- Artist Info -->
-                        <div class="flex-grow-1">
-                            <h5 class="card-title mb-1 fw-semibold">{{ $item->name }}</h5>
-                            <div class="d-flex flex-wrap align-items-center">
-                                <span class="badge bg-primary me-2 mb-1">{{ $item->category }}</span>
-                                <small class="text-muted mb-1">
-                                    <i class="bi bi-geo-alt"></i>{{ $item->address->kota }}, {{ $item->address->alamat ?? '' }}
-                                </small>
-                            </div>
-                        </div>
-                        
-                        <!-- Action Button -->
-                        <div class="flex-shrink-0 ms-3">
-                            <a href="{{ $item->address->link_map }}" 
-                            class="btn btn-outline-primary btn-sm" 
-                            target="_blank">
-                                <i class="bi bi-geo-alt-fill me-1"></i> Lokasi
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <x-artist-list :item="$item" />
             @endforeach
         </div>
     @endif
+    </main>
 
+    <x-footer/>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  {{-- Script Leaflet.js --}}
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
+  <script>
+    // Filter button functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons in this group
+                const filterGroup = this.closest('.filter-options');
+                filterGroup.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get filter value
+                const filterValue = this.getAttribute('data-value');
+                const filterType = this.getAttribute('data-filter');
+                
+                // Here you would typically filter your content
+                console.log(`Filter by ${filterType}: ${filterValue}`);
+                // Implement your filtering logic here
+            });
+        });
+    });
+  </script>
 </body>
 </html>

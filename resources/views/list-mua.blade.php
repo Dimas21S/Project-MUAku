@@ -174,18 +174,10 @@
 
     </main>
 
-    <footer class="mt-auto py-3 bg-light border-top">
-      <div class="container text-center">
-        <span class="text-muted">© 2025 MUAku. All rights reserved.</span>
-      </div>
-    </footer>
+    <x-footer/>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
-    <!-- Script untuk efek smooth carousel -->
-    <script src="{{ asset('js/carousel.js') }}"></script>
-
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const toastEl = document.querySelector('.toast');

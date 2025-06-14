@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('package_name');
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['success', 'pending', 'failed'])->default('pending');
+            $table->integer('end_date')->nullable(); // Tanggal berakhir paket
             $table->timestamps();
         });
     }

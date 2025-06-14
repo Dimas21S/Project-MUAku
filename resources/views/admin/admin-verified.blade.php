@@ -17,89 +17,96 @@
 
 
   <style>
-    body {
-      background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
-      min-height: 100vh;
-      background-size: cover;
-      background-position: center 48%;
-      font-family: 'DM Serif Display', serif;
-    }
 
-    .user-card {
-      width: 100%;
-      height: 70px;
-      background-color: #F2E6E8;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    :root {
+        --primary: #847D9C;
+        --secondary: #8FAAF8;
+        --danger: #AA2424;
+        --text-dark: #322E2E;
+        --text-light: #F2EDE9;
+        --brand: #916D58;
+      }
 
-    .user-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+        body {
+          background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
+          min-height: 100vh;
+          background-size: cover;
+          background-position: center 48%;
+        }
 
-    .verified-badge {
-      color: #28a745;
-      font-size: 0.8rem;
-      margin-left: 10px;
-    }
+        .user-card {
+          width: 100%;
+          height: 70px;
+          background-color: #F2E6E8;
+          border-radius: 10px;
+          padding: 15px;
+          margin-bottom: 15px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
 
-    .modal-content {
-      border-radius: 15px;
-    }
+        .user-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-    .user-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 15px;
-      display: block;
-    }
+        .verified-badge {
+          color: #28a745;
+          font-size: 0.8rem;
+          margin-left: 10px;
+        }
 
-    .navbar-nav .nav-link {
-      color: #EECFC0 !important;
-      transition: 0.3s;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
+        .modal-content {
+          border-radius: 15px;
+        }
 
-    .navbar-nav .nav-link:hover::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      background-color: white;
-      border-radius: 50%;
-      z-index: -1;
-    }
+        .user-avatar {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin: 0 auto 15px;
+          display: block;
+        }
 
-    .navbar-nav .nav-link:hover i {
-      color: #332318 !important;
-    }
-
-    .navbar-nav .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
-      background-color: white;
-      border-radius: 50%;
-    }
+      /* Header Styles */
+      .navbar {
+        background: #FFFFFF;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 0.75rem 2rem;
+      }
+      
+      .brand {
+        font-family: 'DM Serif Display', serif;
+        color: var(--brand);
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+      }
+      
+      .brand-logo {
+        width: 50px;
+        height: auto;
+      }
+      
+      .nav-link {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-link.active {
+        font-weight: 500;
+        text-decoration: underline;
+      }
+      
+      .logout-link {
+        font-weight: 700;
+      }
 
      .portfolio-icon {
       cursor: pointer;
@@ -174,30 +181,7 @@
   </style>
 </head>
 <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white py-2"> <!-- py-2 lebih kecil dari py-3 -->
-        <div class="container">
-          <a class="navbar-brand" href="#"><img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" style="width: 130px; height: 60px; object-fit:cover;"/></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto right-navbar">
-              <li class="nav-item" style="margin-right: 100px"> 
-                <a class="nav-link text-black" href="{{ route('verified-admin') }}">GlamGate</a>
-              </li>
-              <li class="nav-item" style="margin-right: 100px">
-                <a class="nav-link text-black" href="{{ route('data-pelanggan') }}">ClientSphere</a>
-              </li>
-              <li class="nav-item" style="margin-right: 100px">
-                <a class="nav-link text-black" href="{{ route('vip-fitur') }}">PayFlow</a>
-              </li>
-              <button type="submit" class="btn btn-logout" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
-                <i class="bi bi-box-arrow-right me-1"></i> Logout
-              </button>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <x-navbar/>
 
       {{-- Daftar Artist --}}
       <main class="container mt-3">
