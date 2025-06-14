@@ -125,53 +125,78 @@
         <hr class="my-5" />
 
         <!-- Galeri Foto -->
-        <div>
+        {{-- <div>
           <h4 class="section-title">Galeri Karya</h4>
           <div class="mb-3 text-center">
             <label for="gallery" class="file-upload-label">
               <i class="bi bi-cloud-arrow-up fs-1"></i>
+              <i class="bi bi-trash3-fill"></i>
               <p class="file-upload-text">Klik untuk unggah foto karya</p>
               <input type="file" class="form-control d-none" id="gallery" name="photos[]" multiple>
               <div id="previewGallery" class="d-flex flex-wrap gap-2 mt-3 justify-content-center"></div>
             </label>
           </div>
+        </div> --}}
+        
+        <!-- Tombol Tambah Foto -->
+        <div class="text-end mb-3">
+          <label for="gallery" class="btn btn-primary">Add Photo</label>
+          <input type="file" id="gallery" name="photos[]" class="d-none" multiple>
+          <div id="previewGallery" class="d-flex flex-wrap gap-2 mt-3 justify-content-center"></div>
         </div>
+
       </form>
+        <!-- Galeri Foto -->
+        <div class="d-flex flex-wrap gap-3">
+          @foreach ($mua->photos ?? [] as $photo)
+            <div class="position-relative" style="width: 200px;">
+              <img src="{{ Storage::url($photo->image_path) }}" class="img-fluid rounded" style="object-fit: cover; height: 200px; width: 100%;">
+              <!-- Tombol Hapus -->
+              <form action="{{ route('delete-photo', $photo->id) }}" method="POST" class="position-absolute top-0 end-0 m-1">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm rounded-circle shadow-sm" onclick="return confirm('Hapus foto ini?')">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </form>
+            </div>
+          @endforeach
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-  // Preview Foto Profil
-  document.getElementById('profile_photo').addEventListener('change', function (e) {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        document.getElementById('previewProfile').src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // Preview Galeri Karya
-  document.getElementById('gallery').addEventListener('change', function (e) {
-    const previewContainer = document.getElementById('previewGallery');
-    previewContainer.innerHTML = ''; // Kosongkan dulu
-    Array.from(e.target.files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.className = 'img-thumbnail';
-        img.style.maxHeight = '150px';
-        img.style.objectFit = 'cover';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
+    // Preview Foto Profil
+    document.getElementById('profile_photo').addEventListener('change', function (e) {
+      const [file] = e.target.files;
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          document.getElementById('previewProfile').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     });
-  });
-</script>
+
+    // Preview Galeri Karya
+    document.getElementById('gallery').addEventListener('change', function (e) {
+      const previewContainer = document.getElementById('previewGallery');
+      previewContainer.innerHTML = ''; // Kosongkan dulu
+      Array.from(e.target.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'img-thumbnail';
+          img.style.maxHeight = '150px';
+          img.style.objectFit = 'cover';
+          previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
 
   </body>
 </html>

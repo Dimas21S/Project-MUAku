@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Like;
 use App\Models\MakeUpArtist;
 use App\Models\UserHistory;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Termwind\Components\Dd;
 
 class ArtistController extends Controller
@@ -113,7 +115,7 @@ class ArtistController extends Controller
             $query->where('category', $category);
         }
 
-        $artist = $query->get();
+        $artist = $query->paginate(10);
 
         return view('list-mua', compact('user', 'artist'));
     }
@@ -241,7 +243,7 @@ class ArtistController extends Controller
             }
         }
 
-        $artist = $artistStatus->get();
+        $artist = $artistStatus->paginate(10);
 
         return view('user.map', compact('artist'));
     }
@@ -330,5 +332,37 @@ class ArtistController extends Controller
         $artist = Auth::guard('makeup_artist')->user();
 
         return view('mua.mua-index', compact('artist'));
+    }
+
+    public function destroyPhoto($id)
+    {
+        try {
+            // Find the photo record
+            $photo = Photo::findOrFail($id); // Assuming you have a Photo model
+
+            // Verify the photo belongs to the authenticated MUA
+            if ($photo->make_up_artist_id !== auth('makeup_artist')->id()) {
+                abort(403, 'Unauthorized action.');
+            }
+
+            // Get the file path before deletion
+            $filePath = $photo->image_path;
+
+            if (!$filePath) {
+                throw new \Exception('Photo path not found');
+            }
+
+            // Delete the file from storage
+            if (Storage::disk('public')->exists($filePath)) {
+                Storage::disk('public')->delete($filePath);
+            }
+
+            // Delete the record from database
+            $photo->delete();
+
+            return back()->with('success', 'Foto berhasil dihapus.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal menghapus foto: ' . $e->getMessage());
+        }
     }
 }

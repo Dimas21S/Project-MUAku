@@ -134,7 +134,7 @@
     background-color: #f8f9fa; /* Sesuaikan dengan warna yang diinginkan */
     padding: 20px 0;
     bottom: 0; /* Ini akan mendorong footer ke bawah */
-}
+    }
     
     @media (max-width: 576px) {
         .card-body {
@@ -229,6 +229,8 @@
             @endforeach
         </div>
     @endif
+
+    <x-pagination :paginator="$artist" />
     </main>
 
     <x-footer/>

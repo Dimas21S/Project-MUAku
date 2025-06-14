@@ -182,6 +182,8 @@
                 </div>
             @endif
         </div>
+
+        <x-pagination :paginator="$likedArtists" />
     </div>
 
     <x-footer/>

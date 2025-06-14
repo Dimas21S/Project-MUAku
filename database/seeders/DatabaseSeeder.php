@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\MakeUpArtist;
 use App\Models\User;
 use App\Models\Address;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Photo;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,24 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Membuat user admin dengan email berbeda
+        $users = [
+            ['name' => 'frizka', 'email' => 'frizka@example.com', 'password' => bcrypt('frizka12345'), 'role' => 'admin'],
+            ['name' => 'ica', 'email' => 'ica@example.com', 'password' => bcrypt('ica12345'), 'role' => 'customer'],
+            ['name' => 'salsa', 'email' => 'salsa@example.com', 'password' => bcrypt('salsa1234'), 'role' => 'admin'],
+            ['name' => 'caca', 'email' => 'caca@example.com', 'password' => bcrypt('caca1234'), 'role' => 'customer'],
+            ['name' => 'jaswita', 'email' => 'jaswita@example.com', 'password' => bcrypt('jaswita1234'), 'role' => 'admin'],
+            ['name' => 'manda', 'email' => 'manda@example.com', 'password' => bcrypt('manda1234'), 'role' => 'customer'],
+            ['name' => 'anisa', 'email' => 'anisa@example.com', 'password' => bcrypt('anisa1234'), 'role' => 'admin'],
+            ['name' => 'cica', 'email' => 'cica@example.com', 'password' => bcrypt('cica1234'), 'role' => 'customer'],
+        ];
 
-        // Pembuatan data user dan make up artist
-        // Menggunakan factory untuk membuat data user dan make up artist
-        // Menggunakan model User dan MakeUpArtist untuk membuat data
+        foreach ($users as $user) {
+            User::factory()->create([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'password' => $user['password'],
+                'role' => $user['role'],
+            ]);
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'user@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-        ]);
-
-        // User::factory()->create([
-        //     'name' => 'Dims',
-        //     'email' => 'dims@example.com',
-        //     'password' => bcrypt('dims1234'),
-        //     'role' => 'customer',
-        // ]);
+        // Membuat 100 MakeUpArtist lengkap dengan address, photos, dan social media links
+        MakeUpArtist::factory(100)->create()->each(function ($artist) {
+            // Tambah alamat
+            $artist->address()->save(Address::factory()->make());
+        });
     }
 }

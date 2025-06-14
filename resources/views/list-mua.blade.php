@@ -170,8 +170,10 @@
             @endif
           @endif
         </div>
+              {{-- Pagination --}}
+      {{-- Pagination --}}
+      <x-pagination :paginator="$artist" />
       </div>
-
     </main>
 
     <x-footer/>

@@ -70,7 +70,10 @@ Route::controller(ArtistController::class)->group(function () {
 
     Route::get('/index-mua', 'artistIndex')->name('index-mua');
 
-    Route::post('/log-out', 'artistLogout')->name('log-out');                                 // Menangani logout makeup artist
+    Route::post('/log-out', 'artistLogout')->name('log-out');
+
+    Route::delete('/mua/photo/{id}', 'destroyPhoto')->name('delete-photo');
+    // Menangani logout makeup artist
 });
 
 //Rute URL yang hanya bisa diakses oleh role customer
