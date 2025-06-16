@@ -241,16 +241,34 @@
           <div class="pricing-container">
             <div class="pricing-table mb-5">
               {{-- Card Paket Dasar --}}
-              @foreach ($packages as $package)
                   <div class="pricing-plan">
-                    <div class="price">${{ $package->price }}</div>
+                    <div class="price">$Rp. 20.000</div>
                     <div class="price-period">/month</div>
-                    <h3 class="plan-title">{{ $package->name }}</h3>
-                    <p class="plan-description">{{ $package->description }}</p>
+                    <h3 class="plan-title">Paket Dasar</h3>
+                    <p class="plan-description">Paket Dasar</p>
 
-                    <button class="choose-plan-btn" id="pay-button-{{ $package->id }}">Choose plan</button>
+                    <button class="choose-plan-btn" id="pay-button-1">Choose plan</button>
                 </div>
-                @endforeach
+            </div>
+              {{-- Card Paket Medium --}}
+                  <div class="pricing-plan">
+                    <div class="price">$Rp. 20.000</div>
+                    <div class="price-period">/month</div>
+                    <h3 class="plan-title">Paket Medium</h3>
+                    <p class="plan-description">{{ $artist->description == 2 }}</p>
+
+                    <button class="choose-plan-btn" id="pay-button-2">Choose plan</button>
+                </div>
+            </div>
+              {{-- Card Paket High --}}
+                  <div class="pricing-plan">
+                    <div class="price">$Rp. 20.000</div>
+                    <div class="price-period">/month</div>
+                    <h3 class="plan-title">Paket High</h3>
+                    <p class="plan-description">Paket High</p>
+
+                    <button class="choose-plan-btn" id="pay-button-3">Choose plan</button>
+                </div>
             </div>
           </div>
         </main>
@@ -271,7 +289,7 @@
               body: JSON.stringify({
                 packageName: 'Paket Dasar',
                 packageId: 1,
-                amount: 4000
+                amount: 20000
               })
           })
           .then(response => response.json())
@@ -294,7 +312,7 @@
               body: JSON.stringify({
                 packageName: 'Paket Medium',
                 packageId: 2,
-                amount: 13000
+                amount: 20000
               })
           })
           .then(response => response.json())
@@ -317,7 +335,7 @@
               body: JSON.stringify({
                 packageName: 'Paket High',
                 packageId: 3,
-                amount: 150000
+                amount: 20000
               })
           })
           .then(response => response.json())

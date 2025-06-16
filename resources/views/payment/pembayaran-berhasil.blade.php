@@ -72,7 +72,6 @@
     <div class="container">
         <div class="success-icon">✓</div>
         <h2>Pembayaran Berhasil</h2>
-        <p><span class="user-name">{{ $user->name }}</span>,</p>
         <p class="message">Terima kasih telah melakukan pembayaran. Kami telah menerima pembayaran Anda dan akun Anda sekarang sudah aktif.</p>
         <a href="/" class="btn">Kembali ke Beranda</a>
     </div>

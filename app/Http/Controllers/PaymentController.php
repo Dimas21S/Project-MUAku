@@ -41,6 +41,8 @@ class PaymentController extends Controller
             'status' => 'pending', // Set status awal sebagai pending
         ]);
 
+        // $user->update(['role' => 'customer']); // Update role user menjadi 'customer'
+
         // Konfigurasi parameter Midtrans
         $params = [
             'transaction_details' => [

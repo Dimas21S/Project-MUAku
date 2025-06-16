@@ -43,7 +43,7 @@ class ArtistController extends Controller
             if ($mua->status == 'accepted') {
 
                 // Jika status make up artist diterima, maka akan mengarahkan ke halaman daftar make up artist
-                return redirect('/notif-chat')->with('status', 'Selamat datang, ' . $mua->username . '! Anda telah berhasil login sebagai Make Up Artist.');
+                return redirect('/index-mua')->with('status', 'Selamat datang, ' . $mua->username . '! Anda telah berhasil login sebagai Make Up Artist.');
             }
 
             // Jika status make up artist tidak diterima, maka akan mengembalikan ke halaman submit request
@@ -54,7 +54,7 @@ class ArtistController extends Controller
         }
 
         // Kalau login gagal, maka akan mengembalikan ke halaman login dengan pesan error
-        return redirect()->back()->withErrors(['name' => 'Invalid credentials'])->withInput();
+        return redirect()->back()->with(['error' => 'Login gagal, silakan periksa kembali nama pengguna dan password Anda.']);
     }
 
     // Menampilkan form registrasi untuk make up artist

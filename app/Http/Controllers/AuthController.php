@@ -49,10 +49,9 @@ class AuthController extends Controller
         }
 
         // Jika login gagal, alihkan kembali dengan pesan kesalahan
-        return redirect()->back()->withErrors([
-            'name' => 'Nama tidak sesuai',
-            'password' => 'Password tidak sesuai',
-        ])->withInput();
+        return redirect()->back()->with([
+            'error' => 'Login gagal, silakan periksa kembali nama pengguna dan password Anda.',
+        ]);
     }
 
     // Menampilkan form registrasi

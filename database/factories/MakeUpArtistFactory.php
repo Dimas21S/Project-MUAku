@@ -25,7 +25,6 @@ class MakeUpArtistFactory extends Factory
                 '1748491075_Screenshot 2025-05-08 201441.png',
                 '1748491046_Screenshot 2025-05-08 201441.png'
             ]),
-            'profile_photo' => 'uploads/1748491075_Screenshot 2025-05-08 201441.png'
         ];
     }
 }

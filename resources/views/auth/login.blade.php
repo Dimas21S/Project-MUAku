@@ -229,6 +229,10 @@
             <h1 class="mb-4 text-center text-login">Sign In</h1>
             <!-- Tampilkan pesan sukses registrasi -->
             <p class="mb-4">If you don't have an account<br>You can <a href="{{ route('register') }}" class="register-link">Register here!</a></p>
+            @if(session('error'))
+              <div class="alert alert-danger" role="alert">
+                {{ session('error') }}
+              </div>
             
             <form action="{{ route('login.post') }}" method="POST">
               @csrf
@@ -236,17 +240,11 @@
               <div class="input-field">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="name" placeholder="Enter your Username" required autofocus>
-                @error('name')
-                  <span class="text-red-500">{{ $message }}</span>
-                @enderror
               </div>
 
               <div class="input-field">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your Password" required>
-                @error('password')
-                  <span class="text-red-500">{{ $message }}</span>
-                @enderror
               </div>
 
               <div class="d-flex justify-content-between align-items-center mb-4">

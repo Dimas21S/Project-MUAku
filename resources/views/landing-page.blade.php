@@ -357,7 +357,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Collection</a>
+              <a class="nav-link" href="#gallery">Collection</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
@@ -373,8 +373,8 @@
     <!-- Hero Section -->
     <section class="hero-bg" aria-label="MUAku Collection">
       <div class="overlay-content">
-        <h1 class="new-coming">New Coming</h1>
-        <p class="collection-heading">MUAku Collection</p>
+        <h1 class="new-coming" style="color: black;">New Coming</h1>
+        <p class="collection-heading" style="color: black;">MUAku Collection</p>
         <div class="d-flex flex-wrap">
           <button type="button" class="btn btn-login me-3" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button>
           <button type="button" class="btn btn-register" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
@@ -500,7 +500,7 @@
     </section>
 
     <!-- Gallery Section -->
-    <section class="gallery-section py-5">
+    <section class="gallery-section py-5" id="gallery">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Left Column - Content + Image -->

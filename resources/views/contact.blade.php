@@ -124,7 +124,7 @@
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.3); z-index: 2;"></div>
 
         <div class="position-relative d-flex flex-column justify-content-center align-items-center h-100" style="z-index: 3;">
-          <h1 class="fw-bold" style="font-family:DM Serif Display, serif; font-weight: 400; font-style: normal; font-size: 100px;">About Us</h1>
+          <h1 class="fw-bold" style="font-family:DM Serif Display, serif; font-weight: 400; font-style: normal; font-size: 100px;">Contact</h1>
         </div>
     </div>
 

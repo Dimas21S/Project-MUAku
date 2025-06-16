@@ -16,23 +16,23 @@ class PackageSeeder extends Seeder
         //
         DB::table('packages')->insert([
             [
-                'package_type' => 'Basic',
-                'price' => 50000,
-                'description' => 'Paket Basic untuk akses fitur dasar Make Up Artist.',
+                'package_type' => 'Paket Dasar',
+                'price' => 20000,
+                'description' => 'Paket Dasar',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'package_type' => 'Medium',
-                'price' => 100000,
-                'description' => 'Paket Premium dengan akses lebih banyak MUA dan fitur tambahan.',
+                'package_type' => 'Paket Medium',
+                'price' => 20000,
+                'description' => 'Paket Medium',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'package_type' => 'High',
-                'price' => 150000,
-                'description' => 'Paket VIP dengan akses eksklusif ke MUA terbaik dan chat prioritas.',
+                'package_type' => 'Paket High',
+                'price' => 20000,
+                'description' => 'Paket High',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

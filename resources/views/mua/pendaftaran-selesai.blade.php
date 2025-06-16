@@ -35,6 +35,59 @@
         line-height: 1.2;
         margin-bottom: 40px;
       }
+
+            .success-modal .modal-content {
+        border: 3px solid #000000;
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+      
+      .success-icon {
+        width: 111px;
+        height: 111px;
+        margin: 0 auto 20px;
+        position: relative;
+      }
+      
+      .icon-background {
+        width: 100%;
+        height: 100%;
+        background: #79B33E;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .icon-background::after {
+        content: "✓";
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+      }
+      
+      .success-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 10px;
+      }
+      
+      .success-message {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 20px;
+      }
+      
+      .modal-footer {
+        border-top: none;
+        justify-content: center;
+      }
       </style>
   </head>
   <body>

@@ -11,8 +11,8 @@
         font-weight: 500;
         font-size: 25px;
         color: #963E3E;
-    ">
+    "><a href="{{ route('payment') }}" style="text-decoration: none;">
       {{ $message }}
-    </div>
+    </a></div>
   </div>
 </div>

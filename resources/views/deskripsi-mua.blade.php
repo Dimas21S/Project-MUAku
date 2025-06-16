@@ -148,7 +148,7 @@
             <div class="row">
                 <!-- Foto Profil -->
                 <div class="col-md-5 text-center">
-                <img src="{{ Storage::url($artist->profile_photo ?? 'image/foto-cewek-1.jpg') }}" class="img-fluid"
+                <img src="{{ asset('image/Profile-Foto.jpg') }}" class="img-fluid"
                         class="rounded img-fluid" 
                         alt="Foto MUA" 
                         style="height: 474px; width: 442px;">

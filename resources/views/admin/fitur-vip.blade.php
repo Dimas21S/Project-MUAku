@@ -202,6 +202,7 @@
     </style>
   </head>
   <body>
+    <x-modal-success :message="session('success')"/>
     <!-- Navigation -->
     <x-navbar/>
 

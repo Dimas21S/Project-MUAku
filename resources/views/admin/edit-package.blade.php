@@ -119,10 +119,6 @@
                   </div>
                 </div>
                 <div class="package-detail">
-                  <span class="detail-label">Durasi (jam):</span>
-                  <input type="number" class="form-control" id="duration" name="duration" value="{{ $package->duration }}" required>
-                </div>
-                <div class="package-detail">
                   <span class="detail-label">Deskripsi:</span>
                   <textarea class="form-control" id="description" name="description" rows="4" required>{{ $package->description }}</textarea>
                 </div>
