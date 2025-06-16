@@ -233,6 +233,7 @@
               <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
               </div>
+              @endif
             
             <form action="{{ route('login.post') }}" method="POST">
               @csrf
