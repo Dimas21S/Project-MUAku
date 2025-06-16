@@ -185,18 +185,26 @@
             <!-- Galeri Foto -->
             <div class="mt-5">
                 <h3 class="text-center fw-bold">Galeri Karya</h3>
-                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
-                    @foreach ($artist->photos as $photo)
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
+                    @forelse ($artist->photos as $photo)
                         <div class="col">
                             <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" 
                                 onclick="showFullscreen('{{ Storage::url($photo->image_path) }}')">
                                 <img src="{{ Storage::url($photo->image_path) }}" 
                                     class="card-img-top object-fit-cover" 
-                                    style="height: 300px; border-radius: 10px;" 
-                                    alt="Preview">
+                                    style="height: 200px; border-radius: 10px;" 
+                                    alt="Karya {{ $artist->username }}">
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="col-12 text-center py-5">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="bi bi-images fs-1 text-muted mb-3"></i>
+                                <h5 class="text-muted">Belum ada karya yang ditampilkan</h5>
+
+                            </div>
+                        </div>
+                    @endforelse
                 </div>
             </div>
 

@@ -249,17 +249,15 @@
 
                     <button class="choose-plan-btn" id="pay-button-1">Choose plan</button>
                 </div>
-            </div>
               {{-- Card Paket Medium --}}
                   <div class="pricing-plan">
                     <div class="price">$Rp. 20.000</div>
                     <div class="price-period">/month</div>
                     <h3 class="plan-title">Paket Medium</h3>
-                    <p class="plan-description">{{ $artist->description == 2 }}</p>
+                    <p class="plan-description">Paket Medium</p>
 
                     <button class="choose-plan-btn" id="pay-button-2">Choose plan</button>
                 </div>
-            </div>
               {{-- Card Paket High --}}
                   <div class="pricing-plan">
                     <div class="price">$Rp. 20.000</div>

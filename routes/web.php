@@ -102,11 +102,11 @@ Route::middleware(IsCustomer::class)->group(function () {
     Route::get('/chat/mua/{mua_id}', [ChatController::class, 'userToMua'])->name('chat.user.to.mua');
 
     Route::post('/chat/mua/{mua_id}', [ChatController::class, 'userSendToMua'])->name('chat.user.send.mua');
-
-    Route::get('/mua/chat/user/{user_id}', [ChatController::class, 'muaToUser'])->name('chat.mua.to.user');
-
-    Route::post('/mua/chat/user/{user_id}', [ChatController::class, 'muaSendToUser'])->name('chat.mua.send.user');
 });
+
+Route::get('/mua/chat/user/{user_id}', [ChatController::class, 'muaToUser'])->name('chat.mua.to.user');
+
+Route::post('/mua/chat/user/{user_id}', [ChatController::class, 'muaSendToUser'])->name('chat.mua.send.user');
 
 // Rute URL pembayaran
 Route::controller(PaymentController::class)->group(function () {
