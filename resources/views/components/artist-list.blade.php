@@ -13,11 +13,13 @@
             
             <!-- Artist Info -->
             <div class="flex-grow-1">
-                <h5 class="card-title mb-1 fw-semibold">{{ $item->name }}</h5>
+                <a href="{{ route('mua.description', $item->id) }}" class="text-decoration-none text-dark artist-name-link">
+                    <h5 class="card-title mb-1 fw-semibold">{{ $item->name }}</h5>
+                </a>
                 <div class="d-flex flex-wrap align-items-center">
                     <span class="badge bg-primary me-2 mb-1">{{ $item->category }}</span>
                     <small class="text-muted mb-1">
-                        <i class="bi bi-geo-alt"></i>{{ $item->address->kota }}, {{ $item->address->kelurahan ?? '' }}
+                        <i class="bi bi-geo-alt"></i> {{ $item->address->kota }}, {{ $item->address->kelurahan ?? '' }}
                     </small>
                 </div>
             </div>

@@ -170,6 +170,11 @@
             gap: 8px;
         }
     }
+
+    .artist-name-link:hover {
+    color: #A87648 !important;
+    text-decoration: underline;
+    }
   </style>
 </head>
 <body>

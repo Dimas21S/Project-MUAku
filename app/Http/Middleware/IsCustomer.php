@@ -9,21 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class IsCustomer
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == 'customer') {
+        // Kalau user sudah login, langsung ijinkan
+        if (Auth::check()) {
             return $next($request);
         }
 
-        // session()->flash('error', 'Kamu harus berlangganan untuk mengakses fitur lainnya.');
-        // return redirect('/payment');
-        // return redirect('/')->with('error', 'Kamu harus berlangganan untuk mengakses halaman ini.');
-
-        return back()->with('user-error', ' Subscribe Now, Come On !.');
+        // Kalau belum login, arahkan ke halaman login
+        return redirect()->route('login');
     }
 }

@@ -165,7 +165,7 @@
               </div>
             @else
               @foreach ($artist as $artistId)
-                <x-artist-card :artist="$artistId" :blur="true" />
+                <x-artist-card :artist="$artistId" :blur="false" />
               @endforeach
             @endif
           @endif

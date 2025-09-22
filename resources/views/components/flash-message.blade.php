@@ -10,8 +10,8 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 500;
         font-size: 25px;
-    "><a href="{{ route('payment') }}" style="text-decoration: none; color: #963E3E;">
+    ">
       {{ $message }}
-    </a></div>
+    </div>
   </div>
 </div>

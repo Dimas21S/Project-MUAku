@@ -152,7 +152,7 @@ class AuthController extends Controller
 
     //     $user->save();
 
-    //     return redirect('profile')->with('success', 'Profil berhasil diperbarui!');
+    //     return redirect('/profil')->with('success', 'Profil berhasil diperbarui!');
     // }
 
     // public function updatePassword(Request $request)
@@ -185,7 +185,7 @@ class AuthController extends Controller
     //     $user->password = Hash::make($request->newPassword);
     //     $user->save();
 
-    //     return redirect('profile')->with('password-success', 'Password berhasil diperbarui!');
+    //     return redirect()->route('profil')->with('password-success', 'Password berhasil diperbarui!');
     // }
 
     // public function formUpdatePassword()

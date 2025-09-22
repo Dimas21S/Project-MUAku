@@ -102,7 +102,7 @@
               <x-nav-link href="{{ route('favourite') }}" :active="request()->routeIs('favourite')">Favourite</x-nav-link>
             </li>
             <li class="nav-item me-3">
-              <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">Profile</x-nav-link>
+              <x-nav-link href="{{ route('profil') }}" :active="request()->routeIs('profile')">Profil</x-nav-link>
             </li>
         @endswitch
       </ul>
