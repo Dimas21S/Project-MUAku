@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('make_up_artist_id')->constrained()->onDelete('cascade');
             $table->string('package_type');
             $table->bigInteger('price');
             $table->text('description');

@@ -44,6 +44,7 @@ Route::controller(ArtistController::class)->group(function () {
     Route::get('/pendaftaran-berhasil', 'pendaftaranBerhasil')->name('pendaftaran.berhasil');
     Route::get('/daftar-mua', 'listMakeUpArtist')->name('list-mua');
     Route::get('/edit-mua', 'editMakeUpArtist')->name('edit-mua');
+    Route::get('/profil/setting-price', 'getSettingPrice')->name('setting-price');
     Route::patch('/update-mua', 'updateMakeUpArtist')->name('update-mua');
     Route::get('/index-mua', 'artistIndex')->name('index-mua');
     Route::post('/log-out', 'artistLogout')->name('log-out');

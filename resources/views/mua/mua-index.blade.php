@@ -19,6 +19,13 @@
         li {
             margin-right: 1.5rem;
         }
+
+        .profile-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: auto;
+        }
         
         .card-body {
             min-height: 280px;
@@ -95,13 +102,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
+        }
 
-    .exclamation-icon {
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-    }
+        .exclamation-icon {
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        }
         
         @media (max-width: 992px) {
             .content-wrapper {
@@ -121,6 +128,7 @@
         }
     </style>
   </head>
+  
   <body>
 
     <x-navbar />
@@ -137,15 +145,36 @@
 
 
                 <div class="col-md-7">
-                    <h1 class="mb-3">{{ $artist->name }}</h1>
-                    <h5 class="text-muted">{{ $artist->category }}</h5>
-                    <h5 class="text-muted">{{ $artist->address->kota }}, {{ $artist->address->kelurahan }}</h5>
-                                    <!-- Tombol Edit di kanan bawah -->
-                <button type="button" class="btn text-light position-absolute" 
-                    onclick="window.location.href='{{ route('edit-mua') }}'" 
-                    style="background: #1E2772; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    Edit Profil
-                </button>
+                    <h5>Full Name</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
+                        <h6 class="text-start ms-3 mt-2" style="color: #555555">{{ $artist->name }}</h6>
+                    </div>
+                    <h5>Location</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
+                        <h6 class="text-start ms-3 mt-2">{{ $artist->address->kota }}, {{ $artist->address->kelurahan }}</h6>
+                    </div>
+                    <h5>Category</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px; ">
+                        <h6 class="text-start ms-3 mt-2">{{ $artist->category }}</h6>
+                    </div>
+                    <h5>Full Name</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
+                        <h6 class="text-start ms-3 mt-2">{{ $artist->name }}</h6>
+                    </div>                
+                
+                    <!-- Tombol Edit dan Setting Price sejajar di kanan bawah -->
+                    <div class="profile-actions">
+                        <button type="button" class="btn text-light" 
+                            onclick="window.location.href='{{ route('edit-mua') }}'" 
+                            style="background: #1E2772; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            Edit Profil
+                        </button>
+                        <button type="button" class="btn text-light" 
+                                onclick="window.location.href='{{ route('setting-price') }}'" 
+                                style="background: #d5df1bff; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                Setting Price
+                        </button>
+                    </div>
                 </div>
             </div>
 

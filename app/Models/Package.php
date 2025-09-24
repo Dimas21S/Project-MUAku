@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     protected $fillable = ['package_type', 'price', 'description'];
+
+    public function MakeUpArtist()
+    {
+        return $this->belongsTo(MakeUpArtist::class);
+    }
 }

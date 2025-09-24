@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
 use App\Models\MakeUpArtist;
 use App\Models\UserHistory;
 use App\Models\Photo;
@@ -364,5 +363,21 @@ class ArtistController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal menghapus foto: ' . $e->getMessage());
         }
+    }
+
+    public function getSettingPrice()
+    {
+        $mua = MakeUpArtist::findOrFail(Auth::guard('makeup_artist')->user()->id);
+
+        // Pastikan hanya makeup artist yang sedang login yang bisa mengedit profilnya
+        if (Auth::guard('makeup_artist')->user()->id !== $mua->id) {
+            return redirect()->back()->withErrors(['error' => 'Unauthorized action.']);
+        }
+
+        $paketMua = $mua->packages;
+
+        $categories = ['Pesta dan Acara', 'Pengantin', 'Editorial'];
+
+        return view('mua.setting-price', compact('mua', 'categories', 'paketMua'));
     }
 }
