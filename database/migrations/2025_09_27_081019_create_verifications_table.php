@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('make_up_artists', function (Blueprint $table) {
+        Schema::create('verifications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('make_up_artist_id')->constrained()->onDelete('cascade');
             $table->string('username');
             $table->string('name')->nullable();
             $table->string('password');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone')->nullable();
             $table->enum('status', ['accepted', 'pending', 'rejected'])->default('pending');
             $table->text('description')->nullable();
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('make_up_artists');
+        Schema::dropIfExists('verifications');
     }
 };

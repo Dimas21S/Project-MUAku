@@ -20,4 +20,10 @@ class Address extends Model
     {
         return $this->belongsTo(MakeUpArtist::class);
     }
+
+    // relasi dengan mode Verification
+    public function verification()
+    {
+        return $this->belongsTo(Verification::class);
+    }
 }

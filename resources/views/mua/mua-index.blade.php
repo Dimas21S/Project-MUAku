@@ -157,7 +157,7 @@
                     <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px; ">
                         <h6 class="text-start ms-3 mt-2">{{ $artist->category }}</h6>
                     </div>
-                    <h5>Full Name</h5>
+                    <h5>Available Hours</h5>
                     <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
                         <h6 class="text-start ms-3 mt-2">{{ $artist->name }}</h6>
                     </div>                
@@ -171,7 +171,7 @@
                         </button>
                         <button type="button" class="btn text-light" 
                                 onclick="window.location.href='{{ route('setting-price') }}'" 
-                                style="background: #d5df1bff; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                style="background: #F2C25B; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                                 Setting Price
                         </button>
                     </div>

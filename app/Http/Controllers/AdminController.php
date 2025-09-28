@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\MakeUpArtist;
+use App\Models\Verification;
 use App\Models\Package;
 use App\Models\Payment;
 
@@ -39,9 +40,9 @@ class AdminController extends Controller
     public function verifiedMakeUpArtist()
     {
         // Menggunakan model MakeUpArtist untuk mengambil semua data dengan method all()
-        $artistsItem = MakeUpArtist::with('address')->paginate(10);
+        $verifications = Verification::with('makeUpArtist.address')->paginate(10);
 
-        return view('admin.admin-verified', compact('artistsItem'));
+        return view('admin.admin-verified', compact( 'verifications'));
     }
 
     public function fiturVip()
@@ -50,15 +51,35 @@ class AdminController extends Controller
         return view('admin.fitur-vip', compact('packages'));
     }
 
-    public function updateStatus(Request $request, $artistId)
+    public function updateStatus(Request $request, $verificationId)
     {
         $request->validate([
             'status' => 'required|in:accepted,rejected',
         ]);
 
-        $artist = MakeUpArtist::findOrFail($artistId);
-        $artist->status = $request->status;
-        $artist->save();
+        $verification = Verification::findOrFail($verificationId);
+
+        if(!$verification) {
+            return redirect()->back()->with('error', 'Verification record not found.');
+        }
+
+        $verification->status = $request->status;
+        $verification->save();
+
+        if($request->status === 'accepted') {
+            $artist = $verification->makeUpArtist;
+            $artist->status = 'accepted';
+            $artist->name            = $verification->name;
+            $artist->email           = $verification->email;
+            $artist->phone           = $verification->phone;
+            $artist->category  = $verification->category;
+            $artist->file_certificate = $verification->file_certificate;
+            $artist->description     = $verification->description;
+            $artist->save();
+
+            // Hapus data verfikasi yang 'rejected' setelah diterima
+            Verification::where('id', $verificationId)->where('status', 'rejected')->delete();
+        }
 
         return redirect()->back()->with('success', 'Status artist berhasil diperbarui.');
     }

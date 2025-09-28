@@ -197,18 +197,21 @@ class ArtistController extends Controller
             return redirect()->back()->withErrors(['portfolio' => 'Portfolio file is required']);
         }
 
-        $artist->update([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'category' => $request->category,
-            'file_certificate' => $path,
-            'status' => 'pending',
-            'description' => $request->deskripsi,
-        ]);
-
         $artist->address()->updateOrCreate([], [
             'link_map' => $request->link_map,
+        ]);
+
+        $artist->verification()->create([
+            'make_up_artist_id' => $artist->id,
+            'username' => $artist->username,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'category' => $request->category,
+            'file_certificate' => $path,
+            'description' => $request->deskripsi,
+            'password' => $artist->password,
+            'status' => 'pending',
         ]);
 
 
@@ -376,8 +379,6 @@ class ArtistController extends Controller
 
         $paketMua = $mua->packages;
 
-        $categories = ['Pesta dan Acara', 'Pengantin', 'Editorial'];
-
-        return view('mua.setting-price', compact('mua', 'categories', 'paketMua'));
+        return view('mua.setting-price', compact('mua', 'paketMua'));
     }
 }
