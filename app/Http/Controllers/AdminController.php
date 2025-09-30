@@ -62,12 +62,6 @@ class AdminController extends Controller
         if(!$verification) {
             return redirect()->back()->with('error', 'Verification record not found.');
         }
-        
-        // Cek email sudah digunakan di tabel make_up_artists
-        $existingArtist = MakeUpArtist::where('email', $verification->email)->first();
-        if($existingArtist && $request->status === 'accepted') {
-            return redirect()->back()->with('error', 'Email sudah digunakan oleh artist lain.');
-        }
 
         $verification->status = $request->status;
         $verification->save();
