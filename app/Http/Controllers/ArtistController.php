@@ -381,4 +381,9 @@ class ArtistController extends Controller
 
         return view('mua.setting-price', compact('mua', 'paketMua'));
     }
+
+    public function putSettingPrice()
+    {
+        // 
+    }
 }
