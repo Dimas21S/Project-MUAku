@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('verifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('make_up_artist_id')->constrained()->onDelete('cascade');
+            $table->foreignId('make_up_artist_id')->constrained('make_up_artist')->onDelete('cascade');
             $table->string('username');
             $table->string('name')->nullable();
             $table->string('password');

@@ -49,9 +49,9 @@
         <p>include: </p>
         <div class="border border-dark rounded p-3" style="background: #DBC7B4; width: 100%; height: 100px; overflow-y:auto; scrollbar-width: none;">
           <ul class="text-white">
-            <li>Makeup Application</li>
-            <li>Hair Styling</li>
-            <li>Wardrobe Styling</li>
+            @foreach ($deskripsi as $item)
+                <li>{{ $item->description }}</li>
+            @endforeach
           </ul>
         </div>
         <div class="edit-btn-container">

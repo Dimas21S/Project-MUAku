@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Description;
 use Illuminate\Http\Request;
 
 use App\Models\MakeUpArtist;
@@ -75,6 +76,7 @@ class AdminController extends Controller
             $artist->category  = $verification->category;
             $artist->file_certificate = $verification->file_certificate;
             $artist->description     = $verification->description;
+            
             $artist->save();
 
             // Hapus data verfikasi yang 'rejected' setelah diterima

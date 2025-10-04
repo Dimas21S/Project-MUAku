@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('descriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('make_up_artist_id')->constrained()->onDelete('cascade');
+            $table->foreignId('make_up_artist_id')->constrained('make_up_artists')->onDelete('cascade');
             $table->text('description')->nullable();
+            $table->text('description_tambahan')->nullable();
             $table->timestamps();
         });
     }

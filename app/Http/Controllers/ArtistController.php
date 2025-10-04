@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MakeUpArtist;
+use App\Models\Package;
 use App\Models\UserHistory;
 use App\Models\Photo;
 use Illuminate\Http\Request;
@@ -378,12 +379,47 @@ class ArtistController extends Controller
         }
 
         $paketMua = $mua->packages;
+        $deskripsi = MakeUpArtist::select('description')->get();
 
-        return view('mua.setting-price', compact('mua', 'paketMua'));
+        return view('mua.setting-price', compact('mua', 'paketMua', 'deskripsi'));
     }
 
-    public function putSettingPrice()
+    public function postSettingPrice(Request $request, $id)
     {
-        // 
+        //
+        $validator = [
+            'category' => 'nullable|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
+            'price' => 'nullable|numeric|min:0',
+            'description' => 'nullable|string|max:1000',
+            'add_description' => 'nullable|string|max:1000',
+        ];
+
+        $request->validate($validator);
+
+        $mua = MakeUpArtist::findOrFail(Auth::guard('makeup_artist')->user()->id);
+
+        $package = Package::where('make_up_artist_id', $mua->id)
+                      ->where('id', $id)
+                      ->first(); 
+        
+        if ($package) {
+            $package->update([
+                'price' => $request->price,
+            ]);
+        } else {
+            $package = Package::create([
+                'make_up_artist_id' => $mua->id,
+                'price' => $request->price,
+            ]);
+        }
+
+        if ($mua) {
+            $mua->update([
+                'category' => $request->category,
+                'description' => $request->description,
+            ]);
+        }
+
+        
     }
 }
