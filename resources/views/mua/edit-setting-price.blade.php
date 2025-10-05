@@ -35,31 +35,43 @@
         <h3 class="mb-4 text-center">Edit MUA Service</h3>
 
         <!-- Form Edit -->
-        <form action="{{ route('mua.update', $mua->id) }}" method="POST">
+        <form action="{{ route('setting-price.post', $mua->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
-          @method('PUT')
+          @method('PATCH')
 
           <!-- Category -->
           <div class="mb-3">
             <label for="category" class="form-label">Type / Category</label>
-            <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $mua->category) }}" required>
+            <input type="text" class="form-control" id="category" name="category"
+              value="{{ old('category', $mua->category) }}" required>
           </div>
 
           <!-- Price -->
           <div class="mb-3">
             <label for="price" class="form-label">Price (Rp)</label>
-            <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $mua->price) }}" required>
+            <input type="number" class="form-control" id="price" name="price"
+              value="{{ old('price', optional($mua->package)->price) }}" required>
           </div>
 
-          <!-- Include List -->
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Main Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"
+              placeholder="Tuliskan deskripsi layanan utama">{{ old('description', optional($mua->description)->description) }}</textarea>
+          </div>
+
+          <!-- Description Tambahan -->
           <div class="mb-3">
             <label for="include" class="form-label">Include Services</label>
-            <textarea class="form-control" id="include" name="include" rows="4" placeholder="Pisahkan setiap item dengan koma, contoh: Makeup Application, Hair Styling, Wardrobe Styling">{{ old('include', 'Makeup Application, Hair Styling, Wardrobe Styling') }}</textarea>
+            <textarea class="form-control" id="include" name="add_description" rows="4"
+              placeholder="Pisahkan setiap item dengan koma, contoh: Makeup Application, Hair Styling, Wardrobe Styling">
+              {{ old('add_description', optional($mua->description)->description_tambahan) }}
+            </textarea>
           </div>
 
           <!-- Tombol -->
           <div class="d-flex justify-content-between mt-4">
-            <a href="{{ route('mua.index') }}" class="btn btn-back">Back</a>
+            <a href="{{ route('setting-price') }}" class="btn btn-back">Back</a>
             <button type="submit" class="btn btn-save">Save Changes</button>
           </div>
         </form>

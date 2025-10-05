@@ -379,47 +379,62 @@ class ArtistController extends Controller
         }
 
         $paketMua = $mua->packages;
-        $deskripsi = MakeUpArtist::select('description')->get();
+        $deskripsi = $mua->description;
 
         return view('mua.setting-price', compact('mua', 'paketMua', 'deskripsi'));
     }
 
     public function postSettingPrice(Request $request, $id)
     {
-        //
-        $validator = [
+        // Validasi input
+        $request->validate([
             'category' => 'nullable|in:Pesta dan Acara,Pengantin,Editorial,Artistik',
             'price' => 'nullable|numeric|min:0',
             'description' => 'nullable|string|max:1000',
             'add_description' => 'nullable|string|max:1000',
-        ];
+        ]);
 
-        $request->validate($validator);
-
+        // Ambil data MUA yang sedang login
         $mua = MakeUpArtist::findOrFail(Auth::guard('makeup_artist')->user()->id);
 
-        $package = Package::where('make_up_artist_id', $mua->id)
-                      ->where('id', $id)
-                      ->first(); 
-        
-        if ($package) {
-            $package->update([
-                'price' => $request->price,
-            ]);
-        } else {
-            $package = Package::create([
+        // Update atau buat data package
+        $package = Package::updateOrCreate(
+            [
                 'make_up_artist_id' => $mua->id,
+                'id' => $id,
+            ],
+            [
                 'price' => $request->price,
-            ]);
+            ]
+        );
+
+        // Update kategori MUA (jika memang kolom category ada di tabel make_up_artists)
+        if ($request->filled('category')) {
+            $mua->update(['category' => $request->category]);
         }
 
-        if ($mua) {
-            $mua->update([
-                'category' => $request->category,
+        // Update atau buat deskripsi MUA (satu MUA hanya punya satu deskripsi)
+        $mua->description()->updateOrCreate(
+            ['make_up_artist_id' => $mua->id],
+            [
                 'description' => $request->description,
-            ]);
-        }
+                'description_tambahan' => $request->add_description,
+            ]
+        );
 
-        
+        return back()->with('success', 'Data berhasil diperbarui!');
     }
+
+    public function formSettingPrice()
+    {
+        $mua = Auth::guard('makeup_artist')->user(); // Ambil data MUA yang login
+        $id = $mua->id; // Ambil ID-nya
+
+        // Kalau mau ambil data deskripsi atau paket juga bisa:
+        $description = $mua->description; 
+        $package = $mua->package; // Jika relasinya hasOne
+        
+        return view('mua.edit-setting-price', compact('mua', 'id', 'description', 'package'));
+    }
+
 }

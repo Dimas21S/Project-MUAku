@@ -46,7 +46,9 @@ Route::controller(ArtistController::class)->group(function () {
     Route::get('/edit-mua', 'editMakeUpArtist')->name('edit-mua');
 
     Route::get('/profil/setting-price', 'getSettingPrice')->name('setting-price');
-    Route::post('/profil/setting-price/{id}', 'postSettingPrice')->name('setting-price.post');
+    Route::patch('/profil/setting-price/{id}', 'postSettingPrice')->name('setting-price.post');
+    Route::get('/profil/setting-price/{id}', 'formSettingPrice')->name('setting-price.form');
+
     Route::patch('/update-mua', 'updateMakeUpArtist')->name('update-mua');
     Route::get('/index-mua', 'artistIndex')->name('index-mua');
     Route::post('/log-out', 'artistLogout')->name('log-out');

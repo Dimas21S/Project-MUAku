@@ -44,18 +44,24 @@
         </div>
         <div>
           <p>price: </p>
-          <h3>{{ $mua->price ? $mua->price :'Not set' }}</h3>
+          <h3>{{ $mua->packages ? 'Rp ' . number_format($mua->packages->price, 0, ',', '.') : 'Belum diatur' }}</h3>
         </div>
         <p>include: </p>
         <div class="border border-dark rounded p-3" style="background: #DBC7B4; width: 100%; height: 100px; overflow-y:auto; scrollbar-width: none;">
           <ul class="text-white">
-            @foreach ($deskripsi as $item)
-                <li>{{ $item->description }}</li>
-            @endforeach
+            @if(is_array($mua->description) || is_object($mua->description))
+                <ul>
+                    @foreach ($mua->description as $desc)
+                        <li>{{ $desc }}</li>
+                    @endforeach
+                </ul>
+            @else
+                <p>{{ $mua->description }}</p>
+            @endif
           </ul>
         </div>
         <div class="edit-btn-container">
-          <button class="btn" style="background: #dbc7b4">Edit</button>
+          <a href="{{ route('setting-price.form', $mua->id) }}" class="btn" style="background: #dbc7b4">Edit</a>
         </div>
       </div>
 

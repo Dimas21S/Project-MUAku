@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('make_up_artist_id')->constrained('make_up_artists')->onDelete('cascade');
             $table->bigInteger('price');
-            $table->text('description');
             $table->timestamps();
         });
     }
