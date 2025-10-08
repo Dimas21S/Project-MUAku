@@ -69,6 +69,9 @@ Route::middleware(IsCustomer::class)->group(function () {
     Route::post('/hapus-riwayat', [UserController::class, 'deleteHistory'])->name('delete.history');
     Route::get('/chat/mua/{mua_id}', [ChatController::class, 'userToMua'])->name('chat.user.to.mua');
     Route::post('/chat/mua/{mua_id}', [ChatController::class, 'userSendToMua'])->name('chat.user.send.mua');
+
+    Route::get('/booking/{id}', [UserController::class, 'getBookingArtist'])->name('booking.form');
+    Route::get('/pembayaran/{id}', [UserController::class, 'showFormPembayaran'])->name('pembayaran.form');
 });
 
 Route::get('/mua/chat/user/{user_id}', [ChatController::class, 'muaToUser'])->name('chat.mua.to.user');

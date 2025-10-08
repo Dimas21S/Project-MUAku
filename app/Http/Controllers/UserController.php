@@ -144,4 +144,28 @@ class UserController extends Controller
     {
         return view("user.map");
     }
+
+    public function getBookingArtist($artistId)
+    {
+        // Ambil artist yang ingin dibooking
+        $mua = MakeUpArtist::findOrFail($artistId);
+        
+        // Ambil packages artist
+        $paketMua = $mua->packages;
+        $deskripsi = $mua->description;
+
+        return view('user.booking-artist', compact('mua', 'paketMua', 'deskripsi'));
+    }
+
+    public function showFormPembayaran($artistId)
+    {
+        // Ambil artist yang ingin dibooking
+        $mua = MakeUpArtist::findOrFail($artistId);
+        
+        // Ambil packages artist
+        $paketMua = $mua->packages;
+        $deskripsi = $mua->description;
+
+        return view('user.pembayaran-artist', compact('mua', 'paketMua', 'deskripsi'));
+    }
 }
