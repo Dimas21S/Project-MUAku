@@ -126,13 +126,6 @@
                 </button>
                 </form>
 
-                <!-- WhatsApp -->
-                <button type="button" class="btn btn-light rounded-circle me-3"
-                        style="width: 40px; height: 40px;"
-                        onclick="window.location.href='https://api.whatsapp.com/send?phone={{ $artist->phone }}&text=Halo%20{{ urlencode($artist->name) }},%20saya%20tertarik%20dengan%20jasa%20makeup%20Anda.'">
-                <i class="bi bi-whatsapp text-success"></i>
-                </button>
-
                 <!-- Chat -->
                 <button type="button" class="btn btn-light rounded-circle"
                         style="width: 40px; height: 40px;"
@@ -156,18 +149,23 @@
 
                 <div class="col-md-7">
                     <h1 class="mb-3">{{ $artist->name }}</h1>
-                    <h5 class="text-muted">{{ $artist->category }}</h5>
-                    {{-- <p class="mb-3">
-                        <strong>Alamat:</strong> {{ $artist->address->alamat }}<br>
-                        <strong>Telp:</strong> {{ $artist->phone }}<br>
-                        <strong>Sosial Media:</strong> {{ $artist->email }}
-                    </p> --}}
-                    <p class="product-hours">
+                    <h4 class="text-muted">{{ $artist->address->kota }}, {{ $artist->address->kelurahan }}</h4>
+                    <h4 class="text-muted">{{ $artist->category }}</h4>
+                    <p class="product-hours mt-4">
                         Available Hours <br>
                         Monday – Friday : 08:00 AM – 08:00 PM (WIB)<br>
                         Saturday & Sunday : 07:00 AM – 10:00 PM (WIB)
                     </p>
-                </div>
+
+                    <div class="profile-actions position-absolute end-0 bottom-10 me-5 mt-5">
+                        <button type="button" class="btn text-light" 
+                            onclick="window.location.href=''" 
+                            style="background: #1E2772; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            Book Now
+                        </button>
+                    </div>
+
+                </div> 
             </div>
 
             <!-- Garis Pemisah -->
@@ -234,7 +232,7 @@
                         style="height: 474px; width: 452px;">
                 </div>
 
-                <div class="col-md-7">
+                {{-- <div class="col-md-7">
                     <h1 class="mb-3">{{ $artist->name }}</h1>
                     <h5 class="text-muted">{{ $artist->category }}</h5>
                     <p class="mb-3">
@@ -242,6 +240,34 @@
                         <strong>Telp:</strong> {{ $artist->phone }}<br>
                         <strong>Sosial Media:</strong> {{ $artist->email }}
                     </p>
+                </div> --}}
+                
+                <div class="col-md-7">
+                    <h5>Full Name</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
+                        <h6 class="text-start ms-3 mt-2" style="color: #555555">{{ $artist->name }}</h6>
+                    </div>
+                    <h5>Location</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
+                        <h6 class="text-start ms-3 mt-2">{{ $artist->address->kota }}, {{ $artist->address->kelurahan }}</h6>
+                    </div>
+                    <h5>Category</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px; ">
+                        <h6 class="text-start ms-3 mt-2">{{ $artist->category }}</h6>
+                    </div>
+                    <h5>Available Hours</h5>
+                    <div class="border border-dark rounded mb-3" style="background: #EEEEEE; width: 502px; height: 40px;">
+                        <h6 class="text-start ms-3 mt-2">{{ $artist->name }}</h6>
+                    </div>                
+                
+                    <!-- Tombol Edit dan Setting Price sejajar di kanan bawah -->
+                    <div class="profile-actions">
+                        <button type="button" class="btn text-light" 
+                            onclick="window.location.href=''" 
+                            style="background: #1E2772; width: 150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            Book Now
+                        </button>
+                    </div>
                 </div>
             </div>
 

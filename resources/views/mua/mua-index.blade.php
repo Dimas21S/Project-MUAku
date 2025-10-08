@@ -95,13 +95,13 @@
         }
 
           .icon-container {
-      width: 80px;
-      height: 80px;
-      background-color: #e63946;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+            width: 80px;
+            height: 80px;
+            background-color: #e63946;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .exclamation-icon {
