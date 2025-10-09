@@ -8,6 +8,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsCustomer;
 
@@ -81,3 +82,10 @@ Route::post('/mua/chat/user/{user_id}', [ChatController::class, 'muaSendToUser']
 Route::get('/profil', [UserController::class, 'userProfile'])->name('profil');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/notif-chat', [ChatController::class, 'receivedMessages'])->name('notif-chat');
+
+// Rute URL pembayaran
+Route::controller(PaymentController::class)->group(function () {
+    Route::get('/payment', 'paymentIndex')->name('payment');                // Menampilkan halaman pembayaran
+
+    Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token'); // Mendapatkan token Snap dari Midtrans
+});
