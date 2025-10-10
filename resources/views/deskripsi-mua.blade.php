@@ -125,7 +125,7 @@
 
                 <div class="profile-actions mt-4">
                     <button type="button" class="btn book-btn"
-                        onclick="window.location.href='{{ route('booking.form', $artist->id) }}'">
+                        onclick="window.location.href='{{ route('booking.form', $artist->id) }}'"> 
                         Book Now
                     </button>
                 </div>

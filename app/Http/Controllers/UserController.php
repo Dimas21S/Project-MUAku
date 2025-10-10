@@ -165,7 +165,8 @@ class UserController extends Controller
         // Ambil packages artist
         $paketMua = $mua->packages;
         $deskripsi = $mua->description;
+        $biayaAdmin = 2000;
 
-        return view('user.pembayaran-artist', compact('mua', 'paketMua', 'deskripsi'));
+        return view('user.pembayaran-artist', compact('mua', 'paketMua', 'deskripsi', 'biayaAdmin'));
     }
 }

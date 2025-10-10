@@ -89,3 +89,5 @@ Route::controller(PaymentController::class)->group(function () {
 
     Route::post('/get-snap-token', 'getSnapToken')->name('get-snap-token'); // Mendapatkan token Snap dari Midtrans
 });
+
+Route::post('/payment/notification', [PaymentController::class, 'handleNotification'])->withoutMiddleware('web');

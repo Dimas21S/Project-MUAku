@@ -172,7 +172,7 @@
         
         <div class="appointment-info">
             <p>Appointment</p>
-            <p class="appointment-name">Vaneza Andromeda</p>
+            <p class="appointment-name">{{ $mua->name }}</p>
             <p class="appointment-date">Wednesday, 10 Jan 2024, 11:00</p>
         </div>
         
@@ -208,15 +208,15 @@
         <div class="payment-summary">
             <div class="payment-item">
                 <span>Consultation Fee</span>
-                <span>IDR 200.000</span>
+                <span>Rp.{{ number_format($mua->packages->price ?? 0, 0, ',', '.') }}</span>
             </div>
             <div class="payment-item">
                 <span>Admin</span>
-                <span>2.000</span>
+                <span>Rp.{{ number_format($biayaAdmin ?? 0, 0, ',', '.') }}</span>
             </div>
             <div class="payment-total">
                 <span>Total</span>
-                <span>IDR 202.000</span>
+                <span>Rp.{{ number_format(($mua->packages->price ?? 0) + ($biayaAdmin ?? 0), 0, ',', '.') }}</span>
             </div>
         </div>
         
@@ -231,9 +231,12 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },
             body: JSON.stringify({
-                packageName: 'Paket Dasar',
-                packageId: 1,
-                amount: 4000
+                package_id: {{ $mua->packages->id ?? 'null' }},
+                mua_id: {{ $mua->id }},
+                price: {{ $mua->packages->price ?? 0 }},
+                biaya_admin: {{ $biayaAdmin ?? 0 }},
+                total: {{ ($mua->packages->price ?? 0) + ($biayaAdmin ?? 0) }}
+
             })
         })
         .then(response => response.json())

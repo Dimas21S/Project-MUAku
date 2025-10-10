@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('user')->onDelete();
-            $table->foreignId('id_mua')->constrained('make_up_artist')->onDelete();
-            $table->foreignId('package_id')->constrained('packages')->onDelete();
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_mua')->constrained('make_up_artists')->onDelete('cascade');
+            $table->foreignId('package_id')->constrained('packages')->onDelete('cascade');
             $table->string('kode_pembayaran');
-            $table->int('biaya_admin');
+            $table->integer('biaya_admin')->default(2500);
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['success', 'pending', 'failed'])->default('pending');
             $table->timestamps();
