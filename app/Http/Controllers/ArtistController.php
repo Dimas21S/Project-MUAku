@@ -445,7 +445,7 @@ class ArtistController extends Controller
             ]
         );
 
-        return back()->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('setting-price')->with('success', 'Data berhasil diperbarui!');
     }
 
     public function formSettingPrice()

@@ -108,7 +108,7 @@
         <div class="row align-items-start">
             <!-- Foto -->
             <div class="col-md-5 text-center mb-4">
-                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/Profile-Foto.jpg') }}" alt="{{ $artist->name }}" class="profile-img">
+                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/Profile-Foto.jpg') }}" alt="{{ $artist->name }}" class="profile-img" style="height: 474px; width: 452px; object-fit: cover;">
             </div>
 
             <!-- Detail -->
