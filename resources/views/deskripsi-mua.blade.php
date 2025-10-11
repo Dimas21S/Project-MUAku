@@ -108,7 +108,7 @@
         <div class="row align-items-start">
             <!-- Foto -->
             <div class="col-md-5 text-center mb-4">
-                <img src="{{ asset('image/Profile-Foto.jpg') }}" alt="{{ $artist->name }}" class="profile-img">
+                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/Profile-Foto.jpg') }}" alt="{{ $artist->name }}" class="profile-img">
             </div>
 
             <!-- Detail -->
@@ -119,8 +119,17 @@
 
                 <div>
                     <h6 class="fw-bold">Available Hours</h6>
-                    <p class="mb-1 text-secondary">Monday – Friday : 08:00 – 20:00 (WIB)</p>
-                    <p class="text-secondary">Saturday & Sunday : 07:00 – 22:00 (WIB)</p>
+                    @if($artist->jadwal && count($artist->jadwal) > 0)
+                        @foreach($artist->jadwal as $j)
+                            <div class="schedule-item">
+                                {{ $j->hari }}: {{ \Carbon\Carbon::parse($j->jam_buka)->format('H:i') }} - {{ \Carbon\Carbon::parse($j->jam_tutup)->format('H:i') }}
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="schedule-item text-muted">
+                            Jadwal belum tersedia
+                        </div>
+                    @endif
                 </div>
 
                 <div class="profile-actions mt-4">

@@ -6,6 +6,7 @@ use App\Models\MakeUpArtist;
 use App\Models\Package;
 use App\Models\UserHistory;
 use App\Models\Photo;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -289,7 +290,16 @@ class ArtistController extends Controller
             'description' => 'nullable|string|max:1000',
             'photos' => 'nullable|array',
             'photos.*' => 'file|mimes:jpg,jpeg,png|max:2048',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'jadwal' => 'nullable'
         ]);
+
+        if ($request->hasFile('profile_photo')) {
+            $file = $request->file('profile_photo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads', $filename, 'public');
+            $mua->profile_photo = $path;
+        }
 
         // Menangani upload foto
         if ($request->hasFile('photos')) {
@@ -312,6 +322,19 @@ class ArtistController extends Controller
                 $mua->photos()->create([
                     'image_path' => $path,
                     'make_up_artist_id' => $mua->id
+                ]);
+            }
+        }
+
+        Jadwal::where('make_up_artist_id', $mua->id)->delete();
+
+        if ($request->has('jadwal')) {
+            foreach ($request->jadwal as $data) {
+                Jadwal::create([
+                    'make_up_artist_id' => $mua->id,
+                    'hari' => $data['hari'],
+                    'jam_buka' => $data['jam_buka'],
+                    'jam_tutup' => $data['jam_tutup'],
                 ]);
             }
         }

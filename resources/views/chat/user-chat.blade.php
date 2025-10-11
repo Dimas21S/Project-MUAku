@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat dengan {{ $mua->name }}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <style>
     html, body {
       height: 100%;
@@ -207,10 +207,10 @@
       </button>
       
       <div class="recipient-info">
-        <img src="{{ asset($mua->profile_photo ?? 'image/Profile-Foto.jpg') }}" alt="Profile" class="recipient-avatar" />
+        <img src="{{ $mua->profile_photo ? Storage::url($mua->profile_photo) : asset('image/Profile-Foto.jpg') }}" alt="Profile" class="recipient-avatar" />
         <div>
           <div class="recipient-name">{{ $mua->name }}</div>
-          <div class="recipient-status">Online</div>
+          <div class="recipient-status">Not Knowing</div>
         </div>
       </div>
     </div>
@@ -242,7 +242,7 @@
         @csrf
         <input type="text" name="message" class="message-input" placeholder="Ketik pesan..." required>
           <button type="submit" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-            <i class="bi bi-send-fill"></i>
+            <i class="bi bi-send-check-fill"></i>
           </button>
       </form>
     </div>

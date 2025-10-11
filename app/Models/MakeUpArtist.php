@@ -63,4 +63,9 @@ class MakeUpArtist extends Authenticatable
     {
         return $this->hasOne(Description::class);
     }
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'make_up_artist_id');
+    }
 }

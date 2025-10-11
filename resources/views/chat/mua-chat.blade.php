@@ -6,6 +6,8 @@
   <title>Chat dengan {{ $user->name }}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
   <style>
     html, body {
       height: 100%;
@@ -124,14 +126,14 @@
       color: #ffffff;
     }
 
-.received-bubble {
-  background-color: #ffffff;
-  border: 2px solid #A5A6F6;
-  border-radius: 15px 15px 15px 5px; /* Sudut bawah kiri lebih tajam */
-  padding: 10px 15px;
-  color: #5D5FEF;
-  margin-bottom: 10px;
-}
+    .received-bubble {
+      background-color: #ffffff;
+      border: 2px solid #A5A6F6;
+      border-radius: 15px 15px 15px 5px; /* Sudut bawah kiri lebih tajam */
+      padding: 10px 15px;
+      color: #5D5FEF;
+      margin-bottom: 10px;
+    }
 
     .message-time {
       font-size: 0.75rem;
@@ -206,10 +208,10 @@
       </button>
       
       <div class="recipient-info">
-        <img src="{{ asset($receiver->profile_photo ?? 'image/Profile-Foto.jpg') }}" alt="Profile" class="recipient-avatar" />
+        <img src="{{ $user->foto_profil ? Storage::url($user->foto_profil) : asset('image/Profile-Foto.jpg') }}" alt="Profile" class="recipient-avatar" />
         <div>
           <div class="recipient-name">{{ $user->name }}</div>
-          <div class="recipient-status">Online</div>
+          <div class="recipient-status">Not Knowing</div>
         </div>
       </div>
     </div>
@@ -241,7 +243,7 @@
         @csrf
         <input type="text" name="message" class="message-input" placeholder="Ketik pesan..." required>
         <button type="submit" class="send-button">
-          <i class="bi bi-send-fill"></i>
+          <i class="bi bi-send-check-fill"></i>
         </button>
       </form>
     </div>

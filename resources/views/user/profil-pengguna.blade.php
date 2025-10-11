@@ -179,6 +179,7 @@
       <div class="profile-image-container">
         @if ($user->foto_profil)
           <img src="{{ Storage::url($user->foto_profil) }}" class="profile-image" alt="Profile Picture">
+          {{-- <img src="{{ asset('storage/'.$user->foto_profil) }}" class="profile-image" alt="Profile Picture"> --}}
         @else
           <img src="{{ asset('image/Profile-Foto.jpg') }}" class="profile-image" alt="Default Profile Picture">
         @endif
