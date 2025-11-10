@@ -114,7 +114,7 @@
             <!-- Detail -->
             <div class="col-md-7">
                 <h2 class="fw-bold">{{ $artist->name }}</h2>
-                <p class="text-muted mb-1">{{ $artist->address->kota }}, {{ $artist->address->kelurahan }}</p>
+                <p class="text-muted mb-1">{{ $artist->address->kota }}, {{ $artist->address->kecamatan }}</p>
                 <p class="text-muted mb-3">{{ $artist->category }}</p>
 
                 <div>

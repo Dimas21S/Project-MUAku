@@ -142,9 +142,9 @@
       <div>
         <h4 class="fw-bold">Contact Information</h4>
         <p>Say something to start a live chat!</p>
-        <div class="mb-3 mt-4 d-flex align-items-center"><i class="icon bi bi-instagram me-2"></i><a href="https://www.instagram.com/carimua.project/" class="footer-link">@carimua.project</a></div>
-        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-envelope me-2"></i>><a href="mailto:pakaimua100@gmail.com" class="footer-link">pakaimua100@gmail.com</a></div>
-        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-telephone me-2"></i><a href="tel:+6283195341251" class="footer-link">+62 831-9534-1251</a></div>
+        <div class="mb-3 mt-4 d-flex align-items-center"><i class="icon bi bi-instagram me-2"></i><a href="https://www.instagram.com/carimua.project/" class="footer-link" style="text-decoration: none; color: white">@carimua.project</a></div>
+        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-envelope me-2"></i>><a href="mailto:pakaimua100@gmail.com" class="footer-link" style="text-decoration: none; color: white">pakaimua100@gmail.com</a></div>
+        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-telephone me-2"></i><a href="tel:+6283195341251" class="footer-link" style="text-decoration: none; color: white">+62 831-9534-1251</a></div>
         <div class="d-flex align-items-center"><i class="icon bi bi-geo-alt me-2"></i> Kota Jambi</div>
       </div>
       <div class="circle-decoration">

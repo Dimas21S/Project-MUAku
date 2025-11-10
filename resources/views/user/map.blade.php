@@ -184,34 +184,102 @@
 
     <div class="container mt-4">
         <h3 class="mb-3 fw-semibold">Pencarian Make Up Artist</h3>
-            <form action="{{ route('address') }}" method="GET" class="search-form">
-                <div class="input-group shadow-sm rounded-3 overflow-hidden" style="max-width: 600px; background-color: #F2E6E8; border-radius: 20px;">
-                    <input id="autocomplete" 
-                        class="form-control border-end-0 py-2 ps-3" 
-                        type="search" 
-                        placeholder="Cari lokasi..." 
-                        name="search" 
-                        aria-label="Cari lokasi Make Up Artist"
-                        value="{{ request('search') }}"
-                        autocomplete="off">
-                    <button type="submit" 
-                            class="btn btn-cream px-3" 
-                            aria-label="Tombol pencarian">
-                        <i class="bi bi-search fs-5"></i>
-                    </button>
+
+        <div class="d-flex align-items-center" style="max-width: 600px;">
+            <!-- Form pencarian -->
+            <form action="{{ route('address') }}" method="GET" class="flex-grow-1 me-2">
+                <div class="position-relative">
+                    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                    <input id="autocomplete"
+                        type="search"
+                        name="search"
+                        class="form-control ps-5 py-2 border-0"
+                        style="background-color: white; border-radius: 10px;"
+                        placeholder="Cari lokasi..."
+                        autocomplete="off"
+                        value="{{ request('search') }}">
                 </div>
             </form>
+
+            <!-- Dropdown kecamatan (berdampingan dengan form) -->
+            <div class="dropdown">
+                <button class="btn border-0 px-3"
+                        type="button"
+                        id="dropdownKecamatan"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style="background-color: #F2E6E8; border-radius: 10px;">
+                    <i class="bi bi-caret-down-fill fs-5"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownKecamatan" style="max-height: 200px; overflow-y: auto;">
+                    <li><a class="dropdown-item" href="?search=air-hangat">Air Hangat</a></li>
+                    <li><a class="dropdown-item" href="?search=air-hangat-timur">Air Hangat Timur</a></li>
+                    <li><a class="dropdown-item" href="?search=Batang Asam">Batang Asam</a></li>
+                    <li><a class="dropdown-item" href="?search=Betara">Betara</a></li>
+                    <li><a class="dropdown-item" href="?search=Danau Kerinci">Danau Kerinci</a></li>
+                    <li><a class="dropdown-item" href="?search=Danau Sipin">Danau Sipin</a></li>
+                    <li><a class="dropdown-item" href="?search=Depati Tujuh">Depati Tujuh</a></li>
+                    <li><a class="dropdown-item" href="?search=Geragai">Geragai</a></li>
+                    <li><a class="dropdown-item" href="?search=Hamparan Rawang">Hamparan Rawang</a></li>
+                    <li><a class="dropdown-item" href="?search=Jaluko">Jaluko</a></li>
+                    <li><a class="dropdown-item" href="?search=Jelutung">Jelutung</a></li>
+                    <li><a class="dropdown-item" href="?search=Kota Baru">Kota Baru</a></li>
+                    <li><a class="dropdown-item" href="?search=Kota Sarolangun">Kota Sarolangun</a></li>
+                    <li><a class="dropdown-item" href="?search=Koto Baru">Koto Baru</a></li>
+                    <li><a class="dropdown-item" href="?search=Kumpeh">Kumpeh</a></li>
+                    <li><a class="dropdown-item" href="?search=Limbur Lubuk Mengkuang">Limbur Lubuk Mengkuang</a></li>
+                    <li><a class="dropdown-item" href="?search=Limun">Limun</a></li>
+                    <li><a class="dropdown-item" href="?search=Mandiangin">Mandiangin</a></li>
+                    <li><a class="dropdown-item" href="?search=Mendahara">Mendahara</a></li>
+                    <li><a class="dropdown-item" href="?search=Merlung">Merlung</a></li>
+                    <li><a class="dropdown-item" href="?search=Mersam">Mersam</a></li>
+                    <li><a class="dropdown-item" href="?search=Mestong">Mestong</a></li>
+                    <li><a class="dropdown-item" href="?search=Muaro Bulian">Muaro Bulian</a></li>
+                    <li><a class="dropdown-item" href="?search=Muaro Sabak Timur">Muaro Sabak Timur</a></li>
+                    <li><a class="dropdown-item" href="?search=Muaro Sebo">Muaro Sebo</a></li>
+                    <li><a class="dropdown-item" href="?search=Muaro Siau">Muaro Siau</a></li>
+                    <li><a class="dropdown-item" href="?search=Muaro Tembesi">Muaro Tembesi</a></li>
+                    <li><a class="dropdown-item" href="?search=Nipah Panjang">Nipah Panjang</a></li>
+                    <li><a class="dropdown-item" href="?search=Pauh">Pauh</a></li>
+                    <li><a class="dropdown-item" href="?search=Pelawan">Pelawan</a></li>
+                    <li><a class="dropdown-item" href="?search=Pelepat">Pelepat</a></li>
+                    <li><a class="dropdown-item" href="?search=Pelepat Ilir">Pelepat Ilir</a></li>
+                    <li><a class="dropdown-item" href="?search=Pemenang">Pemenang</a></li>
+                    <li><a class="dropdown-item" href="?search=Pemayung">Pemayung</a></li>
+                    <li><a class="dropdown-item" href="?search=Pesisir Bukit">Pesisir Bukit</a></li>
+                    <li><a class="dropdown-item" href="?search=Pengabuan">Pengabuan</a></li>
+                    <li><a class="dropdown-item" href="?search=Rantau Rasau">Rantau Rasau</a></li>
+                    <li><a class="dropdown-item" href="?search=Renah Mendaluh">Renah Mendaluh</a></li>
+                    <li><a class="dropdown-item" href="?search=Renah Pembarap">Renah Pembarap</a></li>
+                    <li><a class="dropdown-item" href="?search=Sekernan">Sekernan</a></li>
+                    <li><a class="dropdown-item" href="?search=Siulak">Siulak</a></li>
+                    <li><a class="dropdown-item" href="?search=Sungai Gelam">Sungai Gelam</a></li>
+                    <li><a class="dropdown-item" href="?search=Sungai Manau">Sungai Manau</a></li>
+                    <li><a class="dropdown-item" href="?search=Sungai Penuh">Sungai Penuh</a></li>
+                    <li><a class="dropdown-item" href="?search=Sumay">Sumay</a></li>
+                    <li><a class="dropdown-item" href="?search=Tabir Barat">Tabir Barat</a></li>
+                    <li><a class="dropdown-item" href="?search=Tanah Kampung">Tanah Kampung</a></li>
+                    <li><a class="dropdown-item" href="?search=Tanah Sepenggal Lintas">Tanah Sepenggal Lintas</a></li>
+                    <li><a class="dropdown-item" href="?search=Telanaipura">Telanaipura</a></li>
+                    <li><a class="dropdown-item" href="?search=Tebo Ilir">Tebo Ilir</a></li>
+                    <li><a class="dropdown-item" href="?search=Tebo Tengah">Tebo Tengah</a></li>
+                    <li><a class="dropdown-item" href="?search=Tebo Ulu">Tebo Ulu</a></li>
+                    <li><a class="dropdown-item" href="?search=VII Koto">VII Koto</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
+
 
     <div class="filter-group">
         <form action="{{ route('address') }}" method="GET" class="search-form">
             <div class="filter-options">
                 <x-filter-button value="all" label="Semua Lokasi" :active="request('location') == 'all'"/>
-                <x-filter-button value="alam-barajo" label="Alam Barajo" :active="request('location') == 'alam-barajo'"/>
+                {{-- <x-filter-button value="alam-barajo" label="Alam Barajo" :active="request('location') == 'alam-barajo'"/>
                 <x-filter-button value="jambi-timur" label="Jambi Timur" :active="request('location') == 'jambi-timur'"/>
                 <x-filter-button value="telanaipura" label="Telanaipura" :active="request('location') == 'telanaipura'"/>
                 <x-filter-button value="jambi-selatan" label="Jambi Selatan" :active="request('location') == 'jambi-selatan'"/>
-                <x-filter-button value="pasar" label="Pasar" :active="request('location') == 'pasar'"/>
+                <x-filter-button value="pasar" label="Pasar" :active="request('location') == 'pasar'"/> --}}
             </div>
         </form>
     </div>

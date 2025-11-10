@@ -583,9 +583,7 @@
           </div>
           <div class="col-md-6 text-center text-md-end">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item"><a href="#" class="footer-link"><i class="bi bi-facebook"></i></a></li>
               <li class="list-inline-item"><a href="#" class="footer-link"><i class="bi bi-instagram"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="footer-link"><i class="bi bi-twitter"></i></a></li>
             </ul>
           </div>
         </div>

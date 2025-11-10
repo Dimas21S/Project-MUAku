@@ -242,7 +242,7 @@ class ArtistController extends Controller
         if ($location = request('location')) {
             if ($location !== 'all') {
                 $artistStatus->whereHas('address', function ($q) use ($location) {
-                    $q->whereRaw('LOWER(REPLACE(kelurahan, " ", "-")) = ?', [strtolower($location)]);
+                    $q->whereRaw('LOWER(REPLACE(kecamatan, " ", "-")) = ?', [strtolower($location)]);
                 });
             }
         }

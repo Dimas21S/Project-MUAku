@@ -19,7 +19,7 @@
                 <div class="d-flex flex-wrap align-items-center">
                     <span class="badge bg-primary me-2 mb-1">{{ $item->category }}</span>
                     <small class="text-muted mb-1">
-                        <i class="bi bi-geo-alt"></i> {{ $item->address->kota }}, {{ $item->address->kelurahan ?? '' }}
+                        <i class="bi bi-geo-alt"></i> {{ $item->address->kota }}, {{ $item->address->kecamatan ?? '' }}
                     </small>
                 </div>
             </div>
