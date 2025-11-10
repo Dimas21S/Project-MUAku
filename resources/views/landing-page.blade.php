@@ -350,7 +350,13 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
       <div class="container">
-        <a class="navbar-brand" href="#">MUAku</a>
+        <a class="navbar-brand" href="#" style="color: #A87648; font-size: 32px; margin-left: 10px">
+                <img 
+        src="{{ asset('image/logo_bulat_MUA.png') }}" 
+        alt="Logo" 
+        style="width: 84px; height: 78px; object-fit: cover; margin-right: 8px;" 
+      />pakaimua
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -433,7 +439,7 @@
                 <div class="col-md-6">
                     <div class="benefit-card d-flex">
                         <div class="benefit-icon me-4">
-                            <img src="icon-business-contact.png" alt="Business contact icon">
+                            <img src="{{ asset('image/Riasan_Berkualitas_Hasil_Memukau.png') }}" alt="Business contact icon">
                         </div>
                         <div>
                             <h4 class="benefit-title">Riasan Berkualitas, Hasil Memukau</h4>
@@ -444,7 +450,7 @@
                 <div class="col-md-6">
                     <div class="benefit-card d-flex">
                         <div class="benefit-icon me-4">
-                            <img src="icon-layers.png" alt="Layers icon">
+                            <img src="{{ asset('image/Inspirasi__Tren_Kecantikan_Terbaru.png') }}" alt="Layers icon">
                         </div>
                         <div>
                             <h4 class="benefit-title">Inspirasi & Tren Kecantikan Terbaru</h4>
@@ -455,7 +461,7 @@
                 <div class="col-md-6">
                     <div class="benefit-card d-flex">
                         <div class="benefit-icon me-4">
-                            <img src="icon-chat.png" alt="Chat icon">
+                            <img src="{{ asset('image/Temukan__Pilih_MUA_Favoritmu_dengan_Mudah.png') }}" alt="Chat icon">
                         </div>
                         <div>
                             <h4 class="benefit-title">Temukan & Pilih MUA Favoritmu dengan Mudah</h4>
@@ -466,7 +472,7 @@
                 <div class="col-md-6">
                     <div class="benefit-card d-flex">
                         <div class="benefit-icon me-4">
-                            <img src="icon-timelapse.png" alt="Timelapse icon">
+                            <img src="{{ asset('image/Tampilkan_Keunikan_Dirimu_dengan_Makeup.png') }}" alt="Timelapse icon">
                         </div>
                         <div>
                             <h4 class="benefit-title">Tampilkan Keunikan Dirimu dengan Makeup</h4>
@@ -541,7 +547,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 mb-4">
-            <h3 class="h4" style="font-family: 'DM Serif Display', serif;">MUAku</h3>
+            <h3 class="h4" style="font-family: 'DM Serif Display', serif;">pakaimua</h3>
             <p>Connecting clients with talented makeup artists for all occasions.</p>
           </div>
           <div class="col-lg-2 col-md-6 mb-4">
@@ -564,15 +570,16 @@
           <div class="col-lg-3 col-md-6 mb-4">
             <h4 class="h5">Contact Us</h4>
             <ul class="list-unstyled">
-              <li class="mb-2"><a href="mailto:info@muaku.com" class="footer-link">info@muaku.com</a></li>
-              <li class="mb-2"><a href="tel:+1234567890" class="footer-link">+1 (234) 567-890</a></li>
+              <li class="mb-2"><a href="https://www.instagram.com/carimua.project/" class="footer-link">@carimua.project</a></li>
+              <li class="mb-2"><a href="mailto:pakaimua100@gmail.com" class="footer-link">pakaimua100@gmail.com</a></li>
+              <li class="mb-2"><a href="tel:+6283195341251" class="footer-link">+62 831-9534-1251</a></li>
             </ul>
           </div>
         </div>
         <hr class="my-4 bg-light opacity-25">
         <div class="row">
           <div class="col-md-6 text-center text-md-start">
-            <p class="small mb-0">&copy; 2023 MUAku. All rights reserved.</p>
+            <p class="small mb-0">&copy; 2025 pakaimua. All rights reserved.</p>
           </div>
           <div class="col-md-6 text-center text-md-end">
             <ul class="list-inline mb-0">

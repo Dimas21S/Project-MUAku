@@ -1,39 +1,54 @@
 @props(['role'])
 
 @php
-  $logo = asset('image/MUAku-Icon-2.jpg.png');
+  $logo = asset('image/logo_bulat_MUA.png');
 @endphp
 
-<!-- Custom Navbar Styles -->
 <style>
-  /* Default Navbar */
+  /* === General Navbar Styles === */
+  .navbar {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .navbar .nav-link {
+    font-size: 18px;
+    color: inherit !important;
+    transition: color 0.2s, border-bottom 0.2s;
+  }
+
+  .navbar .nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid currentColor;
+  }
+
+  .navbar .btn-logout {
+    font-size: 18px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-left: 10px;
+    transition: opacity 0.2s;
+  }
+
+  .navbar .btn-logout:hover {
+    opacity: 0.7;
+  }
+
+  /* === Default Navbar === */
   .navbar-default {
     background-color: white;
     color: black;
   }
 
-  .navbar-default .nav-link {
-    color: black !important;
-  }
-
-  .navbar-default .nav-link.active {
-    font-weight: bold;
-    border-bottom: 2px solid black;
-  }
-
   .navbar-default .btn-logout {
-    border-color: black;
     color: black;
   }
 
-  .navbar-default .btn-logout:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-
-  /* MakeUp Artist Navbar */
+  /* === MUA Navbar === */
   .navbar-mua {
     background: #E4CFCE;
-    color: white;
+    color: black;
     transition: background-color 0.3s ease-in-out;
   }
 
@@ -42,19 +57,31 @@
   }
 
   .navbar-mua .btn-logout {
-    border-color: white;
     color: white;
   }
 
-  .navbar-mua .btn-logout:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+  /* Navbar brand style */
+  .navbar-brand {
+    color: #A87648;
+    text-decoration: none;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbar-brand img {
+    width: 84px;
+    height: 78px;
+    object-fit: cover;
   }
 </style>
 
 <nav class="navbar navbar-expand-lg py-2 {{ $role === 'makeup_artist' ? 'navbar-mua' : 'navbar-default' }}">
   <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="{{ $logo }}" style="width: 130px; height: 60px; object-fit:cover;" />
+    <a class="navbar-brand" href="#" style="text-decoration: none; color: #A87648">
+      <img src="{{ $logo }}" alt="Logo" />
+      pakaimua
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -62,31 +89,31 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto right-navbar">
+      <ul class="navbar-nav ms-auto align-items-center">
         @switch($role)
           @case('admin')
             <li class="nav-item me-4">
-              <x-nav-link href="{{ route('verified-admin') }}" :active="request()->routeIs('verified-admin')">GlamGate</x-nav-link>
+              <x-nav-link href="{{ route('verified-admin') }}" :active="request()->routeIs('verified-admin')">
+                GlamGate
+              </x-nav-link>
             </li>
-            <li class="nav-item me-4">
-              <x-nav-link href="{{ route('data-pelanggan') }}" :active="request()->routeIs('data-pelanggan')">ClientSphere</x-nav-link>
-            </li>
-            <li class="nav-item me-4">
-              <x-nav-link href="{{ route('vip-fitur') }}" :active="request()->routeIs('vip-fitur')">PayFlow</x-nav-link>
-            </li>
-            <button type="submit" class="btn btn-logout text-danger border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
+            <button type="button" class="btn btn-logout text-danger" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
               Logout
             </button>
             @break
 
           @case('makeup_artist')
             <li class="nav-item me-4">
-              <x-nav-link href="{{ route('index-mua') }}" :active="request()->routeIs('index-mua')">Profil</x-nav-link>
+              <x-nav-link href="{{ route('index-mua') }}" :active="request()->routeIs('index-mua')">
+                Profil
+              </x-nav-link>
             </li>
             <li class="nav-item me-4">
-              <x-nav-link href="{{ route('notif-chat') }}" :active="request()->routeIs('notif-chat')">Chat</x-nav-link>
+              <x-nav-link href="{{ route('notif-chat') }}" :active="request()->routeIs('notif-chat')">
+                Chat
+              </x-nav-link>
             </li>
-            <button type="submit" class="btn btn-logout text-danger border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
+            <button type="button" class="btn btn-logout text-danger" data-bs-toggle="modal" data-bs-target="#customLogoutModal">
               Logout
             </button>
             @break

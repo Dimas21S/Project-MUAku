@@ -239,7 +239,7 @@
         <!-- Form Section -->
         <div class="col-lg-7 d-flex align-items-center">
           <div class="logo-container d-flex mb-4 navbar-custom">
-            <img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" alt="MUAku Logo" style="width: 130px; height: 60px; object-fit:cover;">
+            <img src="{{ asset('image/logo_bulat_MUA.png') }}" alt="MUAku Logo" style="width: 40px; height: 40px; object-fit:cover;">
           </div>
           <div class="form-section w-100">
 

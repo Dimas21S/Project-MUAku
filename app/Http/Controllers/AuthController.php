@@ -41,7 +41,7 @@ class AuthController extends Controller
             if (Auth::user()->role == 'admin') {
 
                 // Jika admin maka akan diarahkan ke dasbor admin
-                return redirect()->intended('/data-langganan');
+                return redirect()->intended('/verified-admin');
             }
 
             // jika hanya user biasa atau customer maka akan diarahkan ke halaman

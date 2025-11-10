@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MUA Service Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
       body {
         background: linear-gradient(#DFDBDC, #E6DBD9, #E4CFCE, #D3CEE5);
@@ -35,6 +36,17 @@
     </style>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light py-3" style="background-color: transparant;">
+      <div class="container d-flex justify-content-between align-items-center">
+        <!-- Tombol back -->
+        <a href="{{ route('index-mua') }}" class="btn btn-light rounded-circle border border-dark me-3">
+          <i class="bi bi-arrow-left"></i>
+        </a>
+
+      </div>
+    </nav>
+
     <div class="container-wrapper">
       <!-- Container utama pertama -->
       <div class="container mt-5 border border-dark rounded p-4 container-custom" style="background: #eeeeee; background-attachment: fixed;">
@@ -48,26 +60,12 @@
         </div>
         <p>include: </p>
         <div class="border border-dark rounded p-3" style="background: #DBC7B4; width: 100%; height: 100px; overflow-y:auto; scrollbar-width: none;">
-          <ul class="text-white">
-            @if(is_array($mua->description) || is_object($mua->description))
-                <ul>
-                    @foreach ($mua->description as $desc)
-                        <li>{{ $desc }}</li>
-                    @endforeach
-                </ul>
-            @else
-                <p>{{ $mua->description }}</p>
-            @endif
-          </ul>
+        <p>{{ $mua->detailDescription->description ?? 'Belum ada deskripsi' }}</p>
+        <p>{{ $mua->detailDescription->description_tambahan ?? '' }}</p>
         </div>
         <div class="edit-btn-container">
           <a href="{{ route('setting-price.form', $mua->id) }}" class="btn" style="background: #dbc7b4">Edit</a>
         </div>
-      </div>
-
-      <!-- Tombol Add -->
-      <div class="d-flex justify-content-end">
-        <button id="addButton" class="btn text-white" style="background: rgba(72, 74, 204, 1)">Add</button>
       </div>
 
       <!-- Container baru yang akan ditambahkan -->

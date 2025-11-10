@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('make_up_artist_id')->constrained('make_up_artists')->onDelete('cascade');
             $table->string('kota')->default('Jambi');
-            $table->string('kelurahan');
+            $table->string('kecamatan');
             $table->string('link_map')->default('unknown');
             $table->timestamps();
         });

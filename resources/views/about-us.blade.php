@@ -75,7 +75,13 @@
         <i class="bi bi-arrow-left"></i>
       </a>
       <div class="container">
-        <a class="navbar-brand" href="{{ route('landing-page') }}" style="color: #A87648;">MUAku</a>
+                <a class="navbar-brand" href="#" style="color: #A87648; font-size: 32px; margin-left: 10px">
+                <img 
+        src="{{ asset('image/logo_bulat_MUA.png') }}" 
+        alt="Logo" 
+        style="width: 84px; height: 78px; object-fit: cover; margin-right: 8px;" 
+      />pakaimua
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>

@@ -70,7 +70,7 @@ class ArtistController extends Controller
         $rule_validasi = [
             'username' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'address' => 'required|in:Alam Barajo,Danau Teluk,Telanaipura,Jelutung,Pelayangan,Pasar,Jambi Selatan,Jambi Timur',
+            'address' => 'required|in:Air Hangat,Air Hangat Timur,Batang Asam,Betara,Danau Kerinci,Danau Sipin,Depati Tujuh,Geragai,Hamparan Rawang,Jaluko,Jelutung,Kota Baru,Kota Sarolangun,Koto Baru,Kumpeh,Limbur Lubuk Mengkuang,Limun,Mandiangin,Mendahara,Merlung,Mersam,Mestong,Muaro Bulian,Muaro Sabak Timur,Muaro Sebo,Muaro Siau,Muaro Tembesi,Nipah Panjang,Pauh,Pelawan,Pelepat,Pelepat Ilir,Pemenang,Pemayung,Pesisir Bukit,Pengabuan,Rantau Rasau,Renah Mendaluh,Renah Pembarap,Sekernan,Siulak,Sungai Gelam,Sungai Manau,Sungai Penuh,Sumay,Tabir Barat,Tanah Kampung,Tanah Sepenggal Lintas,Telanaipura,Tebo Ilir,Tebo Tengah,Tebo Ulu,VII Koto',
             'password' => 'required|min:8',
         ];
 
@@ -95,7 +95,7 @@ class ArtistController extends Controller
 
         // Menyimpan alamat make up artist
         $artist->address()->create([
-            'kelurahan' => $request->address,
+            'kecamatan' => $request->address,
         ]);
 
         $artist->save();
@@ -422,13 +422,8 @@ class ArtistController extends Controller
 
         // Update atau buat data package
         $package = Package::updateOrCreate(
-            [
-                'make_up_artist_id' => $mua->id,
-                'id' => $id,
-            ],
-            [
-                'price' => $request->price,
-            ]
+            ['make_up_artist_id' => $mua->id],
+            ['price' => $request->price]
         );
 
         // Update kategori MUA (jika memang kolom category ada di tabel make_up_artists)
@@ -436,14 +431,21 @@ class ArtistController extends Controller
             $mua->update(['category' => $request->category]);
         }
 
-        // Update atau buat deskripsi MUA (satu MUA hanya punya satu deskripsi)
-        $mua->description()->updateOrCreate(
-            ['make_up_artist_id' => $mua->id],
-            [
+        $desc = $mua->detailDescription; // Ambil relasi deskripsi
+
+        if ($desc) {
+            // Jika sudah ada, update
+            $desc->update([
                 'description' => $request->description,
                 'description_tambahan' => $request->add_description,
-            ]
-        );
+            ]);
+        } else {
+            // Jika belum ada, buat baru
+            $mua->description()->create([
+                'description' => $request->description,
+                'description_tambahan' => $request->add_description,
+            ]);
+        }
 
         return redirect()->route('setting-price')->with('success', 'Data berhasil diperbarui!');
     }

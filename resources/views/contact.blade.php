@@ -109,7 +109,13 @@
           <i class="bi bi-arrow-left"></i>
       </a>
       <div class="container">
-        <a class="navbar-brand" href="{{ route('landing-page') }}" style="color: #A87648;">MUAku</a>
+        <a class="navbar-brand" href="#" style="color: #A87648; font-size: 32px; margin-left: 10px">
+          <img 
+            src="{{ asset('image/logo_bulat_MUA.png') }}" 
+            alt="Logo" 
+            style="width: 84px; height: 78px; object-fit: cover; margin-right: 8px;" 
+          />pakaimua
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -136,8 +142,9 @@
       <div>
         <h4 class="fw-bold">Contact Information</h4>
         <p>Say something to start a live chat!</p>
-        <div class="mb-3 mt-4 d-flex align-items-center"><i class="icon bi bi-telephone me-2"></i> +62 8123 4567 89</div>
-        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-envelope me-2"></i> muaku@gmail.com</div>
+        <div class="mb-3 mt-4 d-flex align-items-center"><i class="icon bi bi-instagram me-2"></i><a href="https://www.instagram.com/carimua.project/" class="footer-link">@carimua.project</a></div>
+        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-envelope me-2"></i>><a href="mailto:pakaimua100@gmail.com" class="footer-link">pakaimua100@gmail.com</a></div>
+        <div class="mb-3 d-flex align-items-center"><i class="icon bi bi-telephone me-2"></i><a href="tel:+6283195341251" class="footer-link">+62 831-9534-1251</a></div>
         <div class="d-flex align-items-center"><i class="icon bi bi-geo-alt me-2"></i> Kota Jambi</div>
       </div>
       <div class="circle-decoration">

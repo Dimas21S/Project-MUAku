@@ -12,4 +12,9 @@ class Description extends Model
         'description',
         'description_tambahan',
     ]; 
+
+    public function makeUpArtist()
+    {
+        return $this->belongsTo(MakeUpArtist::class, 'make_up_artist_id');
+    }
 }

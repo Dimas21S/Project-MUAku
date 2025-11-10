@@ -62,7 +62,7 @@
       background-color: transparent;
       transition: border-color 0.2s;
       appearance: none; /* Untuk hilangkan panah default di beberapa browser */
-    }
+      }
 
     .input-field select:focus {
       outline: none;
@@ -178,7 +178,7 @@
         <!-- Form Section -->
         <div class="col-lg-7 d-flex align-items-center">
           <div class="logo-container d-flex mb-4 navbar-custom">
-            <img src="{{ asset('image/MUAku-Icon-2.jpg.png') }}" alt="MUAku Logo" style="width: 130px; height: 60px; object-fit:cover;">
+            <img src="{{ asset('image/logo_bulat_MUA.png') }}" alt="MUAku Logo" style="width: 40px; height: 40px; object-fit:cover;">
           </div>
           <div class="form-section w-100">
 
@@ -205,23 +205,69 @@
               </div>
 
               <div class="input-field">
-                <label for="address">Kelurahan</label>
-                <select id="address" name="address" required autofocus>
-                  <option value="">-- Choose Kelurahan --</option>
-                  <option value="Alam Barajo">Alam Barajo</option>
+                <label for="address">Kecamatan</label>
+                <select id="address" name="address" class="form-select" required autofocus>
+                  <option value="">-- Pilih Kecamatan --</option>
+                  <option value="Air Hangat">Air Hangat</option>
+                  <option value="Air Hangat Timur">Air Hangat Timur</option>
+                  <option value="Batang Asam">Batang Asam</option>
+                  <option value="Betara">Betara</option>
+                  <option value="Danau Kerinci">Danau Kerinci</option>
                   <option value="Danau Sipin">Danau Sipin</option>
-                  <option value="Danau Teluk">Danau Teluk</option>
-                  <option value="Telanaipura">Telanaipura</option>
+                  <option value="Depati Tujuh">Depati Tujuh</option>
+                  <option value="Geragai">Geragai</option>
+                  <option value="Hamparan Rawang">Hamparan Rawang</option>
+                  <option value="Jaluko">Jaluko</option>
                   <option value="Jelutung">Jelutung</option>
-                  <option value="Pelayangan">Pelayangan</option>
-                  <option value="Pasar">Pasar</option>
-                  <option value="Jambi Selatan">Jambi Selatan</option>
-                  <option value="Jambi Timur">Jambi Timur</option>
+                  <option value="Kota Baru">Kota Baru</option>
+                  <option value="Kota Sarolangun">Kota Sarolangun</option>
+                  <option value="Koto Baru">Koto Baru</option>
+                  <option value="Kumpeh">Kumpeh</option>
+                  <option value="Limbur Lubuk Mengkuang">Limbur Lubuk Mengkuang</option>
+                  <option value="Limun">Limun</option>
+                  <option value="Mandiangin">Mandiangin</option>
+                  <option value="Mendahara">Mendahara</option>
+                  <option value="Merlung">Merlung</option>
+                  <option value="Mersam">Mersam</option>
+                  <option value="Mestong">Mestong</option>
+                  <option value="Muaro Bulian">Muaro Bulian</option>
+                  <option value="Muaro Sabak Timur">Muaro Sabak Timur</option>
+                  <option value="Muaro Sebo">Muaro Sebo</option>
+                  <option value="Muaro Siau">Muaro Siau</option>
+                  <option value="Muaro Tembesi">Muaro Tembesi</option>
+                  <option value="Nipah Panjang">Nipah Panjang</option>
+                  <option value="Pauh">Pauh</option>
+                  <option value="Pelawan">Pelawan</option>
+                  <option value="Pelepat">Pelepat</option>
+                  <option value="Pelepat Ilir">Pelepat Ilir</option>
+                  <option value="Pemenang">Pemenang</option>
+                  <option value="Pemayung">Pemayung</option>
+                  <option value="Pesisir Bukit">Pesisir Bukit</option>
+                  <option value="Pengabuan">Pengabuan</option>
+                  <option value="Rantau Rasau">Rantau Rasau</option>
+                  <option value="Renah Mendaluh">Renah Mendaluh</option>
+                  <option value="Renah Pembarap">Renah Pembarap</option>
+                  <option value="Sekernan">Sekernan</option>
+                  <option value="Siulak">Siulak</option>
+                  <option value="Sungai Gelam">Sungai Gelam</option>
+                  <option value="Sungai Manau">Sungai Manau</option>
+                  <option value="Sungai Penuh">Sungai Penuh</option>
+                  <option value="Sumay">Sumay</option>
+                  <option value="Tabir Barat">Tabir Barat</option>
+                  <option value="Tanah Kampung">Tanah Kampung</option>
+                  <option value="Tanah Sepenggal Lintas">Tanah Sepenggal Lintas</option>
+                  <option value="Telanaipura">Telanaipura</option>
+                  <option value="Tebo Ilir">Tebo Ilir</option>
+                  <option value="Tebo Tengah">Tebo Tengah</option>
+                  <option value="Tebo Ulu">Tebo Ulu</option>
+                  <option value="VII Koto">VII Koto</option>
                 </select>
+
                 @error('address')
-                  <span class="text-red-500">{{ $message }}</span>
+                  <span class="text-danger">{{ $message }}</span>
                 @enderror
               </div>
+
 
               <div class="input-field">
                 <label for="password">Password</label>

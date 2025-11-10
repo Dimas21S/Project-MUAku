@@ -59,9 +59,9 @@ class MakeUpArtist extends Authenticatable
         return $this->hasMany(Verification::class);
     }
 
-    public function description()
+    public function detailDescription()
     {
-        return $this->hasOne(Description::class);
+        return $this->hasOne(Description::class, 'make_up_artist_id');
     }
 
     public function jadwal()
