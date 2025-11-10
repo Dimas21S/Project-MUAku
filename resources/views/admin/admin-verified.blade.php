@@ -258,94 +258,94 @@
     @endif
   </main>
 
-  <!-- Pop Up Detail Artist -->
-  <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header border-0">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <h1 class="fw-bold text-center">Request</h1>
-        <div class="modal-body">
-          <div class="row">
-            <!-- Left Column - Basic Info -->
-            <div class="col-md-6 pe-4 border-end">
-              <div class="row text-center mb-4">
-                <div class="col-12 mb-3">
-                  <div class="fw-bold text-muted small">Username</div>
-                  <div class="p-2 bg-light rounded" id="modalUserName">Nama Artist</div>
-                </div>
-                
-                <div class="col-12 mb-3">
-                  <div class="fw-bold text-muted small">Address</div>
-                  <div class="p-2 bg-light rounded" id="modalUserLocation"></div>
-                </div>
+<!-- Pop Up Detail Artist -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <h1 class="fw-bold text-center">Request</h1>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Left Column - Basic Info -->
+          <div class="col-md-6 pe-4 border-end">
+            <div class="d-flex flex-column mb-4">
+              <div class="mb-3">
+                <div class="fw-bold text-muted small">Username</div>
+                <div class="p-2 bg-light rounded text-start" id="modalUserName">Nama Artist</div>
+              </div>
 
-                <div class="col-12 mb-3">
-                  <div class="fw-bold text-muted small">Status</div>
-                  <div class="p-2 bg-light rounded" id="modalUserStatus">Aktif/Tersedia</div>
-                </div>
+              <div class="mb-3">
+                <div class="fw-bold text-muted small">Address</div>
+                <div class="p-2 bg-light rounded text-start" id="modalUserLocation"></div>
+              </div>
 
-                <div class="col-12">
-                  <div class="fw-bold text-muted small">Email</div>
-                  <div class="p-2 bg-light rounded" id="modalUserEmail">artist@example.com</div>
-                </div>
+              <div class="mb-3">
+                <div class="fw-bold text-muted small">Status</div>
+                <div class="p-2 bg-light rounded text-start" id="modalUserStatus">Aktif/Tersedia</div>
+              </div>
+
+              <div class="mb-3">
+                <div class="fw-bold text-muted small">Email</div>
+                <div class="p-2 bg-light rounded text-start" id="modalUserEmail">artist@example.com</div>
               </div>
             </div>
+          </div>
 
-            <!-- Right Column - Contact Info -->
-            <div class="col-md-6 ps-4">
-              <div class="mb-4">
-                <h6 class="fw-bold">Informasi Kontak</h6>
-                
-                <div class="row mb-3">
-                  <div class="col-12">
-                    <div class="fw-bold text-muted small">Telepon</div>
-                    <div class="p-2 bg-light rounded" id="modalUserPhone">0812-3456-7890</div>
-                  </div>
+          <!-- Right Column - Contact Info -->
+          <div class="col-md-6 ps-4">
+            <div class="mb-4">
+              <h6 class="fw-bold">Informasi Kontak</h6>
+              
+              <div class="row mb-3">
+                <div class="col-12">
+                  <div class="fw-bold text-muted small">Telepon</div>
+                  <div class="p-2 bg-light rounded" id="modalUserPhone">0812-3456-7890</div>
                 </div>
-                
-                <div class="row mb-3">
-                  <div class="col-12">
-                    <div class="fw-bold text-muted small">Category</div>
-                    <div class="p-2 bg-light rounded fw-bold" id="modalUserCategory">Category</div>
-                  </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-12">
+                  <div class="fw-bold text-muted small">Category</div>
+                  <div class="p-2 bg-light rounded fw-bold" id="modalUserCategory">Category</div>
                 </div>
-                                  
-                <div class="mb-3">
-                  <div class="fw-bold text-muted small">Deskripsi</div>
-                  <div class="p-2 bg-light rounded" id="modalUserDeskripsi" style="min-height: 100px;">
-                    Deskripsi artist akan muncul di sini...
-                  </div>
+              </div>
+                                
+              <div class="mb-3">
+                <div class="fw-bold text-muted small">Deskripsi</div>
+                <div class="p-2 bg-light rounded" id="modalUserDeskripsi" style="min-height: 100px;">
+                  Deskripsi artist akan muncul di sini...
                 </div>
+              </div>
 
-                <div class="d-grid gap-2 mb-4">
-                  <button class="btn btn-outline-primary btn-sm" id="showPortfolioBtn">
-                    <i class="bi bi-folder2-open"></i> Lihat Portofolio
-                  </button>
-                </div>
+              <div class="d-grid gap-2 mb-4">
+                <button class="btn btn-outline-primary btn-sm" id="showPortfolioBtn">
+                  <i class="bi bi-folder2-open"></i> Lihat Portofolio
+                </button>
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- Action Buttons -->
-        <div class="modal-footer border-0">
-          <form method="POST" action="" id="statusForm" class="w-100 d-none">
-            @csrf
-            <div class="d-flex justify-content-center gap-3">
-              <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
-                <i class="bi bi-check-circle"></i> Terima
-              </button>
-              <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
-                <i class="bi bi-x-circle"></i> Tolak
-              </button>
-            </div>
-          </form>
-        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="modal-footer border-0">
+        <form method="POST" action="" id="statusForm" class="w-100 d-none">
+          @csrf
+          <div class="d-flex justify-content-center gap-3">
+            <button type="submit" name="status" value="accepted" class="btn btn-success px-4">
+              <i class="bi bi-check-circle"></i> Terima
+            </button>
+            <button type="submit" name="status" value="rejected" class="btn btn-danger px-4">
+              <i class="bi bi-x-circle"></i> Tolak
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
   
   <!-- Portfolio Overlay -->
   <div class="portfolio-overlay" id="portfolioOverlay">
