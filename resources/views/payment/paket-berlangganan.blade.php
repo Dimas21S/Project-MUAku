@@ -16,7 +16,7 @@
     
     {{-- Midtrans Script & API Client Key dari Midtrans --}}
     <script type="text/javascript"
-            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            src="https://app.midtrans.com/snap/snap.js"
             data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
     <title>Paket Langganan</title>
     <style>

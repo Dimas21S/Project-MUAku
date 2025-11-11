@@ -182,94 +182,94 @@
     {{-- Navbar --}}
       <x-navbar/>
 
-    <div class="container mt-4">
-        <h3 class="mb-3 fw-semibold">Pencarian Make Up Artist</h3>
+<div class="container mt-4">
+    <h3 class="mb-3 fw-semibold">Pencarian Make Up Artist</h3>
 
-        <div class="d-flex align-items-center" style="max-width: 600px;">
-            <!-- Form pencarian -->
-            <form action="{{ route('address') }}" method="GET" class="flex-grow-1 me-2">
-                <div class="position-relative">
-                    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-                    <input id="autocomplete"
-                        type="search"
-                        name="search"
-                        class="form-control ps-5 py-2 border-0"
-                        style="background-color: white; border-radius: 10px;"
-                        placeholder="Cari lokasi..."
-                        autocomplete="off"
-                        value="{{ request('search') }}">
-                </div>
-            </form>
-
-            <!-- Dropdown kecamatan (berdampingan dengan form) -->
-            <div class="dropdown">
-                <button class="btn border-0 px-3"
-                        type="button"
-                        id="dropdownKecamatan"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        style="background-color: #F2E6E8; border-radius: 10px;">
-                    <i class="bi bi-caret-down-fill fs-5"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownKecamatan" style="max-height: 200px; overflow-y: auto;">
-                    <li><a class="dropdown-item" href="?search=air-hangat">Air Hangat</a></li>
-                    <li><a class="dropdown-item" href="?search=air-hangat-timur">Air Hangat Timur</a></li>
-                    <li><a class="dropdown-item" href="?search=Batang Asam">Batang Asam</a></li>
-                    <li><a class="dropdown-item" href="?search=Betara">Betara</a></li>
-                    <li><a class="dropdown-item" href="?search=Danau Kerinci">Danau Kerinci</a></li>
-                    <li><a class="dropdown-item" href="?search=Danau Sipin">Danau Sipin</a></li>
-                    <li><a class="dropdown-item" href="?search=Depati Tujuh">Depati Tujuh</a></li>
-                    <li><a class="dropdown-item" href="?search=Geragai">Geragai</a></li>
-                    <li><a class="dropdown-item" href="?search=Hamparan Rawang">Hamparan Rawang</a></li>
-                    <li><a class="dropdown-item" href="?search=Jaluko">Jaluko</a></li>
-                    <li><a class="dropdown-item" href="?search=Jelutung">Jelutung</a></li>
-                    <li><a class="dropdown-item" href="?search=Kota Baru">Kota Baru</a></li>
-                    <li><a class="dropdown-item" href="?search=Kota Sarolangun">Kota Sarolangun</a></li>
-                    <li><a class="dropdown-item" href="?search=Koto Baru">Koto Baru</a></li>
-                    <li><a class="dropdown-item" href="?search=Kumpeh">Kumpeh</a></li>
-                    <li><a class="dropdown-item" href="?search=Limbur Lubuk Mengkuang">Limbur Lubuk Mengkuang</a></li>
-                    <li><a class="dropdown-item" href="?search=Limun">Limun</a></li>
-                    <li><a class="dropdown-item" href="?search=Mandiangin">Mandiangin</a></li>
-                    <li><a class="dropdown-item" href="?search=Mendahara">Mendahara</a></li>
-                    <li><a class="dropdown-item" href="?search=Merlung">Merlung</a></li>
-                    <li><a class="dropdown-item" href="?search=Mersam">Mersam</a></li>
-                    <li><a class="dropdown-item" href="?search=Mestong">Mestong</a></li>
-                    <li><a class="dropdown-item" href="?search=Muaro Bulian">Muaro Bulian</a></li>
-                    <li><a class="dropdown-item" href="?search=Muaro Sabak Timur">Muaro Sabak Timur</a></li>
-                    <li><a class="dropdown-item" href="?search=Muaro Sebo">Muaro Sebo</a></li>
-                    <li><a class="dropdown-item" href="?search=Muaro Siau">Muaro Siau</a></li>
-                    <li><a class="dropdown-item" href="?search=Muaro Tembesi">Muaro Tembesi</a></li>
-                    <li><a class="dropdown-item" href="?search=Nipah Panjang">Nipah Panjang</a></li>
-                    <li><a class="dropdown-item" href="?search=Pauh">Pauh</a></li>
-                    <li><a class="dropdown-item" href="?search=Pelawan">Pelawan</a></li>
-                    <li><a class="dropdown-item" href="?search=Pelepat">Pelepat</a></li>
-                    <li><a class="dropdown-item" href="?search=Pelepat Ilir">Pelepat Ilir</a></li>
-                    <li><a class="dropdown-item" href="?search=Pemenang">Pemenang</a></li>
-                    <li><a class="dropdown-item" href="?search=Pemayung">Pemayung</a></li>
-                    <li><a class="dropdown-item" href="?search=Pesisir Bukit">Pesisir Bukit</a></li>
-                    <li><a class="dropdown-item" href="?search=Pengabuan">Pengabuan</a></li>
-                    <li><a class="dropdown-item" href="?search=Rantau Rasau">Rantau Rasau</a></li>
-                    <li><a class="dropdown-item" href="?search=Renah Mendaluh">Renah Mendaluh</a></li>
-                    <li><a class="dropdown-item" href="?search=Renah Pembarap">Renah Pembarap</a></li>
-                    <li><a class="dropdown-item" href="?search=Sekernan">Sekernan</a></li>
-                    <li><a class="dropdown-item" href="?search=Siulak">Siulak</a></li>
-                    <li><a class="dropdown-item" href="?search=Sungai Gelam">Sungai Gelam</a></li>
-                    <li><a class="dropdown-item" href="?search=Sungai Manau">Sungai Manau</a></li>
-                    <li><a class="dropdown-item" href="?search=Sungai Penuh">Sungai Penuh</a></li>
-                    <li><a class="dropdown-item" href="?search=Sumay">Sumay</a></li>
-                    <li><a class="dropdown-item" href="?search=Tabir Barat">Tabir Barat</a></li>
-                    <li><a class="dropdown-item" href="?search=Tanah Kampung">Tanah Kampung</a></li>
-                    <li><a class="dropdown-item" href="?search=Tanah Sepenggal Lintas">Tanah Sepenggal Lintas</a></li>
-                    <li><a class="dropdown-item" href="?search=Telanaipura">Telanaipura</a></li>
-                    <li><a class="dropdown-item" href="?search=Tebo Ilir">Tebo Ilir</a></li>
-                    <li><a class="dropdown-item" href="?search=Tebo Tengah">Tebo Tengah</a></li>
-                    <li><a class="dropdown-item" href="?search=Tebo Ulu">Tebo Ulu</a></li>
-                    <li><a class="dropdown-item" href="?search=VII Koto">VII Koto</a></li>
-                </ul>
-            </div>
+    <!-- Satu form untuk search + kecamatan -->
+    <form action="{{ route('address') }}" method="GET" class="d-flex align-items-center" style="max-width: 600px;">
+        <!-- Input pencarian -->
+        <div class="position-relative flex-grow-1">
+            <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input id="autocomplete"
+                   type="search"
+                   name="search"
+                   class="form-control ps-5 py-2"
+                   placeholder="Cari lokasi..."
+                   value="{{ request('search') }}"
+                   autocomplete="off"
+                   style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
         </div>
-    </div>
 
+        <!-- Dropdown kecamatan -->
+        <div class="dropdown">
+            <button class="btn border-0 px-3"
+                    type="button"
+                    id="dropdownKecamatan"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    value="{{ request('kecamatan') }}"
+                    style="background-color: #F2E6E8; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+                <i class="bi bi-caret-down-fill fs-5"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownKecamatan" style="max-height: 200px; overflow-y: auto;">
+                <li><a class="dropdown-item" href="?kecamatan=Air Hangat">Air Hangat</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Air Hangat Timur">Air Hangat Timur</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Batang Asam">Batang Asam</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Betara">Betara</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Danau Kerinci">Danau Kerinci</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Danau Sipin">Danau Sipin</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Depati Tujuh">Depati Tujuh</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Geragai">Geragai</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Hamparan Rawang">Hamparan Rawang</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Jaluko">Jaluko</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Jelutung">Jelutung</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Kota Baru">Kota Baru</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Kota Sarolangun">Kota Sarolangun</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Koto Baru">Koto Baru</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Kumpeh">Kumpeh</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Limbur Lubuk Mengkuang">Limbur Lubuk Mengkuang</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Limun">Limun</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Mandiangin">Mandiangin</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Mendahara">Mendahara</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Merlung">Merlung</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Mersam">Mersam</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Mestong">Mestong</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Muaro Bulian">Muaro Bulian</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Muaro Sabak Timur">Muaro Sabak Timur</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Muaro Sebo">Muaro Sebo</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Muaro Siau">Muaro Siau</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Muaro Tembesi">Muaro Tembesi</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Nipah Panjang">Nipah Panjang</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pauh">Pauh</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pelawan">Pelawan</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pelepat">Pelepat</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pelepat Ilir">Pelepat Ilir</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pemenang">Pemenang</a></li>
+                <li><a class="dropdown-item" href="?kecamatan=Pemayung">Pemayung</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pesisir Bukit">Pesisir Bukit</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Pengabuan">Pengabuan</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Rantau Rasau">Rantau Rasau</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Renah Mendaluh">Renah Mendaluh</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Renah Pembarap">Renah Pembarap</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Sekernan">Sekernan</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Siulak">Siulak</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Sungai Gelam">Sungai Gelam</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Sungai Manau">Sungai Manau</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Sungai Penuh">Sungai Penuh</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Sumay">Sumay</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Tabir Barat">Tabir Barat</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Tanah Kampung">Tanah Kampung</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Tanah Sepenggal Lintas">Tanah Sepenggal Lintas</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Telanaipura">Telanaipura</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Tebo Ilir">Tebo Ilir</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Tebo Tengah">Tebo Tengah</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=Tebo Ulu">Tebo Ulu</a></li> 
+                <li><a class="dropdown-item" href="?kecamatan=VII Koto">VII Koto</a></li>
+                <!-- Tambahkan semua kecamatan lainnya dengan format data-value="Nama Kecamatan" -->
+            </ul>
+        </div>
+    </form>
+</div>
 
     <div class="filter-group">
         <form action="{{ route('address') }}" method="GET" class="search-form">
@@ -337,6 +337,7 @@
             });
         });
     });
+
   </script>
 </body>
 </html>

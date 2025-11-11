@@ -247,6 +247,14 @@ class ArtistController extends Controller
             }
         }
 
+        if ($location = request('kecamatan')) {
+            if ($location !== 'all') {
+                $artistStatus->whereHas('address', function ($q) use ($location) {
+                    $q->where('kecamatan', $location); // match exact kecamatan
+                });
+            }
+        }
+
         $artist = $artistStatus->paginate(10);
 
         return view('user.map', compact('artist'));
@@ -441,7 +449,7 @@ class ArtistController extends Controller
             ]);
         } else {
             // Jika belum ada, buat baru
-            $mua->description()->create([
+            $mua->detailDescription()->create([
                 'description' => $request->description,
                 'description_tambahan' => $request->add_description,
             ]);
