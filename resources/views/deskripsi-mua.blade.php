@@ -60,10 +60,24 @@
           border-radius: 8px;
           box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       }
+      .profile-img {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* bisa disesuaikan */
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto;
+        }
+
       @media (max-width: 768px) {
           .content-wrapper { flex-direction: column; }
           .image-container { text-align: center; margin-bottom: 20px; }
           .book-btn { width: 100%; max-width: 200px; }
+          .gambar-mua {}
+            .profile-img {
+            max-height: 350px;
+            }
       }
     </style>
   </head>
@@ -107,8 +121,8 @@
     <div class="container py-5">
         <div class="row align-items-start">
             <!-- Foto -->
-            <div class="col-md-5 text-center mb-4">
-                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/Profile-Foto.jpg') }}" alt="{{ $artist->name }}" class="profile-img" style="height: 474px; width: 452px; object-fit: cover;">
+            <div class="col-md-5 text-center mb-4 gambar-mua">
+                <img src="{{ $artist->profile_photo ? Storage::url($artist->profile_photo) : asset('image/Profile-Foto.jpg') }}" alt="{{ $artist->name }}" class="profile-img" style="object-fit: cover;">
             </div>
 
             <!-- Detail -->

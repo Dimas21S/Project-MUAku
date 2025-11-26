@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsCustomer;
+use App\Http\Middleware\IsLogin;
 
 Route::get('/', [AdminController::class, 'index'])->name('landing-page');
 
@@ -27,7 +28,7 @@ Route::controller(AdminController::class)->group(function () {
 })->middleware(IsAdmin::class);
 
 //Rute URL untuk yang belum login maupun register (User yang sudah login tidak bisa mengakses rute ini)
-Route::middleware('guest')->group(function () {
+Route::middleware('guest', IsLogin::class)->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -54,10 +55,10 @@ Route::controller(ArtistController::class)->group(function () {
     Route::get('/index-mua', 'artistIndex')->name('index-mua');
     Route::post('/log-out', 'artistLogout')->name('log-out');
     Route::delete('/mua/photo/{id}', 'destroyPhoto')->name('delete-photo');
-});
+})->middleware(IsLogin::class);
 
 //Rute URL yang hanya bisa diakses oleh role customer
-Route::middleware(IsCustomer::class)->group(function () {
+Route::middleware(IsCustomer::class, IsLogin::class)->group(function () {
     Route::get('/deskripsi-mua/{id}', [ArtistController::class, 'artistDescription'])->name('mua.description');
     Route::post('/toggle-like/{artistId}', [LikeController::class, 'toggleLike'])->name('toggle.like');
     Route::get('/map', [ArtistController::class, 'listAddressMakeUpArtist'])->name('map');

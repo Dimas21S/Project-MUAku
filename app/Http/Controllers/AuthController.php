@@ -37,15 +37,20 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
+            // Simpan cookie auto login 30 hari
+            $cookie = cookie('user_id', encrypt(Auth::id()), 60*24*30);
+
             // Cek apakah pengguna adalah admin
             if (Auth::user()->role == 'admin') {
 
+                session_id(Auth::user()->id);
+
                 // Jika admin maka akan diarahkan ke dasbor admin
-                return redirect()->intended('/verified-admin');
+                return redirect()->intended('/verified-admin')->withCookie($cookie);
             }
 
             // jika hanya user biasa atau customer maka akan diarahkan ke halaman
-            return redirect()->intended('/daftar-mua');
+            return redirect()->intended('/daftar-mua')->withCookie($cookie);
         }
 
         // Jika login gagal, alihkan kembali dengan pesan kesalahan

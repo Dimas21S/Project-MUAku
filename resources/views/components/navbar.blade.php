@@ -74,10 +74,47 @@
     width: 84px;
     height: 78px;
     object-fit: cover;
+    transition: all 0.3s ease;
   }
+
+  /* Tablet (≤992px) */
+@media (max-width: 992px) {
+  .navbar-brand img {
+    width: 78px;
+    height: 72px;
+  }
+
+  .navbar-brand {
+    font-size: 28px;
+  }
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .navbar-brand img {
+    width: 65px;
+    height: 60px;
+  }
+
+  .navbar-brand {
+    font-size: 22px;
+  }
+}
+
+/* Small Mobile (≤576px) */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    width: 55px;
+    height: 50px;
+  }
+
+  .navbar-brand {
+    font-size: 18px;
+  }
+}
 </style>
 
-<nav class="navbar navbar-expand-lg py-2 {{ $role === 'makeup_artist' ? 'navbar-mua' : 'navbar-default' }}">
+<nav class="navbar navbar-expand-lg py-2 navbar-light {{ $role === 'makeup_artist' ? 'navbar-mua' : 'navbar-default' }}">
   <div class="container">
     <a class="navbar-brand" href="#" style="text-decoration: none; color: #A87648">
       <img src="{{ $logo }}" alt="Logo" />

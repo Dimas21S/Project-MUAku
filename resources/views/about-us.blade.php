@@ -67,16 +67,51 @@
         width: auto;
         height: 90%;
       }
+
+      @media (max-width: 992px) {
+        .logo-mua {
+          width: 10px;
+          height: 10px;
+          margin-left: 40px;
+        }
+        .navbar-brand {
+          font-size: 10px;
+        }
+        .navbar-brand img {
+          font-size: 10px;
+          width: 10px;
+          height: 10px;
+        }
+        .logo-kembali {
+          margin-right: 20px;
+        }
+        .gambar-utama img{
+
+        }
+      }
+
+      @media (max-width: 768px) {
+      .about-image {
+        max-height: 400px;
+        margin-bottom: 5px;
+      }
+
+      .content-text {
+        text-align: center;
+        font-size: 1rem;
+      }
+    }
+
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light py-2 navbar-custom">
-      <a href="{{ route('landing-page') }}" class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3">
+    <nav class="navbar py-2 navbar-custom">
+      <a href="{{ route('landing-page') }}" class="btn btn-light rounded-circle btn-outline-dark position-absolute start-0 ms-3 logo-kembali">
         <i class="bi bi-arrow-left"></i>
       </a>
       <div class="container">
                 <a class="navbar-brand" href="#" style="color: #A87648; font-size: 32px; margin-left: 10px">
-                <img 
+                <img class="logo-mua"
         src="{{ asset('image/logo_bulat_MUA.png') }}" 
         alt="Logo" 
         style="width: 84px; height: 78px; object-fit: cover; margin-right: 8px;" 
@@ -88,7 +123,7 @@
       </div>
     </nav>
 
-    <div class="position-relative text-center text-white" style="height: 300px; overflow: hidden;">
+    <div class="position-relative text-center text-white gambar-utama" style="height: 300px; overflow: hidden;">
         <img src="{{ asset('image/alat-makeup.jpg') }}" 
             class="w-100 h-100 position-absolute top-0 start-0" 
             style="object-fit: cover; filter: blur(4px); z-index: 1; width: auto; height: 50px;">
@@ -104,7 +139,7 @@
         <div class="row align-items-center border border-dark" style="background:linear-gradient( #403879, #231D4F); border-radius:15px;">
             <!-- Image Column (Left) -->
             <div class="col-md-6 mb-4 mb-md-0">
-                <img src="{{ asset('image/Black-mamba-girl.jpg') }}" alt="About MUAku" class="about-image" style="box-shadow: -10px -10px 1px rgba(251, 248, 248, 0.93); ">
+                <img src="{{ asset('image/Black-mamba-girl.jpg') }}" alt="About MUAku" class="about-image img-fluid" style="box-shadow: -10px -10px 1px rgba(251, 248, 248, 0.93); ">
             </div>
             
             <!-- Text Column (Right) -->

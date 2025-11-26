@@ -2,13 +2,13 @@
 
 <div class="card mb-3 shadow-sm">
     <div class="card-body p-3 border border-dark" style="background-color: #F2E6E8; border-radius: 15px; object-fit:cover; overflow:hidden; min-width: 100%">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center flex-wrap flex-md-nowrap text-center text-md-start">
             <!-- Artist Avatar -->
             <div class="flex-shrink-0 me-3">
                 <img src="{{ asset($item->profile_photo ?? 'image/foto-cewek-2.jpg') }}" 
                     alt="{{ $item->name }}" 
-                    class="rounded-circle object-fit-cover border border-dark" 
-                    style="width: 70px; height: 70px; object-fit: cover;">
+                    class="rounded-circle object-fit-cover border border-dark img-fluid" 
+                    style="width: 70px; height: 70px; object-fit: cover; min-width: 70px;">
             </div>
             
             <!-- Artist Info -->

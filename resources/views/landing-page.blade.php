@@ -200,8 +200,8 @@
         }
         
         .benefit-icon {
-            width: 90px;
-            height: 90px;
+            width: clamp(60px, 6vw, 90px); /* otomatis menyesuaikan ukuran layar */
+            height: clamp(60px, 6vw, 90px);
             background-color: rgba(70, 59, 240, 0.1);
             border-radius: 15px;
             display: flex;
@@ -263,7 +263,7 @@
             padding: 10px 30px;
         }
 
-                /* Gallery Section */
+        /* Gallery Section */
         .gallery-section {
         background: linear-gradient(to bottom, #ffffff 50%, var(--secondary-color));
       }
@@ -314,6 +314,9 @@
         .collection-heading { font-size: 64px; }
         .new-coming { font-size: 32px; margin-top: 40px; }
         .btn-login, .btn-register { padding: 10px 25px; font-size: 16px; }
+        .hero-bg {height: 80vh}
+        .benefit-icon { width: 80px; height: 80px; margin-left: 10px;}
+        .benefit-icon img { width: 40px; height: 40px; margin-left: 10px;}
       }
 
       @media (max-width: 1199.98px) {
@@ -321,6 +324,9 @@
         .nav-link { font-size: 20px; }
         .collection-heading { font-size: 56px; }
         .new-coming { font-size: 28px; }
+        .hero-bg {height: 80vh;}
+        .benefit-icon { width: 80px; height: 80px; margin-left: 10px;}
+        .benefit-icon img { width: 80px; height: 80px; margin-left: 10px;}
       }
 
       @media (max-width: 992px) {
@@ -328,6 +334,9 @@
         .collection-heading { font-size: 3rem; }
         .nav-link { font-size: 1rem; padding: 0.5rem; }
         .overlay-content { left: 5%; }
+        .hero-bg {height: 80vh}
+        .benefit-icon { width: 80px; height: 80px; margin-left: 10px;}
+        .benefit-icon img { width: 80px; height: 80px; margin-left: 10px;}
       }
 
       @media (max-width: 768px) {
@@ -335,13 +344,27 @@
         .new-coming { font-size: 1.5rem; margin-top: 1.5rem; }
         .collection-heading { font-size: 2.5rem; }
         .btn-custom { margin-top: 1.5rem; padding: 0.6rem 1.5rem; }
-        .hero-bg { height: 70vh; }
+        .hero-bg {height: 80vh}
+        .benefit-icon { width: 80px; height: 80px; margin-left: 10px;}
+        .benefit-icon img { width: 80px; height: 80px; margin-left: 10px;}
       }
 
       @media (max-width: 576px) {
         .collection-heading { font-size: 2rem; }
         .d-flex { flex-direction: column; gap: 0.75rem; }
         .btn-custom { width: 100%; }
+        .hero-bg {height: 80vh}
+        .benefit-icon img { width: 80px; height: 80px; margin-left: 10px;}
+        .benefit-icon { width: 80px; height: 80px; margin-left: 10px;}
+      }
+
+      @media (max-width: 476px) {
+        .collection-heading { font-size: 2rem; }
+        .d-flex { flex-direction: column; gap: 0.75rem; }
+        .btn-custom { width: 100%; }
+        .hero-bg {height: 80vh}
+        .benefit-icon img { width: 80px; height: 80px; margin-left: 10px;}
+        .benefit-icon { width: 80px; height: 80px; margin-left: 10px;}
       }
     </style>
   </head>
@@ -383,7 +406,7 @@
         <p class="collection-heading" style="color: black;">MUAku Collection</p>
         <div class="d-flex flex-wrap">
           <button type="button" class="btn btn-login me-3" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button>
-          <button type="button" class="btn btn-register" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
+          <button type="button" class="btn btn-register me-3" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</button>
         </div>
       </div>
     </section>
@@ -436,10 +459,10 @@
             <h2 class="section-title">People choose us because we provide great service</h2>
             
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="benefit-card d-flex">
-                        <div class="benefit-icon me-4">
-                            <img src="{{ asset('image/Riasan_Berkualitas_Hasil_Memukau.png') }}" alt="Business contact icon">
+                        <div class="benefit-icon me-4 img-fluid">
+                            <img src="{{ asset('image/Riasan_Berkualitas_Hasil_Memukau.png') }}" alt="Business contact icon" width="80" height="80" loading="lazy">
                         </div>
                         <div>
                             <h4 class="benefit-title">Riasan Berkualitas, Hasil Memukau</h4>
@@ -447,10 +470,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="benefit-card d-flex">
-                        <div class="benefit-icon me-4">
-                            <img src="{{ asset('image/Inspirasi__Tren_Kecantikan_Terbaru.png') }}" alt="Layers icon">
+                        <div class="benefit-icon me-4 img-fluid">
+                            <img src="{{ asset('image/Inspirasi__Tren_Kecantikan_Terbaru.png') }}" alt="Layers icon" width="80" height="80" loading="lazy">
                         </div>
                         <div>
                             <h4 class="benefit-title">Inspirasi & Tren Kecantikan Terbaru</h4>
@@ -458,10 +481,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="benefit-card d-flex">
-                        <div class="benefit-icon me-4">
-                            <img src="{{ asset('image/Temukan__Pilih_MUA_Favoritmu_dengan_Mudah.png') }}" alt="Chat icon">
+                        <div class="benefit-icon me-4 img-fluid">
+                            <img src="{{ asset('image/Temukan__Pilih_MUA_Favoritmu_dengan_Mudah.png') }}" alt="Chat icon" width="80" height="80" loading="lazy">
                         </div>
                         <div>
                             <h4 class="benefit-title">Temukan & Pilih MUA Favoritmu dengan Mudah</h4>
@@ -469,10 +492,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="benefit-card d-flex">
-                        <div class="benefit-icon me-4">
-                            <img src="{{ asset('image/Tampilkan_Keunikan_Dirimu_dengan_Makeup.png') }}" alt="Timelapse icon">
+                        <div class="benefit-icon me-4 img-fluid">
+                            <img src="{{ asset('image/Tampilkan_Keunikan_Dirimu_dengan_Makeup.png') }}" alt="Timelapse icon" width="80" height="80" loading="lazy">
                         </div>
                         <div>
                             <h4 class="benefit-title">Tampilkan Keunikan Dirimu dengan Makeup</h4>

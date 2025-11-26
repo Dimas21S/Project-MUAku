@@ -76,6 +76,11 @@
         .ribbon-img {
           max-height: 100px;
         }
+
+        .logo-mua {
+          width: 70px;
+          height: 70px;
+        }
       }
           </style>
   </head>
@@ -86,7 +91,7 @@
 
       <div class="position-relative text-center text-white" style="height: 300px; overflow: hidden;">
         <img src="{{ asset('image/alat-makeup.jpg') }}" 
-            class="w-100 h-100 position-absolute top-0 start-0" 
+            class="w-100 h-100 position-absolute top-0 start-0 logo-mua" 
             style="object-fit: cover; filter: blur(4px); z-index: 1;">
 
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.3); z-index: 2;"></div>
